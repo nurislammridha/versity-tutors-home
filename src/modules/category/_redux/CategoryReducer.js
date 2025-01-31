@@ -11,6 +11,7 @@ const initialState = {
   catLogo: null,
   isImageLoading: false,
   isLogoLoading: false,
+  isStatusUpdate: false
 };
 const CategoryReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -64,6 +65,11 @@ const CategoryReducer = (state = initialState, action) => {
       return {
         ...state,
         isLogoLoading: action.payload,
+      };
+    case Types.IS_STATUS_UPDATE:
+      return {
+        ...state,
+        isStatusUpdate: action.payload,
       };
     default:
       break;

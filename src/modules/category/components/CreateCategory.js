@@ -49,7 +49,7 @@ const CreateCategory = () => {
               onChange={(e) => setCategory(e.target.value)}
             />
           </div>
-          <div className="mt-3 row">
+          {/* <div className="mt-3 row">
             <div className="col-sm-5">
               <h6 className="mt-3">Select a category image</h6>
               <input
@@ -120,7 +120,7 @@ const CreateCategory = () => {
                 className="preview-mul-img mt-3"
               />
             </div>
-          </div>
+          </div> */}
           {isCategory ? (
             <a className="btn btn-success btn-sm mt-3 text-light">
               {" "}

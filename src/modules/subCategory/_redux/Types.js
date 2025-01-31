@@ -6,3 +6,4 @@ export const AFTER_UPDATED = "AFTER_UPDATED";
 export const AFTER_DELETED = "AFTER_DELETED";
 export const CAT_IMG = "CAT_IMG";
 export const IS_IMG_LOADING = "IS_IMG_LOADING";
+export const IS_STATUS_UPDATE = "IS_STATUS_UPDATE";

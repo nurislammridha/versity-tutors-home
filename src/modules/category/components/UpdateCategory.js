@@ -57,76 +57,7 @@ const UpdateCategory = () => {
               onChange={(e) => setCategory(e.target.value)}
             />
           </div>
-          <div className="mt-3 row">
-            <div className="col-sm-5">
-              <h6 className="mt-3">Select a category Image</h6>
-              <input
-                type="file"
-                className="d-none"
-                accept="image/*"
-                id="file-upload2"
-                onChange={(e) =>
-                  handleChangeImg(e.target.files[0])
-                }
-              />
-              {isImageLoading ? <span
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span> :
-                <label
-                  for="file-upload2"
-                  className="btn btn-outline-warning ml-3 mr-3"
-                  style={{ fontSize: "15px" }}
-                >
-                  <i class="fa fa-upload"></i>
-                </label>
-              }
-            </div>
 
-            <div className="col-sm-7">
-              <img
-                src={categoryImg?.publicId === null ? demoProduct : categoryImg?.url}
-                alt="Product Icon"
-                className="preview-mul-img"
-              />
-            </div>
-          </div>
-          <div className="mt-3 row">
-            <div className="col-sm-5">
-              <h6 className="mt-3">Select a category logo</h6>
-              <input
-                type="file"
-                className="d-none"
-                accept="image/*"
-                id="file-upload3"
-                onChange={(e) =>
-                  handleChangeLogo(e.target.files[0])
-                }
-              />
-              {isLogoLoading ? <span
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span> :
-                <label
-                  for="file-upload3"
-                  className="btn btn-outline-warning ml-3 mr-3"
-                  style={{ fontSize: "15px" }}
-                >
-                  <i class="fa fa-upload"></i>
-                </label>
-              }
-            </div>
-
-            <div className="col-sm-7">
-              <img
-                src={categoryLogo?.publicId === null ? demoProduct : categoryLogo?.url}
-                alt="Product Icon"
-                className="preview-mul-img"
-              />
-            </div>
-          </div>
           {isUpdate ? (
             <a className="btn btn-success btn-sm mt-3 text-light">
               {" "}

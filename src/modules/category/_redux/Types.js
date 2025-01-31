@@ -8,3 +8,4 @@ export const CAT_IMG = "CAT_IMG";
 export const IS_IMG_LOADING = "IS_IMG_LOADING";
 export const CAT_LOGO = "CAT_LOGO";
 export const IS_LOGO_LOADING = "IS_LOGO_LOADING";
+export const IS_STATUS_UPDATE = "IS_STATUS_UPDATE";

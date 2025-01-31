@@ -9,6 +9,7 @@ const initialState = {
   subCategoryList: null,
   subCatImg: null,
   isImageLoading: false,
+  isStatusUpdate: false
 };
 const SubCategoryReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -52,6 +53,11 @@ const SubCategoryReducer = (state = initialState, action) => {
       return {
         ...state,
         isImageLoading: action.payload,
+      };
+    case Types.IS_STATUS_UPDATE:
+      return {
+        ...state,
+        isStatusUpdate: action.payload,
       };
     default:
       break;

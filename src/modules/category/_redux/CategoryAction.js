@@ -6,19 +6,11 @@ export const SubmitCategory = (category, categoryImg, categoryLogo) => (dispatch
   if (category.length === 0) {
     showToast("error", "Category shouldn't be empty");
     return 0;
-  } else if (categoryImg.publicId === null) {
-    showToast("error", "Select a category Image");
-    return 0;
-  } else if (categoryLogo.publicId === null) {
-    showToast("error", "Select a category logo");
-    return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}category`;
   dispatch({ type: Types.IS_CREATE_CATEGORY, payload: true });
   const postData = {
     categoryName: category,
-    categoryImg: categoryImg,
-    categoryLogo: categoryLogo
   };
   try {
     Axios.post(url, postData)
@@ -49,19 +41,11 @@ export const CategoryUpdate = (category, categoryImg, categoryLogo, id) => (disp
   if (category.length === 0) {
     showToast("error", "Category shouldn't be empty");
     return 0;
-  } else if (categoryImg.publicId === null) {
-    showToast("error", "Select a category Image");
-    return 0;
-  } else if (categoryLogo.publicId === null) {
-    showToast("error", "Select a category Logo");
-    return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}category/${id}`;
   dispatch({ type: Types.IS_UPDATE_CATEGORY, payload: true });
   const postData = {
     categoryName: category,
-    categoryImg: categoryImg,
-    categoryLogo: categoryLogo
   };
   try {
     Axios.put(url, postData)
@@ -211,4 +195,30 @@ export const UploadCatLogo = (img, catLogo) => (dispatch) => {
     showToast("error", "Image should be jpg/jpeg/png");
   }
 
+};
+export const CategoryStatus = (id, status) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}category/${id}`;
+  dispatch({ type: Types.IS_STATUS_UPDATE, payload: true });
+  const postData = {
+    isActive: !status,
+  };
+  try {
+    Axios.put(url, postData)
+      .then((res) => {
+        if (res.data.status) {
+          dispatch({ type: Types.IS_STATUS_UPDATE, payload: false });
+          dispatch(GetCategoryList())
+        } else {
+          dispatch({ type: Types.IS_STATUS_UPDATE, payload: false });
+        }
+      })
+      .catch((err) => {
+        dispatch({ type: Types.IS_STATUS_UPDATE, payload: false });
+        const message = JSON.parse(err.request.response).message;
+        showToast("error", message);
+      });
+  } catch (error) {
+    dispatch({ type: Types.IS_STATUS_UPDATE, payload: false });
+    showToast("error", "Something went wrong");
+  }
 };
