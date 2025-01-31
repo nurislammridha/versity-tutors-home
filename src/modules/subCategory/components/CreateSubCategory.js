@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AfterCreatedFalse, SubmitSubCategory, UploadSubCatImg } from "../_redux/SubCategoryAction";
 import { GetCategoryList } from "src/modules/category/_redux/CategoryAction";
 import Select from "react-select";
-import { getCategoryOption } from "src/modules/product/_redux/ProductAction";
 import demoProduct from '../../../assets/images/demoProduct.jpg'
 const CreateSubCategory = () => {
   const [subCategory, setSubCategory] = useState("");
@@ -47,14 +46,14 @@ const CreateSubCategory = () => {
         <div className="col-sm-8">
           <div>
             <h6>Select Category</h6>
-            <Select
+            {/* <Select
               options={getCategoryOption(categoryArrList)}
               value={{ label: category }}
               onChange={(e) => {
                 setCategory(e.label);
                 setCategoryId(e.value);
               }}
-            />
+            /> */}
           </div>
           <div className="mt-3">
             <h6 className="mb-3">Sub Category Name</h6>
