@@ -17,6 +17,9 @@ import CreateSubDistrictContainer from "./modules/subDistrict/views/CreateSubDis
 import LanguageListContainer from "./modules/language/views/LanguageListContainer";
 import UpdateLanguageContainer from "./modules/language/views/UpdateLanguageContainer";
 import CreateLanguageContainer from "./modules/language/views/CreateLanguageContainer";
+import ConnectionPackageListContainer from "./modules/connectionPackage/views/ConnectionPackageListContainer";
+import UpdateConnectionPackageContainer from "./modules/connectionPackage/views/UpdateConnectionPackageContainer";
+import CreateConnectionPackageContainer from "./modules/connectionPackage/views/CreateConnectionPackageContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -71,6 +74,14 @@ const routes = [
     path: "/language-add",
     name: "Create Language",
     component: CreateLanguageContainer,
+  },
+  //connections
+  { path: "/connection-package", name: "Connection Package", component: ConnectionPackageListContainer },
+  { path: "/connection-package-edit/:id", name: "Connection Package", component: UpdateConnectionPackageContainer },
+  {
+    path: "/connection-package-add",
+    name: "Create Connection Package",
+    component: CreateConnectionPackageContainer,
   },
 ];
 

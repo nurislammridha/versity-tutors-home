@@ -49,6 +49,12 @@ const _nav = [
     to: "/language",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Package",
+    to: "/connection-package",
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+  },
 
   // {
   //   _tag: "CSidebarNavDropdown",
