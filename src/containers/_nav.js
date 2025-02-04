@@ -31,6 +31,12 @@ const _nav = [
     to: "/division",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
+  {
+    _tag: "CSidebarNavItem",
+    name: "District",
+    to: "/district",
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+  },
 
   // {
   //   _tag: "CSidebarNavDropdown",

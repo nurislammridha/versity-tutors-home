@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import AuthReducer from "src/modules/auth/_redux/AuthReducer";
 import CategoryReducer from "src/modules/category/_redux/CategoryReducer";
+import DistrictReducer from "src/modules/district/_redux/DistrictReducer";
 import DivisionReducer from "src/modules/division/_redux/DivisionReducer";
 import SubCategoryReducer from "src/modules/subCategory/_redux/SubCategoryReducer";
 
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   categoryInfo: CategoryReducer,
   subCategoryInfo: SubCategoryReducer,
   divisionInfo: DivisionReducer,
+  districtInfo: DistrictReducer,
 });
 
 export default rootReducer;

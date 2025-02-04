@@ -8,6 +8,9 @@ import UpdateSubCategoryContainer from "./modules/subCategory/views/UpdateSubCat
 import DivisionListContainer from "./modules/division/views/DivisionListContainer";
 import UpdateDivisionContainer from "./modules/division/views/UpdateDivisionContainer";
 import CreateDivisionContainer from "./modules/division/views/CreateDivisionContainer";
+import DistrictListContainer from "./modules/district/views/DistrictListContainer";
+import UpdateDistrictContainer from "./modules/district/views/UpdateDistrictContainer";
+import CreateDistrictContainer from "./modules/district/views/CreateDistrictContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -38,6 +41,14 @@ const routes = [
     path: "/division-add",
     name: "Create Division",
     component: CreateDivisionContainer,
+  },
+  //district
+  { path: "/district", name: "District", component: DistrictListContainer },
+  { path: "/district-edit/:id", name: "District", component: UpdateDistrictContainer },
+  {
+    path: "/district-add",
+    name: "Create District",
+    component: CreateDistrictContainer,
   },
 ];
 
