@@ -25,6 +25,12 @@ const _nav = [
     to: "/sub-category",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Division",
+    to: "/division",
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+  },
 
   // {
   //   _tag: "CSidebarNavDropdown",

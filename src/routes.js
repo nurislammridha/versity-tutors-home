@@ -5,6 +5,9 @@ import SubCategoryListContainer from "./modules/subCategory/views/SubCategoryLis
 import CategoryListContainer from "./modules/category/views/CategoryListContainer";
 import UpdateCategoryContainer from "./modules/category/views/UpdateCategoryContainer";
 import UpdateSubCategoryContainer from "./modules/subCategory/views/UpdateSubCategoryContainer";
+import DivisionListContainer from "./modules/division/views/DivisionListContainer";
+import UpdateDivisionContainer from "./modules/division/views/UpdateDivisionContainer";
+import CreateDivisionContainer from "./modules/division/views/CreateDivisionContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -27,6 +30,14 @@ const routes = [
     path: "/sub-category-add",
     name: "Create Sub Category",
     component: CreateSubCategoryContainer,
+  },
+  //division
+  { path: "/division", name: "Division", component: DivisionListContainer },
+  { path: "/division-edit/:id", name: "Division", component: UpdateDivisionContainer },
+  {
+    path: "/division-add",
+    name: "Create Division",
+    component: CreateDivisionContainer,
   },
 ];
 
