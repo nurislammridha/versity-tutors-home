@@ -2,31 +2,31 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { AfterDeletedFalse, GetDistrictList, DistrictDelete, DistrictStatus } from "../_redux/DistrictAction";
+import { AfterDeletedFalse, GetSubDistrictList, SubDistrictDelete, SubDistrictStatus } from "../_redux/SubDistrictAction";
 import { useHistory } from "react-router-dom";
-const DistrictList = () => {
+const SubDistrictList = () => {
   const [updateId, setUpdateId] = useState("")
   const history = useHistory();
-  const districtArrList = useSelector(
-    (state) => state.districtInfo.districtList
+  const subDistrictArrList = useSelector(
+    (state) => state.subDistrictInfo.subDistrictList
   );
   const afterDeleted = useSelector(
-    (state) => state.districtInfo.afterDeleted
+    (state) => state.subDistrictInfo.afterDeleted
   );
   const isStatusUpdate = useSelector(
-    (state) => state.districtInfo.isStatusUpdate
+    (state) => state.subDistrictInfo.isStatusUpdate
   );
   const dispatch = useDispatch();
   const handleStatus = (id, status) => {
     setUpdateId(id)
-    dispatch(DistrictStatus(id, status))
+    dispatch(SubDistrictStatus(id, status))
   }
   useEffect(() => {
-    dispatch(GetDistrictList());
+    dispatch(GetSubDistrictList());
   }, []);
   useEffect(() => {
     if (afterDeleted) {
-      dispatch(GetDistrictList());
+      dispatch(GetSubDistrictList());
       dispatch(AfterDeletedFalse());
     }
 
@@ -34,11 +34,11 @@ const DistrictList = () => {
   const handleDelete = (id) => {
     confirmAlert({
       title: "Confirm To Delete",
-      message: `Are you sure to delete this district?`,
+      message: `Are you sure to delete this subdistrict?`,
       buttons: [
         {
           label: "Yes",
-          onClick: () => dispatch(DistrictDelete(id)),
+          onClick: () => dispatch(SubDistrictDelete(id)),
         },
         {
           label: "No",
@@ -50,20 +50,21 @@ const DistrictList = () => {
   return (
     <>
       <div className="d-flex justify-content-between">
-        <h4>District List</h4>
+        <h4>SubDistrict List</h4>
         <a
           className="btn btn-success btn-sm text-light"
-          onClick={() => history.push("/district-add")}
+          onClick={() => history.push("/sub-district-add")}
         >
-          Add District
+          Add Sub District
         </a>
       </div>
       <div className="mt-3">
-        {districtArrList != null && districtArrList.length > 0 ? (
+        {subDistrictArrList != null && subDistrictArrList.length > 0 ? (
           <table className="table table-striped">
             <thead>
               <tr>
                 <th>SL</th>
+                <th>Sub District Name</th>
                 <th>District Name</th>
                 <th>Division Name</th>
                 <th>Status</th>
@@ -71,10 +72,11 @@ const DistrictList = () => {
               </tr>
             </thead>
             <tbody>
-              {districtArrList.map((item, index) => (
+              {subDistrictArrList.map((item, index) => (
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{item.districtName}</td>
+                  <td>{item.subDistrictName}</td>
+                  <td>{item?.districtInfo?.districtName}</td>
                   <td>{item?.divisionInfo?.divisionName}</td>
                   <td>{item.isActive ? "Active" : "Inactive"}</td>
                   <td>
@@ -96,7 +98,7 @@ const DistrictList = () => {
                     }
                     <a
                       className="btn btn-outline-success btn-sm mr-2"
-                      onClick={() => history.push({ pathname: `/district-edit/${item._id}`, state: { data: item } })}
+                      onClick={() => history.push({ pathname: `/sub-district-edit/${item._id}`, state: { data: item } })}
                     >
                       <i className="fa fa-pencil"></i>
                     </a>
@@ -112,11 +114,11 @@ const DistrictList = () => {
             </tbody>
           </table>
         ) : (
-          <div className="alert alert-success mt-5 text-center">No district found</div>
+          <div className="alert alert-success mt-5 text-center">No sub district found</div>
         )}
       </div>
     </>
   );
 };
 
-export default DistrictList;
+export default SubDistrictList;
