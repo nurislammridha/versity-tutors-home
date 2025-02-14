@@ -2,7 +2,7 @@ import * as Types from "./Types";
 import Axios from "axios";
 import { showToast } from "src/utils/ToastHelper";
 //test//est//
-export const SubmitSubDistrict = (subDistrict, district, districtId, division, divisionId) => (dispatch) => {
+export const SubmitArea = (area, subDistrict, subDistrictId, district, districtId, division, divisionId) => (dispatch) => {
   if (division.length === 0) {
     showToast("error", "Select a division");
     return 0;
@@ -10,13 +10,18 @@ export const SubmitSubDistrict = (subDistrict, district, districtId, division, d
     showToast("error", "You Should Select district");
     return 0;
   } else if (subDistrict.length === 0) {
-    showToast("error", "Sub District should not be empty");
+    showToast("error", "You Should Select sub district");
+    return 0;
+  } else if (area.length === 0) {
+    showToast("error", "Area should not be empty");
     return 0;
   }
-  const url = `${process.env.REACT_APP_API_URL}sub-district`;
-  dispatch({ type: Types.IS_CREATE_SUBDISTRICT, payload: true });
+  const url = `${process.env.REACT_APP_API_URL}area`;
+  dispatch({ type: Types.IS_CREATE_AREA, payload: true });
   const postData = {
-    subDistrictName: subDistrict,
+    areaName: area,
+    subDistrictId: subDistrictId,
+    subDistrictInfo: subDistrictId,
     districtId: districtId,
     districtInfo: districtId,
     divisionId: divisionId,
@@ -27,27 +32,27 @@ export const SubmitSubDistrict = (subDistrict, district, districtId, division, d
       .then((res) => {
         if (res.data.status) {
           showToast("success", res.data.message);
-          dispatch({ type: Types.IS_CREATE_SUBDISTRICT, payload: false });
+          dispatch({ type: Types.IS_CREATE_AREA, payload: false });
           dispatch({ type: Types.AFTER_CREATED, payload: true });
         } else {
           showToast("error", res.data.message);
-          dispatch({ type: Types.IS_CREATE_SUBDISTRICT, payload: false });
+          dispatch({ type: Types.IS_CREATE_AREA, payload: false });
         }
       })
       .catch((err) => {
-        dispatch({ type: Types.IS_CREATE_SUBDISTRICT, payload: false });
+        dispatch({ type: Types.IS_CREATE_AREA, payload: false });
         const message = JSON.parse(err.request.response).message;
         showToast("error", message);
       });
   } catch (error) {
-    dispatch({ type: Types.IS_CREATE_SUBDISTRICT, payload: false });
+    dispatch({ type: Types.IS_CREATE_AREA, payload: false });
     showToast("error", "Something went wrong");
   }
 };
 export const AfterCreatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_CREATED, payload: false })
 }
-export const SubDistrictUpdate = (subDistrict, district, districtId, division, divisionId, id) => (dispatch) => {
+export const AreaUpdate = (area, subDistrict, subDistrictId, district, districtId, division, divisionId, id) => (dispatch) => {
   if (division.length === 0) {
     showToast("error", "Select a division");
     return 0;
@@ -55,13 +60,18 @@ export const SubDistrictUpdate = (subDistrict, district, districtId, division, d
     showToast("error", "You Should Select district");
     return 0;
   } else if (subDistrict.length === 0) {
-    showToast("error", "Sub District should not be empty");
+    showToast("error", "You Should Select sub district");
+    return 0;
+  } else if (area.length === 0) {
+    showToast("error", "Area should not be empty");
     return 0;
   }
-  const url = `${process.env.REACT_APP_API_URL}sub-district/${id}`;
-  dispatch({ type: Types.IS_UPDATE_SUBDISTRICT, payload: true });
+  const url = `${process.env.REACT_APP_API_URL}area/${id}`;
+  dispatch({ type: Types.IS_UPDATE_AREA, payload: true });
   const postData = {
-    subDistrictName: subDistrict,
+    areaName: area,
+    subDistrictId: subDistrictId,
+    subDistrictInfo: subDistrictId,
     districtId: districtId,
     districtInfo: districtId,
     divisionId: divisionId,
@@ -72,40 +82,40 @@ export const SubDistrictUpdate = (subDistrict, district, districtId, division, d
       .then((res) => {
         if (res.data.status) {
           showToast("success", res.data.message);
-          dispatch({ type: Types.IS_UPDATE_SUBDISTRICT, payload: false });
+          dispatch({ type: Types.IS_UPDATE_AREA, payload: false });
           dispatch({ type: Types.AFTER_UPDATED, payload: true });
         } else {
           showToast("error", res.data.message);
-          dispatch({ type: Types.IS_UPDATE_SUBDISTRICT, payload: false });
+          dispatch({ type: Types.IS_UPDATE_AREA, payload: false });
         }
       })
       .catch((err) => {
-        dispatch({ type: Types.IS_UPDATE_SUBDISTRICT, payload: false });
+        dispatch({ type: Types.IS_UPDATE_AREA, payload: false });
         const message = JSON.parse(err.request.response).message;
         showToast("error", message);
       });
   } catch (error) {
-    dispatch({ type: Types.IS_UPDATE_SUBDISTRICT, payload: false });
+    dispatch({ type: Types.IS_UPDATE_AREA, payload: false });
     showToast("error", "Something went wrong");
   }
 };
 export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
-export const GetSubDistrictList = () => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}sub-district`;
+export const GetAreaList = () => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}area`;
   try {
     Axios.get(url).then((res) => {
       if (res.data.status) {
-        dispatch({ type: Types.SUBDISTRICT_LIST, payload: res.data.result });
+        dispatch({ type: Types.AREA_LIST, payload: res.data.result });
       }
     });
   } catch (error) {
     showToast("error", "Something went wrong");
   }
 };
-export const SubDistrictDelete = (id) => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}sub-district/${id}`;
+export const AreaDelete = (id) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}area/${id}`;
   try {
     Axios.delete(url).then((res) => {
       if (res.data.status) {
@@ -122,28 +132,13 @@ export const SubDistrictDelete = (id) => (dispatch) => {
 export const AfterDeletedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_DELETED, payload: false })
 }
-export const SubDistrictByDivisionId = (id) => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}sub-district/by-division/${id}`;
+export const AreaByDivisionId = (id) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}area/by-division/${id}`;
   try {
     Axios.get(url).then((res) => {
       if (res.data.status) {
         // showToast("success", res.data.message);
-        dispatch({ type: Types.SUBDISTRICT_LIST, payload: res.data.result });
-      } else {
-        showToast("error", "Something went wrong");
-      }
-    });
-  } catch (error) {
-    showToast("error", "Something went wrong");
-  }
-};
-export const SubDistrictByDistrictId = (id) => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}sub-district/by-district/${id}`;
-  try {
-    Axios.get(url).then((res) => {
-      if (res.data.status) {
-        // showToast("success", res.data.message);
-        dispatch({ type: Types.SUBDISTRICT_LIST, payload: res.data.result });
+        dispatch({ type: Types.AREA_LIST, payload: res.data.result });
       } else {
         showToast("error", "Something went wrong");
       }
@@ -153,8 +148,8 @@ export const SubDistrictByDistrictId = (id) => (dispatch) => {
   }
 };
 
-export const SubDistrictStatus = (id, status) => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}sub-district/${id}`;
+export const AreaStatus = (id, status) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}area/${id}`;
   dispatch({ type: Types.IS_STATUS_UPDATE, payload: true });
   const postData = {
     isActive: !status,
@@ -164,7 +159,7 @@ export const SubDistrictStatus = (id, status) => (dispatch) => {
       .then((res) => {
         if (res.data.status) {
           dispatch({ type: Types.IS_STATUS_UPDATE, payload: false });
-          dispatch(GetSubDistrictList())
+          dispatch(GetAreaList())
         } else {
           dispatch({ type: Types.IS_STATUS_UPDATE, payload: false });
         }

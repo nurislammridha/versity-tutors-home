@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import AreaReducer from "src/modules/area/_redux/AreaReducer";
 import AuthReducer from "src/modules/auth/_redux/AuthReducer";
 import CategoryReducer from "src/modules/category/_redux/CategoryReducer";
 import ConnectionPackageReducer from "src/modules/connectionPackage/_redux/ConnectionPackageReducer";
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   divisionInfo: DivisionReducer,
   districtInfo: DistrictReducer,
   subDistrictInfo: SubDistrictReducer,
+  areaInfo: AreaReducer,
   languageInfo: LanguageReducer,
   connectionPackageInfo: ConnectionPackageReducer,
 });

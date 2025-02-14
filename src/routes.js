@@ -20,6 +20,9 @@ import CreateLanguageContainer from "./modules/language/views/CreateLanguageCont
 import ConnectionPackageListContainer from "./modules/connectionPackage/views/ConnectionPackageListContainer";
 import UpdateConnectionPackageContainer from "./modules/connectionPackage/views/UpdateConnectionPackageContainer";
 import CreateConnectionPackageContainer from "./modules/connectionPackage/views/CreateConnectionPackageContainer";
+import AreaListContainer from "./modules/area/views/AreaContainer";
+import UpdateAreaContainer from "./modules/area/views/UpdateAreaContainer";
+import CreateAreaContainer from "./modules/area/views/CreateAreaContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -66,6 +69,14 @@ const routes = [
     path: "/sub-district-add",
     name: "Create Sub District",
     component: CreateSubDistrictContainer,
+  },
+  //sub district
+  { path: "/area", name: "Area", component: AreaListContainer },
+  { path: "/area-edit/:id", name: "Area", component: UpdateAreaContainer },
+  {
+    path: "/area-add",
+    name: "Create Area",
+    component: CreateAreaContainer,
   },
   //language
   { path: "/language", name: "Language", component: LanguageListContainer },
