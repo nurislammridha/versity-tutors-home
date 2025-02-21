@@ -62,6 +62,53 @@ const _nav = [
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
 
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Tutor Profile",
+    route: "",
+    icon: "cil-puzzle",
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: "All Tutor",
+        to: "/all-tutor",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Approve",
+        to: "/approve-tutor",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Un Approve",
+        to: "/un-approve-tutor",
+      },
+    ]
+  },
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Student Profile",
+    route: "",
+    icon: "cil-puzzle",
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: "All Student",
+        to: "/all-student",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Approve",
+        to: "/approve-student",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Un Approve",
+        to: "/un-approve-student",
+      },
+    ]
+  },
+
   // {
   //   _tag: "CSidebarNavDropdown",
   //   name: "Order Management",

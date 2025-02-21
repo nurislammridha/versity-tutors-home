@@ -1,0 +1,2 @@
+export const PROFILE_LIST = "PROFILE_LIST";
+export const IS_UPDATE_LOADING = "IS_UPDATE_LOADING";

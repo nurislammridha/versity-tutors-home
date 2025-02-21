@@ -23,6 +23,12 @@ import CreateConnectionPackageContainer from "./modules/connectionPackage/views/
 import AreaListContainer from "./modules/area/views/AreaContainer";
 import UpdateAreaContainer from "./modules/area/views/UpdateAreaContainer";
 import CreateAreaContainer from "./modules/area/views/CreateAreaContainer";
+import ApproveTutorListContainer from "./modules/profiles/views/ApproveTutorListContainer";
+import UnApproveTutorListContainer from "./modules/profiles/views/UnApproveTutorListContainer";
+import AllTutorListContainer from "./modules/profiles/views/AllTutorListContainer";
+import AllStudentListContainer from "./modules/profiles/views/AllStudentListContainer";
+import ApproveStudentListContainer from "./modules/profiles/views/ApproveStudentListContainer";
+import UnApproveStudentListContainer from "./modules/profiles/views/UnApproveStudentListContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -94,6 +100,13 @@ const routes = [
     name: "Create Connection Package",
     component: CreateConnectionPackageContainer,
   },
+  //profiles
+  { path: "/all-tutor", name: "All tutor", component: AllTutorListContainer },
+  { path: "/approve-tutor", name: "Approve tutor", component: ApproveTutorListContainer },
+  { path: "/un-approve-tutor", name: "Approve tutor", component: UnApproveTutorListContainer },
+  { path: "/all-student", name: "All student", component: AllStudentListContainer },
+  { path: "/approve-student", name: "Approve student", component: ApproveStudentListContainer },
+  { path: "/un-approve-student", name: "Approve student", component: UnApproveStudentListContainer },
 ];
 
 export default routes;
