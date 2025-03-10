@@ -7,6 +7,7 @@ import DistrictReducer from "src/modules/district/_redux/DistrictReducer";
 import DivisionReducer from "src/modules/division/_redux/DivisionReducer";
 import LanguageReducer from "src/modules/language/_redux/LanguageReducer";
 import ProfileReducer from "src/modules/profiles/_redux/ProfileReducer";
+import ReportConnectionReducer from "src/modules/reportConnection/_redux/ReportConnectionReducer";
 import SubCategoryReducer from "src/modules/subCategory/_redux/SubCategoryReducer";
 import SubDistrictReducer from "src/modules/subDistrict/_redux/SubDistrictReducer";
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   languageInfo: LanguageReducer,
   connectionPackageInfo: ConnectionPackageReducer,
   profileInfo: ProfileReducer,
+  reportConnectionInfo: ReportConnectionReducer,
 });
 
 export default rootReducer;

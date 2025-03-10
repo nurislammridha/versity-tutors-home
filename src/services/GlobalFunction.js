@@ -11,3 +11,9 @@ export const GlobalOptions = (list, name, value) => {
   }
   return arr;
 };
+
+export const calculateTotalPrice = (reportConnectionArrList) => {
+  return reportConnectionArrList.reduce((total, item) => {
+    return total + (item.connectionPackageId?.price || 0);
+  }, 0);
+};
