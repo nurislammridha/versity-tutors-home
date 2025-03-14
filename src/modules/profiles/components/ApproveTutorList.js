@@ -6,7 +6,7 @@ import { GetProfileList, ProfileDelete, ProfileUpdate } from "../_redux/ProfileA
 const ApproveTutorList = () => {
   const dispatch = useDispatch();
   const [updateId, setUpdateId] = useState("")
-  const filter = { filters: { isTutorAccount: true, isApproved: false } }
+  const filter = { filters: { isTutorAccount: true, isApproved: false, isRequestToApprove: true } }
   const profileList = useSelector(
     (state) => state.profileInfo.profileList
   );
@@ -15,7 +15,7 @@ const ApproveTutorList = () => {
   );
   const handleApprove = (id) => {
     setUpdateId(id)
-    dispatch(ProfileUpdate({ isApproved: true }, filter, id))
+    dispatch(ProfileUpdate({ isApproved: true, isRequestToApprove: false }, filter, id))
   }
 
 
@@ -37,11 +37,11 @@ const ApproveTutorList = () => {
   useEffect(() => {
     dispatch(GetProfileList(filter));
   }, []);
-  console.log('profileList', profileList)
+  // console.log('profileList', profileList)
   return (
     <>
       <div className="d-flex justify-content-between">
-        <h4>Approve Tutors</h4>
+        <h4>Un Approve Tutors List</h4>
 
       </div>
       <div className="mt-3">

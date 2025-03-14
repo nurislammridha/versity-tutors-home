@@ -30,6 +30,8 @@ import AllStudentListContainer from "./modules/profiles/views/AllStudentListCont
 import ApproveStudentListContainer from "./modules/profiles/views/ApproveStudentListContainer";
 import UnApproveStudentListContainer from "./modules/profiles/views/UnApproveStudentListContainer";
 import ReportConnectionListContainer from "./modules/reportConnection/views/ReportConnectionListContainer";
+import FeaturedList from "./modules/profiles/components/FeaturedList";
+import UnFeaturedList from "./modules/profiles/components/UnFeaturedList";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -108,6 +110,8 @@ const routes = [
   { path: "/all-student", name: "All student", component: AllStudentListContainer },
   { path: "/approve-student", name: "Approve student", component: ApproveStudentListContainer },
   { path: "/un-approve-student", name: "Approve student", component: UnApproveStudentListContainer },
+  { path: "/featured", name: "Featured", component: FeaturedList },
+  { path: "/un-featured", name: "Un Featured", component: UnFeaturedList },
   //report connection
   { path: "/report-connection", name: "Report Connection", component: ReportConnectionListContainer },
 ];

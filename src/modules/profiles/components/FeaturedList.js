@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { GetProfileList, ProfileDelete, ProfileUpdate } from "../_redux/ProfileAction";
-const UnApproveTutorList = () => {
+const FeaturedList = () => {
   const dispatch = useDispatch();
   const [updateId, setUpdateId] = useState("")
-  const filter = { filters: { isTutorAccount: true, isApproved: true, isRequestToApprove: false } }
+  const filter = { filters: { isTutorAccount: true, isFeatured: false } }
   const profileList = useSelector(
     (state) => state.profileInfo.profileList
   );
@@ -15,7 +15,7 @@ const UnApproveTutorList = () => {
   );
   const handleApprove = (id) => {
     setUpdateId(id)
-    dispatch(ProfileUpdate({ isApproved: false, isRequestToApprove: true }, filter, id))
+    dispatch(ProfileUpdate({ isFeatured: true }, filter, id))
   }
 
 
@@ -41,7 +41,7 @@ const UnApproveTutorList = () => {
   return (
     <>
       <div className="d-flex justify-content-between">
-        <h4>Approved Tutors List</h4>
+        <h4>Un Featured Tutors List</h4>
 
       </div>
       <div className="mt-3">
@@ -73,7 +73,7 @@ const UnApproveTutorList = () => {
                         className="btn btn-outline-success btn-sm mr-2"
                         onClick={() => !isUpdateLoading && handleApprove(item?._id)}
                       >
-                        Un Approve
+                        Featured
                       </a>
                     }
 
@@ -96,4 +96,4 @@ const UnApproveTutorList = () => {
   );
 };
 
-export default UnApproveTutorList;
+export default FeaturedList;

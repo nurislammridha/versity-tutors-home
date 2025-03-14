@@ -83,6 +83,16 @@ const _nav = [
         name: "Un Approve",
         to: "/un-approve-tutor",
       },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Featured",
+        to: "/featured",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Un Featured",
+        to: "/un-featured",
+      },
     ]
   },
   {
