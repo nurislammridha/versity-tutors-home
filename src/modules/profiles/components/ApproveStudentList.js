@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { GetProfileList, ProfileDelete, ProfileUpdate } from "../_redux/ProfileAction";
+import { useHistory } from "react-router-dom";
 const ApproveStudentList = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [updateId, setUpdateId] = useState("")
   const filter = { filters: { isTutorAccount: false, isApproved: false } }
@@ -76,7 +78,12 @@ const ApproveStudentList = () => {
                         Approve
                       </a>
                     }
-
+                    <a
+                      className="btn btn-success btn-sm mr-2"
+                      onClick={() => history.push(`/profile/${item._id}`)}
+                    >
+                      <i className="fa fa-eye"></i>
+                    </a>
                     <a
                       className="btn btn-danger btn-sm"
                       onClick={() => handleDelete(item._id)}

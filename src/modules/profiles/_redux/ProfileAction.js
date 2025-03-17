@@ -56,3 +56,22 @@ export const ProfileDelete = (listData, id) => (dispatch) => {
     showToast("error", "Something went wrong");
   }
 };
+export const GetProfileDetails = (id) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}client/${id}`;
+  dispatch({ type: Types.IS_PROFILE_DETAILS_LOADING, payload: true })
+
+  try {
+    Axios.get(url).then((res) => {
+      if (res.data.status) {
+        dispatch({ type: Types.IS_PROFILE_DETAILS_LOADING, payload: false });
+        dispatch({ type: Types.PROFILE_DETAILS, payload: res.data.result });
+
+      }
+    }).catch((err) => {
+      showToast("success", err);
+    });
+  } catch (error) {
+    dispatch({ type: Types.IS_PROFILE_DETAILS_LOADING, payload: false });
+    showToast("error", "Something went wrong");
+  }
+};

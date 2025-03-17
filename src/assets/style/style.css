@@ -139,3 +139,9 @@
   min-height: 250px !important;
   background-color: #fff !important;
 }
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 3px solid #dee2e6;
+}
