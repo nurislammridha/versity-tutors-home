@@ -65,6 +65,7 @@ const CategoryList = () => {
               <tr>
                 <th>SL</th>
                 <th>Category Name</th>
+                <th>Photo</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -74,6 +75,7 @@ const CategoryList = () => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.categoryName}</td>
+                  <td><img src={item?.img?.url} width={"50px"} /></td>
                   <td>{item.isActive ? "Active" : "Inactive"}</td>
                   <td>
                     {item?._id === updateId && isStatusUpdate ?
