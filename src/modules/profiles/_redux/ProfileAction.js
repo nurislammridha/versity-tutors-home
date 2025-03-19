@@ -75,3 +75,21 @@ export const GetProfileDetails = (id) => (dispatch) => {
     showToast("error", "Something went wrong");
   }
 };
+
+export const GetDocumentByClientId = (id) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}document/client/${id}`;
+  dispatch({ type: Types.IS_DOCUMENT_LOADING, payload: true })
+  try {
+    Axios.get(url).then((res) => {
+      if (res.data.status) {
+        dispatch({ type: Types.IS_DOCUMENT_LOADING, payload: false });
+        dispatch({ type: Types.DOCUMENT_INFO, payload: res?.data?.result });
+      }
+    }).catch((err) => {
+      showToast("success", err);
+    });
+  } catch (error) {
+    dispatch({ type: Types.IS_DOCUMENT_LOADING, payload: false });
+    showToast("error", "Something went wrong");
+  }
+};

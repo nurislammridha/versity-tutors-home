@@ -5,6 +5,8 @@ const initialState = {
   isUpdateLoading: false,
   isProfileDetailsLoading: false,
   profileDetails: null,
+  documentData: null,
+  isDocumentLoading: false,
 };
 const ProfileReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -28,6 +30,16 @@ const ProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         profileDetails: action.payload,
+      };
+    case Types.IS_DOCUMENT_LOADING:
+      return {
+        ...state,
+        isDocumentLoading: action.payload,
+      };
+    case Types.DOCUMENT_INFO:
+      return {
+        ...state,
+        documentData: action.payload,
       };
     default:
       break;

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { GetProfileDetails } from '../_redux/ProfileAction';
+import Documents from './Documents';
 const ProfileDetails = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -49,7 +50,7 @@ const ProfileDetails = () => {
                 <div className="card shadow-lg p-4">
                     {/* Profile Header */}
                     <div className="d-flex align-items-center mb-4">
-                        <img src={avatar.url} alt="Avatar" className="rounded-circle me-4 profile-img" />
+                        <img src={avatar?.url} alt="Avatar" className="rounded-circle me-4 profile-img" />
                         <div>
                             <h3>{fullName}({isTutorAccount ? "Tutor" : "Student"})</h3>
                             <p className="text-muted">{tagline}</p>
@@ -78,11 +79,11 @@ const ProfileDetails = () => {
                     {/* Subjects */}
                     <div className="mb-4">
                         <h5>Subjects</h5>
-                        {subject.map((subj) => (
+                        {subject && subject.map((subj) => (
                             <div key={subj._id}>
                                 <strong>{subj.categoryInfo.categoryName}</strong>
                                 <div>
-                                    {subj.subCategories.map((sub) => (
+                                    {subj?.subCategories?.map((sub) => (
                                         <span key={sub._id} className="badge bg-info text-dark me-2 mt-1">
                                             {sub.subCategoryInfo.subCategoryName}
                                         </span>
@@ -95,7 +96,7 @@ const ProfileDetails = () => {
                     {/* Education */}
                     <div className="mb-4">
                         <h5>Education</h5>
-                        {education.map((edu) => (
+                        {education && education.map((edu) => (
                             <div key={edu._id} className="mb-2">
                                 <strong>{edu.degree}</strong> - {edu.institute} ({edu.startDate} to {edu.endDate})
                                 <p>{edu.description}</p>
@@ -107,7 +108,7 @@ const ProfileDetails = () => {
                     <div className="mb-4">
                         <h5>Address</h5>
                         <p>
-                            {address}, {areaInfo.areaName}, {subDistrictInfo.subDistrictName}, {districtInfo.districtName}, {divisionInfo.divisionName}, Zip: {zipCode}
+                            {address}, {areaInfo?.areaName}, {subDistrictInfo?.subDistrictName}, {districtInfo?.districtName}, {divisionInfo?.divisionName}, Zip: {zipCode}
                         </p>
                     </div>
 
@@ -124,7 +125,9 @@ const ProfileDetails = () => {
                         {isFeatured && <span className="badge bg-warning text-dark me-2">Featured</span>}
                         {isBooked && <span className="badge bg-danger me-2">Booked</span>}
                     </div>
+                    <Documents clientId={id} />
                 </div>
+
             </div>
         </>
     )
