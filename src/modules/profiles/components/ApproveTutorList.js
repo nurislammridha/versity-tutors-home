@@ -4,6 +4,7 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { GetProfileList, ProfileDelete, ProfileUpdate } from "../_redux/ProfileAction";
 import { useHistory } from "react-router-dom";
+import { CreateNotification } from "src/modules/auth/_redux/AuthAction";
 const ApproveTutorList = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ const ApproveTutorList = () => {
   const handleApprove = (id) => {
     setUpdateId(id)
     dispatch(ProfileUpdate({ isApproved: true, isRequestToApprove: false }, filter, id))
+    const post = { clientInfo: id, title: `Your profile is approved by admin`, redirectUrl: "/dashboard?name=settings" }
+    dispatch(CreateNotification(post))
   }
 
 

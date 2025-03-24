@@ -49,3 +49,51 @@ export const SubmitLogin = (data) => (dispatch) => {
 export const SetFalseLogin = () => (dispatch) => {
   dispatch({ type: Types.LOGIN_SUCCESS, payload: false });
 };
+export const NotificationByAdmin = () => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}notification/admin`;
+  try {
+    Axios.get(url).then((res) => {
+      if (res.data.status) {
+        dispatch({ type: Types.NOTIFICATION_LIST, payload: res.data });
+      }
+    });
+  } catch (error) {
+    showToast("error", "Something went wrong");
+  }
+};
+export const SeenNotification = (id) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}notification/${id}`;
+  try {
+    Axios.put(url).then((res) => {
+      if (res.data.status) {
+        dispatch(NotificationByAdmin())
+      }
+    });
+  } catch (error) {
+    showToast("error", "Something went wrong");
+  }
+};
+export const NotificationAsClicked = () => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}notification/admin`;
+  try {
+    Axios.put(url).then((res) => {
+      if (res.data.status) {
+        dispatch(NotificationByAdmin())
+      }
+    });
+  } catch (error) {
+    showToast("error", "Something went wrong");
+  }
+};
+export const CreateNotification = (data) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}notification`;
+  try {
+    Axios.post(url, data).then((res) => {
+      if (res.data.status) {
+        //
+      }
+    });
+  } catch (error) {
+    showToast("error", "Something went wrong");
+  }
+};

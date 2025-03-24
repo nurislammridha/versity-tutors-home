@@ -3,6 +3,7 @@ import * as Types from "./Types";
 const initialState = {
   isLogin: false,
   loginSuccess: false,
+  notificationList: null,
 };
 const AuthReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -16,6 +17,11 @@ const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         isLogin: action.payload,
+      };
+    case Types.NOTIFICATION_LIST:
+      return {
+        ...state,
+        notificationList: action.payload,
       };
     default:
       break;
