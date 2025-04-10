@@ -3,19 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { AfterCreatedFalse, SubmitConnectionPackage, UploadCatImg, UploadCatLogo } from "../_redux/ConnectionPackageAction";
 const CreateConnectionPackage = () => {
   const [name, setName] = useState("");
+  const [nameBn, setNameBn] = useState("");
   const [connections, setConnections] = useState(0);
+  const [connectionsBn, setConnectionsBn] = useState(0);
   const [price, setPrice] = useState(0);
+  const [priceBn, setPriceBn] = useState(0);
   const isConnectionPackage = useSelector((state) => state.connectionPackageInfo.isConnectionPackage);
   const afterCreated = useSelector((state) => state.connectionPackageInfo.afterCreated);
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(SubmitConnectionPackage(name, connections, price));
+    dispatch(SubmitConnectionPackage(name, nameBn, connections, connectionsBn, price, priceBn));
   };
   useEffect(() => {
     if (afterCreated) {
       setName("")
+      setNameBn("")
       setConnections(0)
+      setConnectionsBn("")
       setPrice(0)
+      setPriceBn("")
       dispatch(AfterCreatedFalse())
     }
   }, [afterCreated])
@@ -34,6 +40,15 @@ const CreateConnectionPackage = () => {
             />
           </div>
           <div className="mt-3">
+            <h6 className="mb-3">Package Name Bangla</h6>
+            <input
+              className="form-control"
+              value={nameBn}
+              placeholder="enter package name bangla"
+              onChange={(e) => setNameBn(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
             <h6 className="mb-3">Connections Number</h6>
             <input
               className="form-control"
@@ -44,13 +59,33 @@ const CreateConnectionPackage = () => {
             />
           </div>
           <div className="mt-3">
+            <h6 className="mb-3">Connections Number Bangla</h6>
+            <input
+              className="form-control"
+              type="text"
+              value={connectionsBn}
+              placeholder="enter connections number bangla"
+              onChange={(e) => setConnectionsBn(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
             <h6 className="mb-3">Connections Price</h6>
             <input
               className="form-control"
               type="number"
               value={price}
-              placeholder="enter connections number"
+              placeholder="enter connections price"
               onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Connections Price Bangla</h6>
+            <input
+              className="form-control"
+              type="text"
+              value={priceBn}
+              placeholder="enter connections price bangla"
+              onChange={(e) => setPriceBn(e.target.value)}
             />
           </div>
 

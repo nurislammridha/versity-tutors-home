@@ -2,15 +2,19 @@ import * as Types from "./Types";
 import Axios from "axios";
 import { showToast } from "src/utils/ToastHelper";
 //test//est//
-export const SubmitDivision = (division) => (dispatch) => {
+export const SubmitDivision = (division, divisionBn) => (dispatch) => {
   if (division.length === 0) {
     showToast("error", "Division shouldn't be empty");
+    return 0;
+  } else if (divisionBn.length === 0) {
+    showToast("error", "Division name shouldn't be empty");
     return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}division`;
   dispatch({ type: Types.IS_CREATE_DIVISION, payload: true });
   const postData = {
     divisionName: division,
+    divisionNameBn: divisionBn,
   };
   try {
     Axios.post(url, postData)
@@ -37,15 +41,19 @@ export const SubmitDivision = (division) => (dispatch) => {
 export const AfterCreatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_CREATED, payload: false })
 }
-export const DivisionUpdate = (division, id) => (dispatch) => {
+export const DivisionUpdate = (division, divisionBn, id) => (dispatch) => {
   if (division.length === 0) {
-    showToast("error", "Division shouldn't be empty");
+    showToast("error", "Division name shouldn't be empty");
+    return 0;
+  } else if (divisionBn.length === 0) {
+    showToast("error", "Division name bangla shouldn't be empty");
     return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}division/${id}`;
   dispatch({ type: Types.IS_UPDATE_DIVISION, payload: true });
   const postData = {
     divisionName: division,
+    divisionNameBn: divisionBn,
   };
   try {
     Axios.put(url, postData)

@@ -65,6 +65,7 @@ const DistrictList = () => {
               <tr>
                 <th>SL</th>
                 <th>District Name</th>
+                <th>District Name Bangla</th>
                 <th>Division Name</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -75,6 +76,7 @@ const DistrictList = () => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.districtName}</td>
+                  <td>{item.districtNameBn}</td>
                   <td>{item?.divisionInfo?.divisionName}</td>
                   <td>{item.isActive ? "Active" : "Inactive"}</td>
                   <td>

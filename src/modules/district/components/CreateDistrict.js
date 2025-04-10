@@ -6,6 +6,7 @@ import Select from "react-select";
 import { GlobalOptions } from "src/services/GlobalFunction";
 const CreateDistrict = () => {
   const [district, setDistrict] = useState("");
+  const [districtBn, setDistrictBn] = useState("");
   const [division, setDivision] = useState("");
   const [divisionId, setDivisionId] = useState("");
   const isDistrict = useSelector((state) => state.districtInfo.isDistrict);
@@ -15,12 +16,13 @@ const CreateDistrict = () => {
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(SubmitDistrict(district, division, divisionId));
+    dispatch(SubmitDistrict(district, districtBn, division, divisionId));
   };
 
   useEffect(() => {
     if (afterCreated) {
       setDistrict("")
+      setDistrictBn("")
       setDivision("")
       setDivisionId("")
       dispatch(AfterCreatedFalse())
@@ -52,6 +54,15 @@ const CreateDistrict = () => {
               value={district}
               placeholder="enter district name"
               onChange={(e) => setDistrict(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">District Name Bangla</h6>
+            <input
+              className="form-control"
+              value={districtBn}
+              placeholder="enter district name bangla"
+              onChange={(e) => setDistrictBn(e.target.value)}
             />
           </div>
           {isDistrict ? (

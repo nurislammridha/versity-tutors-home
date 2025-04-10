@@ -15,13 +15,13 @@ const _nav = [
 
   {
     _tag: "CSidebarNavItem",
-    name: "Category",
+    name: "Class",
     to: "/category",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Sub Category",
+    name: "Subject",
     to: "/sub-category",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
@@ -49,12 +49,12 @@ const _nav = [
     to: "/area",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Language",
-    to: "/language",
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
-  },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Language",
+  //   to: "/language",
+  //   icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+  // },
   {
     _tag: "CSidebarNavItem",
     name: "Package",

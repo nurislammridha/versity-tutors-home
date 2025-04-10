@@ -2,7 +2,7 @@ import * as Types from "./Types";
 import Axios from "axios";
 import { showToast } from "src/utils/ToastHelper";
 //test//est//
-export const SubmitSubDistrict = (subDistrict, district, districtId, division, divisionId) => (dispatch) => {
+export const SubmitSubDistrict = (subDistrict, subDistrictBn, district, districtId, division, divisionId) => (dispatch) => {
   if (division.length === 0) {
     showToast("error", "Select a division");
     return 0;
@@ -10,13 +10,17 @@ export const SubmitSubDistrict = (subDistrict, district, districtId, division, d
     showToast("error", "You Should Select district");
     return 0;
   } else if (subDistrict.length === 0) {
-    showToast("error", "Sub District should not be empty");
+    showToast("error", "Sub District name should not be empty");
+    return 0;
+  } else if (subDistrictBn.length === 0) {
+    showToast("error", "Sub District name bangla should not be empty");
     return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}sub-district`;
   dispatch({ type: Types.IS_CREATE_SUBDISTRICT, payload: true });
   const postData = {
     subDistrictName: subDistrict,
+    subDistrictNameBn: subDistrictBn,
     districtId: districtId,
     districtInfo: districtId,
     divisionId: divisionId,
@@ -47,7 +51,7 @@ export const SubmitSubDistrict = (subDistrict, district, districtId, division, d
 export const AfterCreatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_CREATED, payload: false })
 }
-export const SubDistrictUpdate = (subDistrict, district, districtId, division, divisionId, id) => (dispatch) => {
+export const SubDistrictUpdate = (subDistrict, subDistrictBn, district, districtId, division, divisionId, id) => (dispatch) => {
   if (division.length === 0) {
     showToast("error", "Select a division");
     return 0;
@@ -57,11 +61,15 @@ export const SubDistrictUpdate = (subDistrict, district, districtId, division, d
   } else if (subDistrict.length === 0) {
     showToast("error", "Sub District should not be empty");
     return 0;
+  } else if (subDistrictBn.length === 0) {
+    showToast("error", "Sub District name bangla should not be empty");
+    return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}sub-district/${id}`;
   dispatch({ type: Types.IS_UPDATE_SUBDISTRICT, payload: true });
   const postData = {
     subDistrictName: subDistrict,
+    subDistrictNameBn: subDistrictBn,
     districtId: districtId,
     districtInfo: districtId,
     divisionId: divisionId,

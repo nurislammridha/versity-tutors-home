@@ -7,6 +7,7 @@ import { GlobalOptions } from "src/services/GlobalFunction";
 import { DistrictByDivisionId } from "src/modules/district/_redux/DistrictAction";
 const CreateSubDistrict = () => {
   const [subDistrict, setSubDistrict] = useState("");
+  const [subDistrictBn, setSubDistrictBn] = useState("");
   const [division, setDivision] = useState("");
   const [divisionId, setDivisionId] = useState("");
   const [district, setDistrict] = useState("");
@@ -21,12 +22,13 @@ const CreateSubDistrict = () => {
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(SubmitSubDistrict(subDistrict, district, districtId, division, divisionId));
+    dispatch(SubmitSubDistrict(subDistrict, subDistrictBn, district, districtId, division, divisionId));
   };
 
   useEffect(() => {
     if (afterCreated) {
       setSubDistrict("")
+      setSubDistrictBn("")
       setDistrict("")
       setDistrictId("")
       setDivision("")
@@ -76,6 +78,15 @@ const CreateSubDistrict = () => {
               value={subDistrict}
               placeholder="enter sub district name"
               onChange={(e) => setSubDistrict(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Sub District Name Bangla</h6>
+            <input
+              className="form-control"
+              value={subDistrictBn}
+              placeholder="enter sub district name bangla"
+              onChange={(e) => setSubDistrictBn(e.target.value)}
             />
           </div>
           {isSubDistrict ? (

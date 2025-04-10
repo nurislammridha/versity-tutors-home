@@ -2,21 +2,30 @@ import * as Types from "./Types";
 import Axios from "axios";
 import { showToast } from "src/utils/ToastHelper";
 //test//est//
-export const SubmitConnectionPackage = (name, connections, price) => (dispatch) => {
+export const SubmitConnectionPackage = (name, nameBn, connections, connectionsBn, price, priceBn) => (dispatch) => {
   if (name.length === 0) {
     showToast("error", "Name shouldn't be empty");
     return 0;
+  } else if (nameBn.length === 0) {
+    showToast("error", "Name bangla shouldn't be empty");
+    return 0;
   } else if (connections <= 0) {
-    showToast("error", "Connection should be greater than zero");
+    showToast("error", "Connection number should be greater than zero");
+    return 0;
+  } else if (connectionsBn.length === 0) {
+    showToast("error", "Connection number bangla should not empty");
     return 0;
   } else if (price <= 0) {
     showToast("error", "Price should be greater than zero");
+    return 0;
+  } else if (priceBn.length === 0) {
+    showToast("error", "Connection price bangla should not empty");
     return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}connection-package`;
   dispatch({ type: Types.IS_CREATE_CONNECTIONPACKAGE, payload: true });
   const postData = {
-    name, connections, price
+    name, nameBn, connections, connectionsBn, price, priceBn
   };
   try {
     Axios.post(url, postData)
@@ -43,21 +52,30 @@ export const SubmitConnectionPackage = (name, connections, price) => (dispatch) 
 export const AfterCreatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_CREATED, payload: false })
 }
-export const ConnectionPackageUpdate = (name, connections, price, id) => (dispatch) => {
+export const ConnectionPackageUpdate = (name, nameBn, connections, connectionsBn, price, priceBn, id) => (dispatch) => {
   if (name.length === 0) {
     showToast("error", "Name shouldn't be empty");
     return 0;
+  } else if (nameBn.length === 0) {
+    showToast("error", "Name bangla shouldn't be empty");
+    return 0;
   } else if (connections <= 0) {
-    showToast("error", "Connection should be greater than zero");
+    showToast("error", "Connection number should be greater than zero");
+    return 0;
+  } else if (connectionsBn.length === 0) {
+    showToast("error", "Connection number bangla should not empty");
     return 0;
   } else if (price <= 0) {
     showToast("error", "Price should be greater than zero");
+    return 0;
+  } else if (priceBn.length === 0) {
+    showToast("error", "Connection price bangla should not empty");
     return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}connection-package/${id}`;
   dispatch({ type: Types.IS_UPDATE_CONNECTIONPACKAGE, payload: true });
   const postData = {
-    name, connections, price
+    name, nameBn, connections, connectionsBn, price, priceBn
   };
   try {
     Axios.put(url, postData)

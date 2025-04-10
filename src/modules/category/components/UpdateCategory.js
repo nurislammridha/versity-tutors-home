@@ -9,6 +9,7 @@ const UpdateCategory = () => {
   const location = useLocation()
   const history = useHistory()
   const [category, setCategory] = useState("");
+  const [categoryBn, setCategoryBn] = useState("");
   const [categoryImg, setCategoryImg] = useState({ url: "", publicId: null });
   const [categoryLogo, setCategoryLogo] = useState({ url: "", publicId: null });
   const isUpdate = useSelector((state) => state.categoryInfo.isUpdate);
@@ -20,7 +21,7 @@ const UpdateCategory = () => {
 
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(CategoryUpdate(category, categoryImg, categoryLogo, id));
+    dispatch(CategoryUpdate(category, categoryBn, categoryImg, categoryLogo, id));
   };
   const handleChangeImg = (value) => {
     dispatch(UploadCatImg(value, categoryImg));
@@ -32,6 +33,7 @@ const UpdateCategory = () => {
       dispatch(AfterUpdatedFalse())
     }
     setCategory(location?.state?.category?.categoryName)
+    setCategoryBn(location?.state?.category?.categoryNameBn)
     setCategoryImg(location?.state?.category?.img)
   }, [afterUpdated, id])
   useEffect(() => {
@@ -43,18 +45,27 @@ const UpdateCategory = () => {
       <div className="row">
         <div className="col-sm-2"></div>
         <div className="col-sm-8">
-          <h3 className="mb-3">Update Category</h3>
+          <h3 className="mb-3">Update Class</h3>
           <div>
-            <h6 className="mb-3">Category Name</h6>
+            <h6 className="mb-3">Class Name</h6>
             <input
               className="form-control"
               value={category}
-              placeholder="enter category name"
+              placeholder="enter class name"
               onChange={(e) => setCategory(e.target.value)}
             />
           </div>
+          <div>
+            <h6 className="mb-3">Class Name Bangla</h6>
+            <input
+              className="form-control"
+              value={categoryBn}
+              placeholder="enter class bangla name"
+              onChange={(e) => setCategoryBn(e.target.value)}
+            />
+          </div>
           <div className="mt-3">
-            <h6 className="mt-3">Select a category Image</h6>
+            <h6 className="mt-3">Select a class Image</h6>
             <input
               type="file"
               className="d-none"

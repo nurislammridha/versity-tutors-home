@@ -4,6 +4,7 @@ import { AfterCreatedFalse, SubmitCategory, UploadCatImg, UploadCatLogo } from "
 import demoProduct from '../../../assets/images/demoProduct.jpg'
 const CreateCategory = () => {
   const [category, setCategory] = useState("");
+  const [categoryBn, setCategoryBn] = useState("");
   const [categoryImg, setCategoryImg] = useState({ url: "", publicId: null });
   const [categoryLogo, setCategoryLogo] = useState({ url: "", publicId: null });
   const isCategory = useSelector((state) => state.categoryInfo.isCategory);
@@ -14,7 +15,7 @@ const CreateCategory = () => {
   const isLogoLoading = useSelector((state) => state.categoryInfo.isLogoLoading);
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(SubmitCategory(category, categoryImg));
+    dispatch(SubmitCategory(category, categoryBn, categoryImg));
   };
   const handleChangeImg = (value) => {
     dispatch(UploadCatImg(value, categoryImg));
@@ -23,6 +24,7 @@ const CreateCategory = () => {
   useEffect(() => {
     if (afterCreated) {
       setCategory("")
+      setCategoryBn("")
       setCategoryImg({ url: "", publicId: null })
       setCategoryLogo({ url: "", publicId: null })
       dispatch(AfterCreatedFalse())
@@ -37,12 +39,21 @@ const CreateCategory = () => {
         <div className="col-sm-2"></div>
         <div className="col-sm-8">
           <div>
-            <h6 className="mb-3">Category Name</h6>
+            <h6 className="mb-3">Class name</h6>
             <input
               className="form-control"
               value={category}
-              placeholder="enter category name"
+              placeholder="enter class name"
               onChange={(e) => setCategory(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Class name bangla</h6>
+            <input
+              className="form-control"
+              value={categoryBn}
+              placeholder="enter class name bangla"
+              onChange={(e) => setCategoryBn(e.target.value)}
             />
           </div>
           <div className="mt-3">

@@ -65,8 +65,11 @@ const ConnectionPackageList = () => {
               <tr>
                 <th>SL</th>
                 <th> Name</th>
+                <th> Name Bangla</th>
                 <th> Connections</th>
+                <th> Con Ban</th>
                 <th> Price</th>
+                <th> P Bangla</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -76,8 +79,11 @@ const ConnectionPackageList = () => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.name}</td>
+                  <td>{item.nameBn}</td>
                   <td>{item.connections}</td>
+                  <td>{item.connectionsBn}</td>
                   <td>{item.price}</td>
+                  <td>{item.priceBn}</td>
                   <td>{item.isActive ? "Active" : "Inactive"}</td>
                   <td>
                     {item?._id === updateId && isStatusUpdate ?

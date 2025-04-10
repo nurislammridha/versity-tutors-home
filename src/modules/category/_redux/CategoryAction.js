@@ -2,9 +2,12 @@ import * as Types from "./Types";
 import Axios from "axios";
 import { showToast } from "src/utils/ToastHelper";
 //test//est//
-export const SubmitCategory = (category, categoryImg) => (dispatch) => {
+export const SubmitCategory = (category, categoryBn, categoryImg) => (dispatch) => {
   if (category.length === 0) {
-    showToast("error", "Category shouldn't be empty");
+    showToast("error", "Class nme shouldn't be empty");
+    return 0;
+  } else if (categoryBn.length === 0) {
+    showToast("error", "Class name bangla shouldn't be empty");
     return 0;
   } else if (categoryImg.publicId === null) {
     showToast("error", "Select a category Image");
@@ -14,6 +17,7 @@ export const SubmitCategory = (category, categoryImg) => (dispatch) => {
   dispatch({ type: Types.IS_CREATE_CATEGORY, payload: true });
   const postData = {
     categoryName: category,
+    categoryNameBn: categoryBn,
     img: categoryImg
   };
   try {
@@ -41,9 +45,12 @@ export const SubmitCategory = (category, categoryImg) => (dispatch) => {
 export const AfterCreatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_CREATED, payload: false })
 }
-export const CategoryUpdate = (category, categoryImg, categoryLogo, id) => (dispatch) => {
+export const CategoryUpdate = (category, categoryBn, categoryImg, categoryLogo, id) => (dispatch) => {
   if (category.length === 0) {
-    showToast("error", "Category shouldn't be empty");
+    showToast("error", "Class name shouldn't be empty");
+    return 0;
+  } else if (categoryBn.length === 0) {
+    showToast("error", "Class name bangla shouldn't be empty");
     return 0;
   } else if (categoryImg.publicId === null) {
     showToast("error", "Select a category Image");
@@ -53,6 +60,7 @@ export const CategoryUpdate = (category, categoryImg, categoryLogo, id) => (disp
   dispatch({ type: Types.IS_UPDATE_CATEGORY, payload: true });
   const postData = {
     categoryName: category,
+    categoryNameBn: categoryBn,
     img: categoryImg
   };
   try {

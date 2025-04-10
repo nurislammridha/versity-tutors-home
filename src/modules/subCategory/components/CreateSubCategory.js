@@ -7,6 +7,7 @@ import demoProduct from '../../../assets/images/demoProduct.jpg'
 import { GlobalOptions } from "src/services/GlobalFunction";
 const CreateSubCategory = () => {
   const [subCategory, setSubCategory] = useState("");
+  const [subCategoryBn, setSubCategoryBn] = useState("");
   const [category, setCategory] = useState("");
   const [subCategoryImg, setSubCategoryImg] = useState({ url: "", publicId: null });
   const [categoryId, setCategoryId] = useState("");
@@ -19,7 +20,7 @@ const CreateSubCategory = () => {
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(SubmitSubCategory(subCategory, category, categoryId));
+    dispatch(SubmitSubCategory(subCategory, subCategoryBn, category, categoryId));
   };
   const handleChangeImg = (value) => {
     dispatch(UploadSubCatImg(value, subCategoryImg));
@@ -27,6 +28,7 @@ const CreateSubCategory = () => {
   useEffect(() => {
     if (afterCreated) {
       setSubCategory("")
+      setSubCategoryBn("")
       setCategory("")
       setCategoryId("")
       setSubCategoryImg({ url: "", publicId: null })
@@ -46,7 +48,7 @@ const CreateSubCategory = () => {
         <div className="col-sm-2"></div>
         <div className="col-sm-8">
           <div>
-            <h6>Select Category</h6>
+            <h6>Select Class</h6>
             <Select
               options={GlobalOptions(categoryArrList, "categoryName", "_id")}
               value={{ label: category }}
@@ -57,12 +59,21 @@ const CreateSubCategory = () => {
             />
           </div>
           <div className="mt-3">
-            <h6 className="mb-3">Sub Category Name</h6>
+            <h6 className="mb-3">Subject name</h6>
             <input
               className="form-control"
               value={subCategory}
-              placeholder="enter sub category name"
+              placeholder="enter subject name"
               onChange={(e) => setSubCategory(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Subject name bangla</h6>
+            <input
+              className="form-control"
+              value={subCategoryBn}
+              placeholder="enter subject name"
+              onChange={(e) => setSubCategoryBn(e.target.value)}
             />
           </div>
           {/* //Image Upload */}

@@ -34,7 +34,7 @@ const SubCategoryList = () => {
   const handleDelete = (id) => {
     confirmAlert({
       title: "Confirm To Delete",
-      message: `Are you sure to delete this sub category?`,
+      message: `Are you sure to delete this subject?`,
       buttons: [
         {
           label: "Yes",
@@ -50,12 +50,12 @@ const SubCategoryList = () => {
   return (
     <>
       <div className="d-flex justify-content-between">
-        <h4>Sub Category List</h4>
+        <h4>Subject List</h4>
         <a
           className="btn btn-success btn-sm text-light"
           onClick={() => history.push("/sub-category-add")}
         >
-          Add Sub Category
+          Add Subject
         </a>
       </div>
       <div className="mt-3">
@@ -64,8 +64,9 @@ const SubCategoryList = () => {
             <thead>
               <tr>
                 <th>SL</th>
-                <th>Sub Category Name</th>
-                <th>Category Name</th>
+                <th>Subject Name</th>
+                <th>Subject Name Bangla</th>
+                <th>Class Name</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -75,6 +76,7 @@ const SubCategoryList = () => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.subCategoryName}</td>
+                  <td>{item.subCategoryNameBn}</td>
                   <td>{item?.categoryInfo?.categoryName}</td>
                   <td>{item.isActive ? "Active" : "Inactive"}</td>
                   <td>
@@ -112,7 +114,7 @@ const SubCategoryList = () => {
             </tbody>
           </table>
         ) : (
-          <div className="alert alert-success mt-5 text-center">No sub category found</div>
+          <div className="alert alert-success mt-5 text-center">No subject found</div>
         )}
       </div>
     </>

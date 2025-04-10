@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { AfterCreatedFalse, SubmitDivision } from "../_redux/DivisionAction";
 const CreateDivision = () => {
   const [division, setDivision] = useState("");
+  const [divisionBn, setDivisionBn] = useState("");
   const isDivision = useSelector((state) => state.divisionInfo.isDivision);
   const afterCreated = useSelector((state) => state.divisionInfo.afterCreated);
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(SubmitDivision(division));
+    dispatch(SubmitDivision(division, divisionBn));
   };
   useEffect(() => {
     if (afterCreated) {
       setDivision("")
+      setDivisionBn("")
       dispatch(AfterCreatedFalse())
     }
   }, [afterCreated])
@@ -27,6 +29,15 @@ const CreateDivision = () => {
               value={division}
               placeholder="enter division name"
               onChange={(e) => setDivision(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Division name bangla</h6>
+            <input
+              className="form-control"
+              value={divisionBn}
+              placeholder="enter division name bangla"
+              onChange={(e) => setDivisionBn(e.target.value)}
             />
           </div>
 

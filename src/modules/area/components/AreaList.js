@@ -65,6 +65,7 @@ const AreaList = () => {
               <tr>
                 <th>SL</th>
                 <th>Area </th>
+                <th>Area Bangla</th>
                 <th>Sub District</th>
                 <th>District</th>
                 <th>Division</th>
@@ -77,6 +78,7 @@ const AreaList = () => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.areaName}</td>
+                  <td>{item.areaNameBn}</td>
                   <td>{item?.subDistrictInfo?.subDistrictName}</td>
                   <td>{item?.districtInfo?.districtName}</td>
                   <td>{item?.divisionInfo?.divisionName}</td>

@@ -2,9 +2,12 @@ import * as Types from "./Types";
 import Axios from "axios";
 import { showToast } from "src/utils/ToastHelper";
 //test//est//
-export const SubmitSubCategory = (subCategory, category, categoryId,) => (dispatch) => {
+export const SubmitSubCategory = (subCategory, subCategoryBn, category, categoryId,) => (dispatch) => {
   if (subCategory.length === 0) {
-    showToast("error", "Sub category name shouldn't be empty");
+    showToast("error", "Subject name shouldn't be empty");
+    return 0;
+  } else if (subCategoryBn.length === 0) {
+    showToast("error", "Subject name bangla shouldn't be empty");
     return 0;
   } else if (category.length === 0) {
     showToast("error", "You Should Select Category Name");
@@ -14,9 +17,11 @@ export const SubmitSubCategory = (subCategory, category, categoryId,) => (dispat
   dispatch({ type: Types.IS_CREATE_SUBCATEGORY, payload: true });
   const postData = {
     subCategoryName: subCategory,
+    subCategoryNameBn: subCategoryBn,
     categoryId: categoryId,
     categoryInfo: categoryId
   };
+
   try {
     Axios.post(url, postData)
       .then((res) => {
@@ -42,9 +47,12 @@ export const SubmitSubCategory = (subCategory, category, categoryId,) => (dispat
 export const AfterCreatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_CREATED, payload: false })
 }
-export const SubCategoryUpdate = (subCategory, category, categoryId, id) => (dispatch) => {
+export const SubCategoryUpdate = (subCategory, subCategoryBn, category, categoryId, id) => (dispatch) => {
   if (subCategory.length === 0) {
-    showToast("error", "Sub category name shouldn't be empty");
+    showToast("error", "Subject name shouldn't be empty");
+    return 0;
+  } if (subCategoryBn.length === 0) {
+    showToast("error", "Subject name bangla shouldn't be empty");
     return 0;
   } else if (category.length === 0) {
     showToast("error", "You Should Select Category Name");
@@ -54,6 +62,7 @@ export const SubCategoryUpdate = (subCategory, category, categoryId, id) => (dis
   dispatch({ type: Types.IS_UPDATE_SUBCATEGORY, payload: true });
   const postData = {
     subCategoryName: subCategory,
+    subCategoryNameBn: subCategoryBn,
     categoryId: categoryId,
     categoryInfo: categoryId,
   };

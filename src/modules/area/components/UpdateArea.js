@@ -12,6 +12,7 @@ const UpdateArea = () => {
   const history = useHistory()
   const location = useLocation()
   const [area, setArea] = useState("");
+  const [areaBn, setAreaBn] = useState("");
   const [division, setDivision] = useState("");
   const [divisionId, setDivisionId] = useState("");
   const [district, setDistrict] = useState("");
@@ -31,7 +32,7 @@ const UpdateArea = () => {
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(AreaUpdate(area, subDistrict, subDistrictId, district, districtId, division, divisionId, id));
+    dispatch(AreaUpdate(area, areaBn, subDistrict, subDistrictId, district, districtId, division, divisionId, id));
   };
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const UpdateArea = () => {
       dispatch(AfterUpdatedFalse())
     }
     setArea(location?.state?.data?.areaName)
+    setAreaBn(location?.state?.data?.areaNameBn)
     setSubDistrict(location?.state?.data?.subDistrictInfo?.subDistrictName)
     setSubDistrictId(location?.state?.data?.subDistrictInfo?._id)
     setDistrict(location?.state?.data?.districtInfo?.districtName)
@@ -109,6 +111,15 @@ const UpdateArea = () => {
               value={area}
               placeholder="enter area name"
               onChange={(e) => setArea(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Area Name Bangla</h6>
+            <input
+              className="form-control"
+              value={areaBn}
+              placeholder="enter area name bangla"
+              onChange={(e) => setAreaBn(e.target.value)}
             />
           </div>
 

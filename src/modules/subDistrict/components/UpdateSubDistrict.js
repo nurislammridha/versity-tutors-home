@@ -11,6 +11,7 @@ const UpdateSubDistrict = () => {
   const history = useHistory()
   const location = useLocation()
   const [subDistrict, setSubDistrict] = useState("");
+  const [subDistrictBn, setSubDistrictBn] = useState("");
   const [division, setDivision] = useState("");
   const [divisionId, setDivisionId] = useState("");
   const [district, setDistrict] = useState("");
@@ -25,7 +26,7 @@ const UpdateSubDistrict = () => {
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(SubDistrictUpdate(subDistrict, district, districtId, division, divisionId, id));
+    dispatch(SubDistrictUpdate(subDistrict, subDistrictBn, district, districtId, division, divisionId, id));
   };
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const UpdateSubDistrict = () => {
       dispatch(AfterUpdatedFalse())
     }
     setSubDistrict(location?.state?.data?.subDistrictName)
+    setSubDistrictBn(location?.state?.data?.subDistrictNameBn)
     setDistrict(location?.state?.data?.districtInfo?.districtName)
     setDistrictId(location?.state?.data?.districtInfo?._id)
     setDivision(location?.state?.data?.divisionInfo?.divisionName)
@@ -83,6 +85,15 @@ const UpdateSubDistrict = () => {
               value={subDistrict}
               placeholder="enter subdistrict name"
               onChange={(e) => setSubDistrict(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Sub District Name Bangla</h6>
+            <input
+              className="form-control"
+              value={subDistrictBn}
+              placeholder="enter subdistrict name bangla"
+              onChange={(e) => setSubDistrictBn(e.target.value)}
             />
           </div>
 

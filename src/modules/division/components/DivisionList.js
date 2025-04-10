@@ -65,6 +65,7 @@ const DivisionList = () => {
               <tr>
                 <th>SL</th>
                 <th>Division Name</th>
+                <th>Division Name Bangla</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -74,6 +75,7 @@ const DivisionList = () => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.divisionName}</td>
+                  <td>{item.divisionNameBn}</td>
                   <td>{item.isActive ? "Active" : "Inactive"}</td>
                   <td>
                     {item?._id === updateId && isStatusUpdate ?

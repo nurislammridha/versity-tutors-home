@@ -8,12 +8,13 @@ const UpdateDivision = () => {
   const location = useLocation()
   const history = useHistory()
   const [division, setDivision] = useState("");
+  const [divisionBn, setDivisionBn] = useState("");
   const isUpdate = useSelector((state) => state.divisionInfo.isUpdate);
   const afterUpdated = useSelector((state) => state.divisionInfo.afterUpdated);
 
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(DivisionUpdate(division, id));
+    dispatch(DivisionUpdate(division, divisionBn, id));
   };
   useEffect(() => {
     if (afterUpdated) {
@@ -21,6 +22,7 @@ const UpdateDivision = () => {
       dispatch(AfterUpdatedFalse())
     }
     setDivision(location?.state?.division?.divisionName)
+    setDivisionBn(location?.state?.division?.divisionNameBn)
   }, [afterUpdated, id])
   return (
     <>
@@ -29,12 +31,21 @@ const UpdateDivision = () => {
         <div className="col-sm-8">
           <h3 className="mb-3">Update Division</h3>
           <div>
-            <h6 className="mb-3">Division Name</h6>
+            <h6 className="mb-3">Division name</h6>
             <input
               className="form-control"
               value={division}
               placeholder="enter division name"
               onChange={(e) => setDivision(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Division name bangla</h6>
+            <input
+              className="form-control"
+              value={divisionBn}
+              placeholder="enter division name bangla"
+              onChange={(e) => setDivisionBn(e.target.value)}
             />
           </div>
 

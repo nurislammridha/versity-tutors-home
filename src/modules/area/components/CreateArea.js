@@ -8,6 +8,7 @@ import { DistrictByDivisionId } from "src/modules/district/_redux/DistrictAction
 import { SubDistrictByDistrictId } from "src/modules/subDistrict/_redux/SubDistrictAction";
 const CreateArea = () => {
   const [area, setArea] = useState("");
+  const [areaBn, setAreaBn] = useState("");
   const [division, setDivision] = useState("");
   const [divisionId, setDivisionId] = useState("");
   const [district, setDistrict] = useState("");
@@ -27,12 +28,13 @@ const CreateArea = () => {
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(SubmitArea(area, subDistrict, subDistrictId, district, districtId, division, divisionId));
+    dispatch(SubmitArea(area, areaBn, subDistrict, subDistrictId, district, districtId, division, divisionId));
   };
 
   useEffect(() => {
     if (afterCreated) {
       setArea("")
+      setAreaBn("")
       setDistrict("")
       setDistrictId("")
       setDivision("")
@@ -100,6 +102,15 @@ const CreateArea = () => {
               value={area}
               placeholder="enter area name"
               onChange={(e) => setArea(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Area Name Bn</h6>
+            <input
+              className="form-control"
+              value={areaBn}
+              placeholder="enter area name bangla"
+              onChange={(e) => setAreaBn(e.target.value)}
             />
           </div>
           {isArea ? (

@@ -50,12 +50,12 @@ const CategoryList = () => {
   return (
     <>
       <div className="d-flex justify-content-between">
-        <h4>Category List</h4>
+        <h4>Class List</h4>
         <a
           className="btn btn-success btn-sm text-light"
           onClick={() => history.push("/category-add")}
         >
-          Add Category
+          Add Class
         </a>
       </div>
       <div className="mt-3">
@@ -64,7 +64,8 @@ const CategoryList = () => {
             <thead>
               <tr>
                 <th>SL</th>
-                <th>Category Name</th>
+                <th>Class Name</th>
+                <th>Class Name Bangla</th>
                 <th>Photo</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -75,6 +76,7 @@ const CategoryList = () => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.categoryName}</td>
+                  <td>{item.categoryNameBn}</td>
                   <td><img src={item?.img?.url} width={"50px"} /></td>
                   <td>{item.isActive ? "Active" : "Inactive"}</td>
                   <td>

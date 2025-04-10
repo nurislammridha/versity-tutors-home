@@ -8,14 +8,17 @@ const UpdateConnectionPackage = () => {
   const location = useLocation()
   const history = useHistory()
   const [name, setName] = useState("");
+  const [nameBn, setNameBn] = useState("");
   const [connections, setConnections] = useState(0);
+  const [connectionsBn, setConnectionsBn] = useState("");
   const [price, setPrice] = useState(0);
+  const [priceBn, setPriceBn] = useState("");
   const isUpdate = useSelector((state) => state.connectionPackageInfo.isUpdate);
   const afterUpdated = useSelector((state) => state.connectionPackageInfo.afterUpdated);
 
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(ConnectionPackageUpdate(name, connections, price, id));
+    dispatch(ConnectionPackageUpdate(name, nameBn, connections, connectionsBn, price, priceBn, id));
   };
 
   useEffect(() => {
@@ -24,8 +27,11 @@ const UpdateConnectionPackage = () => {
       dispatch(AfterUpdatedFalse())
     }
     setName(location?.state?.connectionPackage?.name)
+    setNameBn(location?.state?.connectionPackage?.nameBn)
     setConnections(location?.state?.connectionPackage?.connections)
+    setConnectionsBn(location?.state?.connectionPackage?.connectionsBn)
     setPrice(location?.state?.connectionPackage?.price)
+    setPriceBn(location?.state?.connectionPackage?.priceBn)
   }, [afterUpdated, id])
 
   return (
@@ -44,6 +50,15 @@ const UpdateConnectionPackage = () => {
             />
           </div>
           <div className="mt-3">
+            <h6 className="mb-3">Package Name Bangla</h6>
+            <input
+              className="form-control"
+              value={nameBn}
+              placeholder="enter package name bangla"
+              onChange={(e) => setNameBn(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
             <h6 className="mb-3">Connections Number</h6>
             <input
               className="form-control"
@@ -54,6 +69,16 @@ const UpdateConnectionPackage = () => {
             />
           </div>
           <div className="mt-3">
+            <h6 className="mb-3">Connections Number Bangla</h6>
+            <input
+              className="form-control"
+              type="text"
+              value={connectionsBn}
+              placeholder="enter connections number bangla"
+              onChange={(e) => setConnectionsBn(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
             <h6 className="mb-3">Connections Price</h6>
             <input
               className="form-control"
@@ -61,6 +86,16 @@ const UpdateConnectionPackage = () => {
               value={price}
               placeholder="enter connections number"
               onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">Connections Price Bangla</h6>
+            <input
+              className="form-control"
+              type="text"
+              value={priceBn}
+              placeholder="enter connections number bangla"
+              onChange={(e) => setPriceBn(e.target.value)}
             />
           </div>
           {isUpdate ? (

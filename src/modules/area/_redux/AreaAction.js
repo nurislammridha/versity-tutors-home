@@ -2,7 +2,7 @@ import * as Types from "./Types";
 import Axios from "axios";
 import { showToast } from "src/utils/ToastHelper";
 //test//est//
-export const SubmitArea = (area, subDistrict, subDistrictId, district, districtId, division, divisionId) => (dispatch) => {
+export const SubmitArea = (area, areaBn, subDistrict, subDistrictId, district, districtId, division, divisionId) => (dispatch) => {
   if (division.length === 0) {
     showToast("error", "Select a division");
     return 0;
@@ -15,11 +15,15 @@ export const SubmitArea = (area, subDistrict, subDistrictId, district, districtI
   } else if (area.length === 0) {
     showToast("error", "Area should not be empty");
     return 0;
+  } else if (areaBn.length === 0) {
+    showToast("error", "Area bangla should not be empty");
+    return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}area`;
   dispatch({ type: Types.IS_CREATE_AREA, payload: true });
   const postData = {
     areaName: area,
+    areaNameBn: areaBn,
     subDistrictId: subDistrictId,
     subDistrictInfo: subDistrictId,
     districtId: districtId,
@@ -52,7 +56,7 @@ export const SubmitArea = (area, subDistrict, subDistrictId, district, districtI
 export const AfterCreatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_CREATED, payload: false })
 }
-export const AreaUpdate = (area, subDistrict, subDistrictId, district, districtId, division, divisionId, id) => (dispatch) => {
+export const AreaUpdate = (area, areaBn, subDistrict, subDistrictId, district, districtId, division, divisionId, id) => (dispatch) => {
   if (division.length === 0) {
     showToast("error", "Select a division");
     return 0;
@@ -65,11 +69,15 @@ export const AreaUpdate = (area, subDistrict, subDistrictId, district, districtI
   } else if (area.length === 0) {
     showToast("error", "Area should not be empty");
     return 0;
+  } else if (areaBn.length === 0) {
+    showToast("error", "Area bangla should not be empty");
+    return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}area/${id}`;
   dispatch({ type: Types.IS_UPDATE_AREA, payload: true });
   const postData = {
     areaName: area,
+    areaNameBn: areaBn,
     subDistrictId: subDistrictId,
     subDistrictInfo: subDistrictId,
     districtId: districtId,

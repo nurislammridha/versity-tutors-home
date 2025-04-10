@@ -10,6 +10,7 @@ const UpdateDistrict = () => {
   const history = useHistory()
   const location = useLocation()
   const [district, setDistrict] = useState("");
+  const [districtBn, setDistrictBn] = useState("");
   const [division, setDivision] = useState("");
   const [divisionId, setDivisionId] = useState("");
   const isUpdate = useSelector((state) => state.districtInfo.isUpdate);
@@ -19,7 +20,7 @@ const UpdateDistrict = () => {
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(DistrictUpdate(district, division, divisionId, id));
+    dispatch(DistrictUpdate(district, districtBn, division, divisionId, id));
   };
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const UpdateDistrict = () => {
       dispatch(AfterUpdatedFalse())
     }
     setDistrict(location?.state?.data?.districtName)
+    setDistrictBn(location?.state?.data?.districtNameBn)
     setDivision(location?.state?.data?.divisionInfo?.divisionName)
     setDivisionId(location?.state?.data?.divisionInfo?._id)
   }, [afterUpdated, id])
@@ -59,6 +61,15 @@ const UpdateDistrict = () => {
               value={district}
               placeholder="enter district name"
               onChange={(e) => setDistrict(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <h6 className="mb-3">District Name Bangla</h6>
+            <input
+              className="form-control"
+              value={districtBn}
+              placeholder="enter district name"
+              onChange={(e) => setDistrictBn(e.target.value)}
             />
           </div>
 

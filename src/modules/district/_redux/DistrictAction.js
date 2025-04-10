@@ -2,9 +2,12 @@ import * as Types from "./Types";
 import Axios from "axios";
 import { showToast } from "src/utils/ToastHelper";
 //test//est//
-export const SubmitDistrict = (district, division, divisionId,) => (dispatch) => {
+export const SubmitDistrict = (district, districtBn, division, divisionId,) => (dispatch) => {
   if (district.length === 0) {
     showToast("error", "District name shouldn't be empty");
+    return 0;
+  } if (districtBn.length === 0) {
+    showToast("error", "District name bangla shouldn't be empty");
     return 0;
   } else if (division.length === 0) {
     showToast("error", "You Should Select Division");
@@ -14,6 +17,7 @@ export const SubmitDistrict = (district, division, divisionId,) => (dispatch) =>
   dispatch({ type: Types.IS_CREATE_DISTRICT, payload: true });
   const postData = {
     districtName: district,
+    districtNameBn: districtBn,
     divisionId: divisionId,
     divisionInfo: divisionId
   };
@@ -42,9 +46,12 @@ export const SubmitDistrict = (district, division, divisionId,) => (dispatch) =>
 export const AfterCreatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_CREATED, payload: false })
 }
-export const DistrictUpdate = (district, division, divisionId, id) => (dispatch) => {
+export const DistrictUpdate = (district, districtBn, division, divisionId, id) => (dispatch) => {
   if (district.length === 0) {
     showToast("error", "District name shouldn't be empty");
+    return 0;
+  } else if (districtBn.length === 0) {
+    showToast("error", "District name bangla shouldn't be empty");
     return 0;
   } else if (division.length === 0) {
     showToast("error", "You Should Select a Division");
@@ -54,6 +61,7 @@ export const DistrictUpdate = (district, division, divisionId, id) => (dispatch)
   dispatch({ type: Types.IS_UPDATE_DISTRICT, payload: true });
   const postData = {
     districtName: district,
+    districtNameBn: districtBn,
     divisionId: divisionId,
     divisionInfo: divisionId,
   };
