@@ -68,16 +68,7 @@ const UpdateConnectionPackage = () => {
               onChange={(e) => setConnections(e.target.value)}
             />
           </div>
-          <div className="mt-3">
-            <h6 className="mb-3">Connections Number Bangla</h6>
-            <input
-              className="form-control"
-              type="text"
-              value={connectionsBn}
-              placeholder="enter connections number bangla"
-              onChange={(e) => setConnectionsBn(e.target.value)}
-            />
-          </div>
+
           <div className="mt-3">
             <h6 className="mb-3">Connections Price</h6>
             <input
@@ -88,16 +79,7 @@ const UpdateConnectionPackage = () => {
               onChange={(e) => setPrice(e.target.value)}
             />
           </div>
-          <div className="mt-3">
-            <h6 className="mb-3">Connections Price Bangla</h6>
-            <input
-              className="form-control"
-              type="text"
-              value={priceBn}
-              placeholder="enter connections number bangla"
-              onChange={(e) => setPriceBn(e.target.value)}
-            />
-          </div>
+
           {isUpdate ? (
             <a className="btn btn-success btn-sm mt-3 text-light">
               {" "}
