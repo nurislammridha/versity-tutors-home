@@ -80,12 +80,12 @@ export const DivisionUpdate = (division, divisionBn, id) => (dispatch) => {
 export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
-export const GetDivisionList = () => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}division`;
+export const GetDivisionList = (search, page) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}division/filter`;
   try {
-    Axios.get(url).then((res) => {
+    Axios.get(url, { params: { search, page, limit: 20 } }).then((res) => {
       if (res.data.status) {
-        dispatch({ type: Types.DIVISION_LIST, payload: res.data.result });
+        dispatch({ type: Types.DIVISION_LIST, payload: res.data });
       }
     });
   } catch (error) {

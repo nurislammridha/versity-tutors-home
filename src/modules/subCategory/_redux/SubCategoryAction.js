@@ -91,12 +91,12 @@ export const SubCategoryUpdate = (subCategory, subCategoryBn, category, category
 export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
-export const GetSubCategoryList = () => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}sub-category`;
+export const GetSubCategoryList = (search, page, categoryId, limit = 20) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}sub-category/filter`;
   try {
-    Axios.get(url).then((res) => {
+    Axios.get(url, { params: { search, filters: categoryId, page, limit } }).then((res) => {
       if (res.data.status) {
-        dispatch({ type: Types.SUBCATEGORY_LIST, payload: res.data.result });
+        dispatch({ type: Types.SUBCATEGORY_LIST, payload: res.data });
       }
     });
   } catch (error) {

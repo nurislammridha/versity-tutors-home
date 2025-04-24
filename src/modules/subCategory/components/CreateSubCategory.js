@@ -16,7 +16,7 @@ const CreateSubCategory = () => {
   const subCatImg = useSelector((state) => state.subCategoryInfo.subCatImg);
   const isImageLoading = useSelector((state) => state.subCategoryInfo.isImageLoading);
   const categoryArrList = useSelector(
-    (state) => state.categoryInfo.categoryList
+    (state) => state.categoryInfo.categoryList?.result
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {
