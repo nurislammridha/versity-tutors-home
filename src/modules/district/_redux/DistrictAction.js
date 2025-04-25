@@ -90,12 +90,12 @@ export const DistrictUpdate = (district, districtBn, division, divisionId, id) =
 export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
-export const GetDistrictList = () => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}district`;
+export const GetDistrictList = (search = "", page = 1, divisionId, limit = 10000) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}district/filter`;
   try {
-    Axios.get(url).then((res) => {
+    Axios.get(url, { params: { search, filters: divisionId, page, limit } }).then((res) => {
       if (res.data.status) {
-        dispatch({ type: Types.DISTRICT_LIST, payload: res.data.result });
+        dispatch({ type: Types.DISTRICT_LIST, payload: res.data });
       }
     });
   } catch (error) {

@@ -80,10 +80,10 @@ export const DivisionUpdate = (division, divisionBn, id) => (dispatch) => {
 export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
-export const GetDivisionList = (search, page) => (dispatch) => {
+export const GetDivisionList = (search = "", page = 1, limit = 10000) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}division/filter`;
   try {
-    Axios.get(url, { params: { search, page, limit: 20 } }).then((res) => {
+    Axios.get(url, { params: { search, page, limit } }).then((res) => {
       if (res.data.status) {
         dispatch({ type: Types.DIVISION_LIST, payload: res.data });
       }

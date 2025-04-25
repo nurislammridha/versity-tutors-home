@@ -91,7 +91,7 @@ export const SubCategoryUpdate = (subCategory, subCategoryBn, category, category
 export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
-export const GetSubCategoryList = (search, page, categoryId, limit = 20) => (dispatch) => {
+export const GetSubCategoryList = (search, page, categoryId, limit = 1000) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}sub-category/filter`;
   try {
     Axios.get(url, { params: { search, filters: categoryId, page, limit } }).then((res) => {

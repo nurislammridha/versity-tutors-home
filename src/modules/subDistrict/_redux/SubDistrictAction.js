@@ -100,12 +100,12 @@ export const SubDistrictUpdate = (subDistrict, subDistrictBn, district, district
 export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
-export const GetSubDistrictList = () => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}sub-district`;
+export const GetSubDistrictList = (search, page, divisionId, districtId, limit = 1000) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}sub-district/filter`;
   try {
-    Axios.get(url).then((res) => {
+    Axios.get(url, { params: { search, divisionId, districtId, page, limit } }).then((res) => {
       if (res.data.status) {
-        dispatch({ type: Types.SUBDISTRICT_LIST, payload: res.data.result });
+        dispatch({ type: Types.SUBDISTRICT_LIST, payload: res.data });
       }
     });
   } catch (error) {

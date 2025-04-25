@@ -33,7 +33,7 @@ const SubCategoryList = () => {
     dispatch(SubCategoryStatus(id, status))
   }
   useEffect(() => {
-    dispatch(GetSubCategoryList(search, page, categoryId));
+    dispatch(GetSubCategoryList(search, page, categoryId, 20));
   }, [search, page, categoryId]);
   useEffect(() => {
     dispatch(GetCategoryList());

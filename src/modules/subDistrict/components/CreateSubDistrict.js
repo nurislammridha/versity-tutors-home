@@ -15,7 +15,7 @@ const CreateSubDistrict = () => {
   const isSubDistrict = useSelector((state) => state.subDistrictInfo.isSubDistrict);
   const afterCreated = useSelector((state) => state.subDistrictInfo.afterCreated);
   const divisionArrList = useSelector(
-    (state) => state.divisionInfo.divisionList
+    (state) => state.divisionInfo.divisionList?.result
   );
   const districtArrList = useSelector(
     (state) => state.districtInfo.districtList

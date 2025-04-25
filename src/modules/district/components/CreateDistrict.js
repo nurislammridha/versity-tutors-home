@@ -12,7 +12,7 @@ const CreateDistrict = () => {
   const isDistrict = useSelector((state) => state.districtInfo.isDistrict);
   const afterCreated = useSelector((state) => state.divisionInfo.afterCreated);
   const divisionArrList = useSelector(
-    (state) => state.divisionInfo.divisionList
+    (state) => state.divisionInfo.divisionList?.result
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {

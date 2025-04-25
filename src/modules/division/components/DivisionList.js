@@ -26,7 +26,7 @@ const DivisionList = () => {
     setPage(1); // Reset to first page on new search
   };
   useEffect(() => {
-    dispatch(GetDivisionList(search, page));
+    dispatch(GetDivisionList(search, page, 20));
   }, [search, page]);
   useEffect(() => {
     if (afterDeleted) {
