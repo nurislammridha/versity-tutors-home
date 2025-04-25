@@ -13,7 +13,7 @@ export const SubmitCategory = (category, categoryBn, categoryImg) => (dispatch) 
     showToast("error", "Select a category Image");
     return 0;
   }
-  const url = `${process.env.REACT_APP_API_URL}category/filter`;
+  const url = `${process.env.REACT_APP_API_URL}category`;
   dispatch({ type: Types.IS_CREATE_CATEGORY, payload: true });
   const postData = {
     categoryName: category,
@@ -89,7 +89,7 @@ export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
 export const GetCategoryList = (search = "", page = 1, limit = 1000) => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}category`;
+  const url = `${process.env.REACT_APP_API_URL}category/filter`;
   try {
     Axios.get(url, { params: { search, page, limit } }).then((res) => {
       if (res.data.status) {

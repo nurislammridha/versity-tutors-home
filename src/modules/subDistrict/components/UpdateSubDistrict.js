@@ -19,7 +19,7 @@ const UpdateSubDistrict = () => {
   const isUpdate = useSelector((state) => state.subDistrictInfo.isUpdate);
   const afterUpdated = useSelector((state) => state.subDistrictInfo.afterUpdated);
   const divisionArrList = useSelector(
-    (state) => state.divisionInfo.divisionList
+    (state) => state.divisionInfo.divisionList?.result
   );
   const districtArrList = useSelector(
     (state) => state.districtInfo.districtList

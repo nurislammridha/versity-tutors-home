@@ -22,7 +22,7 @@ const UpdateArea = () => {
   const isUpdate = useSelector((state) => state.areaInfo.isUpdate);
   const afterUpdated = useSelector((state) => state.areaInfo.afterUpdated);
   const divisionArrList = useSelector(
-    (state) => state.divisionInfo.divisionList
+    (state) => state.divisionInfo.divisionList?.result
   );
   const districtArrList = useSelector(
     (state) => state.districtInfo.districtList

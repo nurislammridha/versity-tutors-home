@@ -110,12 +110,12 @@ export const AreaUpdate = (area, areaBn, subDistrict, subDistrictId, district, d
 export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
-export const GetAreaList = () => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}area`;
+export const GetAreaList = (search, page, divisionId, districtId, subDistrictId, limit = 1000) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}area/filter`;
   try {
-    Axios.get(url).then((res) => {
+    Axios.get(url, { params: { search, divisionId, districtId, subDistrictId, page, limit } }).then((res) => {
       if (res.data.status) {
-        dispatch({ type: Types.AREA_LIST, payload: res.data.result });
+        dispatch({ type: Types.AREA_LIST, payload: res.data });
       }
     });
   } catch (error) {

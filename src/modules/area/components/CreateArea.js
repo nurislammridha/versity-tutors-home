@@ -18,7 +18,7 @@ const CreateArea = () => {
   const isArea = useSelector((state) => state.areaInfo.isArea);
   const afterCreated = useSelector((state) => state.areaInfo.afterCreated);
   const divisionArrList = useSelector(
-    (state) => state.divisionInfo.divisionList
+    (state) => state.divisionInfo.divisionList?.result
   );
   const districtArrList = useSelector(
     (state) => state.districtInfo.districtList

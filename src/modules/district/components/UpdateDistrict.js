@@ -16,7 +16,7 @@ const UpdateDistrict = () => {
   const isUpdate = useSelector((state) => state.districtInfo.isUpdate);
   const afterUpdated = useSelector((state) => state.divisionInfo.afterUpdated);
   const divisionArrList = useSelector(
-    (state) => state.divisionInfo.divisionList
+    (state) => state.divisionInfo.divisionList?.result
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {

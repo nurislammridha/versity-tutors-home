@@ -26,7 +26,7 @@ const CategoryList = () => {
     setPage(1); // Reset to first page on new search
   };
   useEffect(() => {
-    dispatch(GetCategoryList(search, page));
+    dispatch(GetCategoryList(search, page, 20));
   }, [search, page]);
   useEffect(() => {
     if (afterDeleted) {

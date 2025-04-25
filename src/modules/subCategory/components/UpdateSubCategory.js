@@ -21,7 +21,7 @@ const UpdateSubCategory = () => {
   const subCatImg = useSelector((state) => state.subCategoryInfo.subCatImg);
   const afterUpdated = useSelector((state) => state.categoryInfo.afterUpdated);
   const categoryArrList = useSelector(
-    (state) => state.categoryInfo.categoryList
+    (state) => state.categoryInfo.categoryList?.result
   );
   const dispatch = useDispatch();
   const handleSubmit = () => {
