@@ -16,6 +16,24 @@ export const GetProfileList = (data) => (dispatch) => {
     showToast("error", "Something went wrong");
   }
 };
+export const GetProfileListFilter = (data) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}client/filter`;
+  // dispatch({ type: Types.IS_PROFILES_LOADING, payload: true })
+
+  try {
+    Axios.post(url, data).then((res) => {
+      if (res.data.status) {
+        dispatch({ type: Types.PROFILE_LIST, payload: res.data });
+        dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
+      }
+    }).catch((err) => {
+      showToast("success", err);
+    });
+  } catch (error) {
+    // dispatch({ type: Types.IS_PROFILES_LOADING, payload: false });
+    showToast("error", "Something went wrong");
+  }
+};
 export const ProfileUpdate = (data, listData, id) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}client/${id}`;
   dispatch({ type: Types.IS_UPDATE_LOADING, payload: true });

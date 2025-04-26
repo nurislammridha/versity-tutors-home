@@ -155,6 +155,21 @@ export const AreaByDivisionId = (id) => (dispatch) => {
     showToast("error", "Something went wrong");
   }
 };
+export const AreaBySubDistirctId = (id) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}area/by-sub-district/${id}`;
+  try {
+    Axios.get(url).then((res) => {
+      if (res.data.status) {
+        // showToast("success", res.data.message);
+        dispatch({ type: Types.AREA_LIST, payload: res.data.result });
+      } else {
+        showToast("error", "Something went wrong");
+      }
+    });
+  } catch (error) {
+    showToast("error", "Something went wrong");
+  }
+};
 
 export const AreaStatus = (id, status) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}area/${id}`;
