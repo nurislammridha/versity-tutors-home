@@ -1,0 +1,8 @@
+export const IS_CREATE_ROLE = "IS_CREATE_ROLE";
+export const IS_UPDATE_ROLE = "IS_UPDATE_ROLE";
+export const ROLE_LIST = "ROLE_LIST";
+export const AFTER_CREATED = "AFTER_CREATED";
+export const AFTER_UPDATED = "AFTER_UPDATED";
+export const AFTER_DELETED = "AFTER_DELETED";
+export const IS_STATUS_UPDATE = "IS_STATUS_UPDATE";
+export const ROLE_LIST_TYPE = "ROLE_LIST_TYPE";

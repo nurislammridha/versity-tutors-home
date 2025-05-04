@@ -33,6 +33,9 @@ import ReportConnectionListContainer from "./modules/reportConnection/views/Repo
 import FeaturedList from "./modules/profiles/components/FeaturedList";
 import UnFeaturedList from "./modules/profiles/components/UnFeaturedList";
 import ProfileDetailsContainer from "./modules/profiles/views/ProfileDetailsContainer";
+import RoleListContainer from "./modules/role/views/RoleListContainer";
+import UpdateRoleContainer from "./modules/role/views/UpdateRoleContainer";
+import CreateRoleContainer from "./modules/role/views/CreateRoleContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -116,6 +119,14 @@ const routes = [
   { path: "/profile/:id", name: "Profile Details", component: ProfileDetailsContainer },
   //report connection
   { path: "/report-connection", name: "Report Connection", component: ReportConnectionListContainer },
+  //role
+  { path: "/role", name: "Role", component: RoleListContainer },
+  { path: "/role-edit/:id", name: "Role", component: UpdateRoleContainer },
+  {
+    path: "/role-add",
+    name: "Create Role",
+    component: CreateRoleContainer,
+  },
 ];
 
 export default routes;

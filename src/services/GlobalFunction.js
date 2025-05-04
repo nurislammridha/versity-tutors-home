@@ -28,3 +28,28 @@ export const formatDate = (dateString) => {
 
   return `${day} ${month} ${time}`;
 };
+export const roleTypeOption = () => {
+  return [
+    {
+      label: "Moderator",
+      value: "Moderator"
+    },
+    {
+      label: "Manager",
+      value: "Manager"
+    }
+  ]
+
+}
+
+export const servicesListArr = () => [
+  { id: "class", name: 'Class' },
+  { id: "subject", name: 'Subject' },
+  { id: "division", name: 'Division' },
+  { id: "district", name: 'District' },
+  { id: "subDistrict", name: 'Sub District' },
+  { id: "area", name: 'Area' },
+  { id: "package", name: 'Package' },
+  { id: "tutorManagement", name: 'Tutor Management' },
+  { id: "studentManagement", name: 'Student Management' },
+];

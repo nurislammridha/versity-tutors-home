@@ -1,12 +1,13 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
-
+import logo from '../assets/images/logo.png'
 const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "Dashboard",
     to: "/dashboard",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+    // icon: <img src={logo} width={30} />,
     badge: {
       color: "info",
       text: "NEW",
@@ -64,7 +65,7 @@ const _nav = [
 
   {
     _tag: "CSidebarNavDropdown",
-    name: "Tutor Profile",
+    name: "Tutor Management",
     route: "",
     icon: "cil-puzzle",
     _children: [
@@ -97,7 +98,7 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavDropdown",
-    name: "Student Profile",
+    name: "Student Management",
     route: "",
     icon: "cil-puzzle",
     _children: [
@@ -122,6 +123,12 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "Report Connection",
     to: "/report-connection",
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Role",
+    to: "/role",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
   // {

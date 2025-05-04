@@ -254,7 +254,7 @@ const AllTutorList = () => {
           <div className="alert alert-success mt-5 text-center">No data found</div>
         )}
       </div>
-      {/* <nav>
+      <nav>
         <ul className="pagination">
           <li className={`page-item ${page === 1 && "disabled"}`}>
             <button className="page-link" onClick={() => setPage(page - 1)}>
@@ -276,7 +276,7 @@ const AllTutorList = () => {
             </button>
           </li>
         </ul>
-      </nav> */}
+      </nav>
     </>
   );
 };
