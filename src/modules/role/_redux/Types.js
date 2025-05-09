@@ -6,3 +6,4 @@ export const AFTER_UPDATED = "AFTER_UPDATED";
 export const AFTER_DELETED = "AFTER_DELETED";
 export const IS_STATUS_UPDATE = "IS_STATUS_UPDATE";
 export const ROLE_LIST_TYPE = "ROLE_LIST_TYPE";
+export const MANAGER_LIST = "MANAGER_LIST";

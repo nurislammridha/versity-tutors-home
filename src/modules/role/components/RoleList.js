@@ -2,42 +2,40 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { AfterDeletedFalse, RoleDelete, RoleStatus, GetRoleList } from "../_redux/RoleAction";
+import { AfterDeletedFalse, RoleDelete, RoleStatus, GetRoleList, GetAllManager } from "../_redux/RoleAction";
 import { useHistory } from "react-router-dom";
+import { GlobalOptions } from "src/services/GlobalFunction";
+import Select from "react-select";
 const RoleList = () => {
   const history = useHistory();
+  const [managerId, setManagerId] = useState("")
+  const [managerName, setManagerName] = useState("")
   const [updateId, setUpdateId] = useState("")
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const divInfo = useSelector(
+  const roleInfo = useSelector(
     (state) => state.roleInfo.roleList
   );
   const afterDeleted = useSelector(
     (state) => state.roleInfo.afterDeleted
   );
+  const managerList = useSelector(
+    (state) => state.roleInfo.managerList
+  );
   const isStatusUpdate = useSelector(
     (state) => state.roleInfo.isStatusUpdate
   );
-  const { result: roleArrList, totalPages } = divInfo || { totalPages: 1 }
+  const { result: roleArrList, totalPages } = roleInfo || { totalPages: 1 }
 
   const dispatch = useDispatch();
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setPage(1); // Reset to first page on new search
   };
-  useEffect(() => {
-    dispatch(GetRoleList(search, page, 20));
-  }, [search, page]);
-  useEffect(() => {
-    if (afterDeleted) {
-      dispatch(GetRoleList());
-      dispatch(AfterDeletedFalse());
-    }
 
-  }, [afterDeleted]);
   const handleStatus = (id, status) => {
     setUpdateId(id)
-    dispatch(RoleStatus(id, status))
+    dispatch(RoleStatus(id, status, search, page, managerId, 20))
   }
   const handleDelete = (id) => {
     confirmAlert({
@@ -54,15 +52,40 @@ const RoleList = () => {
       ],
     });
   };
+  useEffect(() => {
+    dispatch(GetRoleList(search, page, managerId, 20));
+  }, [search, page, managerId]);
+  useEffect(() => {
+    if (afterDeleted) {
+      dispatch(GetRoleList());
+      dispatch(AfterDeletedFalse());
+    }
+  }, [afterDeleted]);
+  useEffect(() => {
+    dispatch(GetAllManager())
+  }, [])
+
   console.log('roleArrList', roleArrList)
   return (
     <>
 
       <div className="row align-items-center mb-4 p-3 bg-white rounded shadow-sm">
-        <div className="col-md-6 mb-2 mb-md-0">
+        <div className="col-md-2 mb-2 mb-md-0">
           <h4 className="mb-0 fw-semibold text-primary">Role List</h4>
         </div>
-
+        <div className="col-md-4 d-flex align-items-center gap-2">
+          <label className="mb-0 fw-semibold">Select Manager:</label>
+          <div className="flex-grow-1">
+            <Select
+              options={GlobalOptions(managerList, "name", "_id")}
+              value={{ label: managerName }}
+              onChange={(e) => {
+                setManagerName(e.label);
+                setManagerId(e.value);
+              }}
+            />
+          </div>
+        </div>
         <div className="col-md-4 mb-2 mb-md-0">
           <input
             className="form-control"
@@ -88,8 +111,10 @@ const RoleList = () => {
             <thead>
               <tr>
                 <th>SL</th>
-                <th>Role Name</th>
-                <th>Role Name Bangla</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Manager</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -98,8 +123,10 @@ const RoleList = () => {
               {roleArrList.map((item, index) => (
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{item.roleName}</td>
-                  <td>{item.roleNameBn}</td>
+                  <td>{item.name}</td>
+                  <td>{item.phone}</td>
+                  <td>{item.email}</td>
+                  <td>{item.managerInfo?.name}</td>
                   <td>{item.isActive ? "Active" : "Inactive"}</td>
                   <td>
                     {item?._id === updateId && isStatusUpdate ?
@@ -120,7 +147,7 @@ const RoleList = () => {
                     }
                     <a
                       className="btn btn-outline-success btn-sm mr-2"
-                      onClick={() => history.push({ pathname: `/role-edit/${item._id}`, state: { role: item } })}
+                      onClick={() => history.push({ pathname: `/role-edit/${item._id}`, state: { data: item } })}
                     >
                       <i className="fa fa-pencil"></i>
                     </a>

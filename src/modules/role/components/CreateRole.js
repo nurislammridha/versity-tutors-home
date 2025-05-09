@@ -9,6 +9,7 @@ const permissions = ['View', 'Create', 'Edit', 'Delete'];
 const CreateRole = () => {
   const [servicesList, setServicesList] = useState([]);
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [roleType, setRoleType] = useState("");
   const [managerId, setManagerId] = useState(null);
   const [managerName, setManagerName] = useState("");
@@ -27,7 +28,7 @@ const CreateRole = () => {
   );
   const handleSubmit = () => {
     const postData = {
-      name, email, roleType, assignServices: selectedServices
+      name, email, phone, roleType, assignServices: selectedServices
     }
     if (managerId) {
       postData.managerId = managerId;
@@ -94,6 +95,7 @@ const CreateRole = () => {
       setManagerId(null)
       setManagerName("")
       setEmail("")
+      setPhone("")
       setSelectedServices(servicesListArr())
       dispatch(AfterCreatedFalse())
     }
@@ -107,7 +109,7 @@ const CreateRole = () => {
 
 
 
-
+  console.log('servicesList', servicesList)
   console.log('selectedServices', selectedServices)
   return (
     <>
@@ -155,6 +157,15 @@ const CreateRole = () => {
               value={email}
               placeholder="Enter person email"
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Phone</label>
+            <input
+              className="form-control"
+              value={phone}
+              placeholder="Enter phone"
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
 

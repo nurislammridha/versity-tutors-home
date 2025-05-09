@@ -34,7 +34,7 @@ const DistrictList = () => {
     dispatch(DistrictStatus(id, status))
   }
   useEffect(() => {
-    dispatch(GetDistrictList(search, page, divisionId));
+    dispatch(GetDistrictList(search, page, divisionId, 20));
   }, [search, page, divisionId]);
   useEffect(() => {
     dispatch(GetDivisionList());

@@ -52,4 +52,5 @@ export const servicesListArr = () => [
   { id: "package", name: 'Package' },
   { id: "tutorManagement", name: 'Tutor Management' },
   { id: "studentManagement", name: 'Student Management' },
+  { id: "manualTutorRequest", name: 'Manual Tutor Request' },
 ];

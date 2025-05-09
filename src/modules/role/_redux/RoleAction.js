@@ -3,12 +3,15 @@ import Axios from "axios";
 import { showToast } from "src/utils/ToastHelper";
 //test//est//
 export const SubmitRole = (data) => (dispatch) => {
-  const { name, email, roleType, assignServices, managerId } = data || {}
+  const { name, email, phone, roleType, assignServices, managerId } = data || {}
   if (name.length === 0) {
     showToast("error", "Name shouldn't be empty");
     return 0;
   } else if (email.length === 0) {
     showToast("error", "Email shouldn't be empty");
+    return 0;
+  } else if (phone.length === 0) {
+    showToast("error", "Phone shouldn't be empty");
     return 0;
   } else if (roleType.length === 0) {
     showToast("error", "Select a role type");
@@ -49,22 +52,29 @@ export const SubmitRole = (data) => (dispatch) => {
 export const AfterCreatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_CREATED, payload: false })
 }
-export const RoleUpdate = (role, roleBn, id) => (dispatch) => {
-  if (role.length === 0) {
-    showToast("error", "Role name shouldn't be empty");
+export const RoleUpdate = (data, id) => (dispatch) => {
+  const { name, email, phone, roleType, assignServices, managerId } = data || {}
+  if (name.length === 0) {
+    showToast("error", "Name shouldn't be empty");
     return 0;
-  } else if (roleBn.length === 0) {
-    showToast("error", "Role name bangla shouldn't be empty");
+  } else if (email.length === 0) {
+    showToast("error", "Email shouldn't be empty");
+    return 0;
+  } else if (phone.length === 0) {
+    showToast("error", "Phone shouldn't be empty");
+    return 0;
+  } else if (roleType.length === 0) {
+    showToast("error", "Select a role type");
+    return 0;
+  } else if (roleType === "Moderator" && managerId.length === 0) {
+    showToast("error", "Select a manager");
     return 0;
   }
   const url = `${process.env.REACT_APP_API_URL}role/${id}`;
   dispatch({ type: Types.IS_UPDATE_ROLE, payload: true });
-  const postData = {
-    roleName: role,
-    roleNameBn: roleBn,
-  };
+
   try {
-    Axios.put(url, postData)
+    Axios.put(url, data)
       .then((res) => {
         if (res.data.status) {
           showToast("success", res.data.message);
@@ -88,12 +98,24 @@ export const RoleUpdate = (role, roleBn, id) => (dispatch) => {
 export const AfterUpdatedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_UPDATED, payload: false })
 }
-export const GetRoleList = (search = "", page = 1, limit = 10000) => (dispatch) => {
+export const GetRoleList = (search = "", page = 1, managerId, limit = 10000) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}role/filter`;
   try {
-    Axios.get(url, { params: { search, page, limit } }).then((res) => {
+    Axios.get(url, { params: { search, filters: managerId, page, limit } }).then((res) => {
       if (res.data.status) {
         dispatch({ type: Types.ROLE_LIST, payload: res.data });
+      }
+    });
+  } catch (error) {
+    showToast("error", "Something went wrong");
+  }
+};
+export const GetAllManager = () => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}role/role-type?roleType=Manager`;
+  try {
+    Axios.get(url).then((res) => {
+      if (res.data.status) {
+        dispatch({ type: Types.MANAGER_LIST, payload: res.data.result });
       }
     });
   } catch (error) {
@@ -131,7 +153,7 @@ export const AfterDeletedFalse = () => (dispatch) => {
   dispatch({ type: Types.AFTER_DELETED, payload: false })
 }
 
-export const RoleStatus = (id, status) => (dispatch) => {
+export const RoleStatus = (id, status, search, page, managerId, limit) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}role/${id}`;
   dispatch({ type: Types.IS_STATUS_UPDATE, payload: true });
   const postData = {
@@ -142,7 +164,7 @@ export const RoleStatus = (id, status) => (dispatch) => {
       .then((res) => {
         if (res.data.status) {
           dispatch({ type: Types.IS_STATUS_UPDATE, payload: false });
-          dispatch(GetRoleList())
+          dispatch(GetRoleList(search, page, managerId, limit))
         } else {
           dispatch({ type: Types.IS_STATUS_UPDATE, payload: false });
         }
