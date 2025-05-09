@@ -147,6 +147,12 @@ const RoleList = () => {
                     }
                     <a
                       className="btn btn-outline-success btn-sm mr-2"
+                      onClick={() => history.push({ pathname: `/role-details/${item._id}`, state: { data: item } })}
+                    >
+                      <i className="fa fa-eye"></i>
+                    </a>
+                    <a
+                      className="btn btn-outline-success btn-sm mr-2"
                       onClick={() => history.push({ pathname: `/role-edit/${item._id}`, state: { data: item } })}
                     >
                       <i className="fa fa-pencil"></i>

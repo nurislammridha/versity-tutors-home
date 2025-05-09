@@ -36,6 +36,7 @@ import ProfileDetailsContainer from "./modules/profiles/views/ProfileDetailsCont
 import RoleListContainer from "./modules/role/views/RoleListContainer";
 import UpdateRoleContainer from "./modules/role/views/UpdateRoleContainer";
 import CreateRoleContainer from "./modules/role/views/CreateRoleContainer";
+import RoleDetailsContainer from "./modules/role/views/RoleDetailsContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -121,6 +122,7 @@ const routes = [
   { path: "/report-connection", name: "Report Connection", component: ReportConnectionListContainer },
   //role
   { path: "/role", name: "Role", component: RoleListContainer },
+  { path: "/role-details/:id", name: "Role", component: RoleDetailsContainer },
   { path: "/role-edit/:id", name: "Role", component: UpdateRoleContainer },
   {
     path: "/role-add",

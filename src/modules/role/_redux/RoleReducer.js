@@ -9,6 +9,8 @@ const initialState = {
   roleList: null,
   roleListType: null,
   managerList: null,
+  roleDetails: null,
+  isRoleDetails: false,
   isStatusUpdate: false
 };
 const RoleReducer = (state = initialState, action) => {
@@ -58,6 +60,16 @@ const RoleReducer = (state = initialState, action) => {
       return {
         ...state,
         managerList: action.payload,
+      };
+    case Types.ROLE_DETAILS:
+      return {
+        ...state,
+        roleDetails: action.payload,
+      };
+    case Types.IS_ROLE_DETAILS:
+      return {
+        ...state,
+        isRoleDetails: action.payload,
       };
     default:
       break;

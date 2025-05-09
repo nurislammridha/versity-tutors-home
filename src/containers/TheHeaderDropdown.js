@@ -11,7 +11,7 @@ import CIcon from "@coreui/icons-react";
 import { useHistory } from "react-router";
 import { cilBell } from "@coreui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { NotificationAsClicked, NotificationByAdmin, SeenNotification } from "src/modules/auth/_redux/AuthAction";
+import { GlobalUserData, NotificationAsClicked, NotificationByAdmin, SeenNotification } from "src/modules/auth/_redux/AuthAction";
 
 const TheHeaderDropdown = () => {
   const history = useHistory();
@@ -31,7 +31,9 @@ const TheHeaderDropdown = () => {
     unreadCount > 0 && dispatch(NotificationAsClicked())
   }
   useEffect(() => {
+    // const userData = JSON.parse(localStorage.getItem("userData"))
     dispatch(NotificationByAdmin())
+    // dispatch(GlobalUserData(userData))
   }, [])
 
   return (

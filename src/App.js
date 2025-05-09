@@ -17,6 +17,7 @@ const TheLayout = React.lazy(() => import("./containers/TheLayout"));
 
 // Pages
 const Login = React.lazy(() => import("./modules/auth/views/LoginContainer"));
+const SuperAdminLogin = React.lazy(() => import("./modules/auth/views/SuperAdminLoginContainer"));
 const Register = React.lazy(() =>
   import("./modules/auth/views/RegisterContainer")
 );
@@ -34,6 +35,12 @@ class App extends Component {
               path="/login"
               name="Login Page"
               render={(props) => <Login {...props} />}
+            />
+            <Route
+              exact
+              path="/super-admin/login"
+              name="Login Page"
+              render={(props) => <SuperAdminLogin {...props} />}
             />
             <Route
               exact

@@ -134,6 +134,23 @@ export const AllRolesByRoleType = (roleType = "Manager") => (dispatch) => {
     showToast("error", "Something went wrong");
   }
 };
+export const GetRoleDetails = (id) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}role/${id}`;
+  dispatch({ type: Types.IS_ROLE_DETAILS, payload: true })
+  try {
+    Axios.get(url).then((res) => {
+      if (res.data.status) {
+        dispatch({ type: Types.ROLE_DETAILS, payload: res.data.result })
+        dispatch({ type: Types.IS_ROLE_DETAILS, payload: false })
+      } else {
+        showToast("error", "Something went wrong");
+      }
+    });
+  } catch (error) {
+    dispatch({ type: Types.IS_ROLE_DETAILS, payload: false })
+    showToast("error", "Something went wrong");
+  }
+};
 export const RoleDelete = (id) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}role/${id}`;
   try {

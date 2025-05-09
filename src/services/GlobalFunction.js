@@ -53,4 +53,14 @@ export const servicesListArr = () => [
   { id: "tutorManagement", name: 'Tutor Management' },
   { id: "studentManagement", name: 'Student Management' },
   { id: "manualTutorRequest", name: 'Manual Tutor Request' },
+  { id: "createRole", name: 'Create Role' },
 ];
+export const getUserPermissions = () => {
+  try {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    console.log('userData', userData)
+    return userData?.assignServices || {};
+  } catch {
+    return {};
+  }
+};

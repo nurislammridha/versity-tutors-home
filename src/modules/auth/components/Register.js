@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CButton,
   CCard,
@@ -14,42 +14,35 @@ import {
   CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import { showToast } from "src/utils/ToastHelper";
+import { useDispatch, useSelector } from "react-redux";
+import { SetFalseLogin, SubmitRoleReg } from "../_redux/AuthAction";
+import { useHistory } from "react-router";
 
 const Register = () => {
-  const [regInfo, setRegInfo] = useState({
-    name: "",
-    email: "",
-    password: "",
-    rePassword: "",
-    cupon: "",
-  });
-  const handleChangeText = (name, value) => {
-    const val = { ...regInfo };
-    val[name] = value;
-    setRegInfo(val);
-  };
+  const history = useHistory();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [cPassword, setCPassword] = useState("")
+  const isLogin = useSelector((state) => state.authInfo.isLogin);
+  const loginSuccess = useSelector((state) => state.authInfo.loginSuccess);
+
+  const dispatch = useDispatch()
   const handleReg = () => {
-    if (regInfo.name.length === 0) {
-      showToast("error", "User name should not be empty!");
-      return 0;
-    } else if (regInfo.email.length === 0) {
-      showToast("error", "Email should not be empty");
-      return 0;
-    } else if (regInfo.password.length < 6) {
-      showToast(
-        "error",
-        "password should not be empty or less than 6 charector"
-      );
-      return 0;
-    } else if (regInfo.rePassword !== regInfo.password) {
-      showToast("error", "Password not matched!");
-      return 0;
-    } else if (regInfo.cupon.length === 0) {
-      showToast("error", "Hidden cupon should not be empty!");
-      return 0;
-    }
+    dispatch(SubmitRoleReg(email, password, cPassword))
   };
+
+  useEffect(() => {
+    if (loginSuccess) {
+      history.push("/dashboard");
+      dispatch(SetFalseLogin());
+    }
+  }, [loginSuccess]);
+  useEffect(() => {
+    const isLogin = localStorage.getItem("isLogin") || "false";
+    if (isLogin === true || isLogin === "true") {
+      history.push("/dashboard");
+    }
+  }, []);
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -60,19 +53,7 @@ const Register = () => {
                 <CForm>
                   <h1>Register</h1>
                   <p className="text-muted">Create your account</p>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>
-                        <CIcon name="cil-user" />
-                      </CInputGroupText>
-                    </CInputGroupPrepend>
-                    <CInput
-                      type="text"
-                      placeholder="enter username"
-                      onChange={(e) => handleChangeText("name", e.target.value)}
-                      value={regInfo.name}
-                    />
-                  </CInputGroup>
+
                   <CInputGroup className="mb-3">
                     <CInputGroupPrepend>
                       <CInputGroupText>@</CInputGroupText>
@@ -81,9 +62,9 @@ const Register = () => {
                       type="text"
                       placeholder="Email"
                       onChange={(e) =>
-                        handleChangeText("email", e.target.value)
+                        setEmail(e.target.value)
                       }
-                      value={regInfo.email}
+                      value={email}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
@@ -96,9 +77,9 @@ const Register = () => {
                       type="password"
                       placeholder="Password"
                       onChange={(e) =>
-                        handleChangeText("password", e.target.value)
+                        setPassword(e.target.value)
                       }
-                      value={regInfo.password}
+                      value={password}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-4">
@@ -111,28 +92,14 @@ const Register = () => {
                       type="password"
                       placeholder="Repeat password"
                       onChange={(e) =>
-                        handleChangeText("rePassword", e.target.value)
+                        setCPassword(e.target.value)
                       }
-                      value={regInfo.rePassword}
+                      value={cPassword}
                     />
                   </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>
-                        <CIcon name="cil-lock-locked" />
-                      </CInputGroupText>
-                    </CInputGroupPrepend>
-                    <CInput
-                      type="text"
-                      placeholder="Hidden Cupon"
-                      onChange={(e) =>
-                        handleChangeText("cupon", e.target.value)
-                      }
-                      value={regInfo.cupon}
-                    />
-                  </CInputGroup>
-                  <CButton color="success" onClick={() => handleReg()}>
-                    Create Account
+
+                  <CButton color="success" onClick={() => !isLogin && handleReg()}>
+                    {isLogin ? "Creating" : "Create Account"}
                   </CButton>
                 </CForm>
               </CCardBody>

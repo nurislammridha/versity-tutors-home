@@ -15,9 +15,9 @@ import {
 import CIcon from "@coreui/icons-react";
 import logo from "../../../assets/images/txt.png";
 import { useDispatch, useSelector } from "react-redux";
-import { SetFalseLogin, SubmitLogin, SubmitRoleLogin } from "../_redux/AuthAction";
+import { SetFalseLogin, SubmitLogin } from "../_redux/AuthAction";
 import { useHistory } from "react-router";
-const Login = () => {
+const SuperAdminLogin = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.authInfo.isLogin);
@@ -25,7 +25,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleLogin = () => {
-    dispatch(SubmitRoleLogin(email, password));
+    dispatch(SubmitLogin({ email: email, password: password }));
   };
   useEffect(() => {
     if (loginSuccess) {
@@ -48,7 +48,7 @@ const Login = () => {
               <CCard className="p-4">
                 <CCardBody>
                   <div>
-                    <h1>Login</h1>
+                    <h1>Super Admin</h1>
                     <p className="text-muted">Sign In to your account</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
@@ -124,4 +124,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SuperAdminLogin;

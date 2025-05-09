@@ -4,6 +4,7 @@ const initialState = {
   isLogin: false,
   loginSuccess: false,
   notificationList: null,
+  userData: null
 };
 const AuthReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -22,6 +23,11 @@ const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         notificationList: action.payload,
+      };
+    case Types.USER_DATA:
+      return {
+        ...state,
+        userData: action.payload,
       };
     default:
       break;

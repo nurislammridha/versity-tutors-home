@@ -1,6 +1,11 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
 import logo from '../assets/images/logo.png'
+import { useSelector } from "react-redux";
+import { getUserPermissions } from "src/services/GlobalFunction";
+const permissions = getUserPermissions();
+console.log('permissions', permissions)
+const canView = (key) => permissions[key]?.View === true;
 const _nav = [
   {
     _tag: "CSidebarNavItem",
@@ -14,37 +19,37 @@ const _nav = [
     },
   },
 
-  {
+  canView("class") && {
     _tag: "CSidebarNavItem",
     name: "Class",
     to: "/category",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
-  {
+  canView("subject") && {
     _tag: "CSidebarNavItem",
     name: "Subject",
     to: "/sub-category",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
-  {
+  canView("division") && {
     _tag: "CSidebarNavItem",
     name: "Division",
     to: "/division",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
-  {
+  canView("district") && {
     _tag: "CSidebarNavItem",
     name: "District",
     to: "/district",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
-  {
+  canView("subDistrict") && {
     _tag: "CSidebarNavItem",
     name: "Sub District",
     to: "/sub-district",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
-  {
+  canView("area") && {
     _tag: "CSidebarNavItem",
     name: "Area",
     to: "/area",
@@ -56,14 +61,14 @@ const _nav = [
   //   to: "/language",
   //   icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   // },
-  {
+  canView("package") && {
     _tag: "CSidebarNavItem",
     name: "Package",
     to: "/connection-package",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
 
-  {
+  canView("tutorManagement") && {
     _tag: "CSidebarNavDropdown",
     name: "Tutor Management",
     route: "",
@@ -96,7 +101,7 @@ const _nav = [
       },
     ]
   },
-  {
+  canView("studentManagement") && {
     _tag: "CSidebarNavDropdown",
     name: "Student Management",
     route: "",
@@ -119,13 +124,13 @@ const _nav = [
       },
     ]
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Report Connection",
-    to: "/report-connection",
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
-  },
-  {
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Report Connection",
+  //   to: "/report-connection",
+  //   icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+  // },
+  canView("createRole") && {
     _tag: "CSidebarNavItem",
     name: "Role",
     to: "/role",
@@ -175,6 +180,6 @@ const _nav = [
   //   ]
   // },
 
-];
+].filter(Boolean);;
 
 export default _nav;
