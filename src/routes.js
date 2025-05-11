@@ -37,6 +37,7 @@ import RoleListContainer from "./modules/role/views/RoleListContainer";
 import UpdateRoleContainer from "./modules/role/views/UpdateRoleContainer";
 import CreateRoleContainer from "./modules/role/views/CreateRoleContainer";
 import RoleDetailsContainer from "./modules/role/views/RoleDetailsContainer";
+import UpdateProfileContainer from "./modules/profile/views/UpdateProfielContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -129,6 +130,8 @@ const routes = [
     name: "Create Role",
     component: CreateRoleContainer,
   },
+  //role
+  { path: "/profile", name: "Role", component: UpdateProfileContainer },
 ];
 
 export default routes;

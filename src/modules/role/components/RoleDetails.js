@@ -78,73 +78,73 @@ const RoleDetails = () => {
                                 {/* <!-- Rows will be populated dynamically in React --> */}
                                 <tr>
                                     <td>Class</td>
-                                    <td>{cl.Create ? "✔️" : "❌"}</td>
-                                    <td>{cl.View ? "✔️" : "❌"}</td>
-                                    <td>{cl.Edit ? "✔️" : "❌"}</td>
-                                    <td>{cl.Delete ? "✔️" : "❌"}</td>
+                                    <td>{cl?.Create ? "✔️" : "❌"}</td>
+                                    <td>{cl?.View ? "✔️" : "❌"}</td>
+                                    <td>{cl?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{cl?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 <tr>
                                     <td>Subject</td>
-                                    <td>{subject.Create ? "✔️" : "❌"}</td>
-                                    <td>{subject.View ? "✔️" : "❌"}</td>
-                                    <td>{subject.Edit ? "✔️" : "❌"}</td>
-                                    <td>{subject.Delete ? "✔️" : "❌"}</td>
+                                    <td>{subject?.Create ? "✔️" : "❌"}</td>
+                                    <td>{subject?.View ? "✔️" : "❌"}</td>
+                                    <td>{subject?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{subject?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 <tr>
                                     <td>Division</td>
-                                    <td>{division.Create ? "✔️" : "❌"}</td>
-                                    <td>{division.View ? "✔️" : "❌"}</td>
-                                    <td>{division.Edit ? "✔️" : "❌"}</td>
-                                    <td>{division.Delete ? "✔️" : "❌"}</td>
+                                    <td>{division?.Create ? "✔️" : "❌"}</td>
+                                    <td>{division?.View ? "✔️" : "❌"}</td>
+                                    <td>{division?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{division?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 <tr>
                                     <td>District</td>
-                                    <td>{district.Create ? "✔️" : "❌"}</td>
-                                    <td>{district.View ? "✔️" : "❌"}</td>
-                                    <td>{district.Edit ? "✔️" : "❌"}</td>
-                                    <td>{district.Delete ? "✔️" : "❌"}</td>
+                                    <td>{district?.Create ? "✔️" : "❌"}</td>
+                                    <td>{district?.View ? "✔️" : "❌"}</td>
+                                    <td>{district?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{district?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 <tr>
                                     <td>Sub District</td>
-                                    <td>{subDistrict.Create ? "✔️" : "❌"}</td>
-                                    <td>{subDistrict.View ? "✔️" : "❌"}</td>
-                                    <td>{subDistrict.Edit ? "✔️" : "❌"}</td>
-                                    <td>{subDistrict.Delete ? "✔️" : "❌"}</td>
+                                    <td>{subDistrict?.Create ? "✔️" : "❌"}</td>
+                                    <td>{subDistrict?.View ? "✔️" : "❌"}</td>
+                                    <td>{subDistrict?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{subDistrict?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 <tr>
                                     <td>Area</td>
-                                    <td>{area.Create ? "✔️" : "❌"}</td>
-                                    <td>{area.View ? "✔️" : "❌"}</td>
-                                    <td>{area.Edit ? "✔️" : "❌"}</td>
-                                    <td>{area.Delete ? "✔️" : "❌"}</td>
+                                    <td>{area?.Create ? "✔️" : "❌"}</td>
+                                    <td>{area?.View ? "✔️" : "❌"}</td>
+                                    <td>{area?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{area?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 <tr>
                                     <td>Manual Tutor Request</td>
-                                    <td>{manualTutorRequest.Create ? "✔️" : "❌"}</td>
-                                    <td>{manualTutorRequest.View ? "✔️" : "❌"}</td>
-                                    <td>{manualTutorRequest.Edit ? "✔️" : "❌"}</td>
-                                    <td>{manualTutorRequest.Delete ? "✔️" : "❌"}</td>
+                                    <td>{manualTutorRequest?.Create ? "✔️" : "❌"}</td>
+                                    <td>{manualTutorRequest?.View ? "✔️" : "❌"}</td>
+                                    <td>{manualTutorRequest?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{manualTutorRequest?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 <tr>
                                     <td>Package</td>
-                                    <td>{pk.Create ? "✔️" : "❌"}</td>
-                                    <td>{pk.View ? "✔️" : "❌"}</td>
-                                    <td>{pk.Edit ? "✔️" : "❌"}</td>
-                                    <td>{pk.Delete ? "✔️" : "❌"}</td>
+                                    <td>{pk?.Create ? "✔️" : "❌"}</td>
+                                    <td>{pk?.View ? "✔️" : "❌"}</td>
+                                    <td>{pk?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{pk?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 <tr>
                                     <td>Student Management</td>
-                                    <td>{studentManagement.Create ? "✔️" : "❌"}</td>
-                                    <td>{studentManagement.View ? "✔️" : "❌"}</td>
-                                    <td>{studentManagement.Edit ? "✔️" : "❌"}</td>
-                                    <td>{studentManagement.Delete ? "✔️" : "❌"}</td>
+                                    <td>{studentManagement?.Create ? "✔️" : "❌"}</td>
+                                    <td>{studentManagement?.View ? "✔️" : "❌"}</td>
+                                    <td>{studentManagement?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{studentManagement?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 <tr>
                                     <td>Tutor Management</td>
-                                    <td>{tutorManagement.Create ? "✔️" : "❌"}</td>
-                                    <td>{tutorManagement.View ? "✔️" : "❌"}</td>
-                                    <td>{tutorManagement.Edit ? "✔️" : "❌"}</td>
-                                    <td>{tutorManagement.Delete ? "✔️" : "❌"}</td>
+                                    <td>{tutorManagement?.Create ? "✔️" : "❌"}</td>
+                                    <td>{tutorManagement?.View ? "✔️" : "❌"}</td>
+                                    <td>{tutorManagement?.Edit ? "✔️" : "❌"}</td>
+                                    <td>{tutorManagement?.Delete ? "✔️" : "❌"}</td>
                                 </tr>
                                 {/* <!-- Add more rows dynamically --> */}
                             </tbody>

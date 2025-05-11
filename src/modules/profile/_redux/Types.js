@@ -1,0 +1,11 @@
+export const IS_CREATE_PROFILE = "IS_CREATE_PROFILE";
+export const IS_UPDATE_PROFILE = "IS_UPDATE_PROFILE";
+export const PROFILE_LIST = "PROFILE_LIST";
+export const AFTER_CREATED = "AFTER_CREATED";
+export const AFTER_UPDATED = "AFTER_UPDATED";
+export const AFTER_DELETED = "AFTER_DELETED";
+export const CAT_IMG = "CAT_IMG";
+export const IS_IMG_LOADING = "IS_IMG_LOADING";
+export const CAT_LOGO = "CAT_LOGO";
+export const IS_LOGO_LOADING = "IS_LOGO_LOADING";
+export const IS_STATUS_UPDATE = "IS_STATUS_UPDATE";

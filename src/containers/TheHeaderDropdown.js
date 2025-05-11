@@ -84,6 +84,9 @@ const TheHeaderDropdown = () => {
         </CDropdownItem> */}
         {/* <CDropdownItem>Name: Anikh</CDropdownItem>
         <CDropdownItem>Email: Anikh</CDropdownItem> */}
+        <CDropdownItem onClick={() => history.push("profile")}>
+          <a className="ml-5">Profile</a>
+        </CDropdownItem>
         <CDropdownItem onClick={() => handleLogout()}>
           <a className="ml-5">LOGOUT</a>
         </CDropdownItem>

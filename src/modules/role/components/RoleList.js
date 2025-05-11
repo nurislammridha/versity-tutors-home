@@ -114,6 +114,7 @@ const RoleList = () => {
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>Manager</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -126,6 +127,7 @@ const RoleList = () => {
                   <td>{item.name}</td>
                   <td>{item.phone}</td>
                   <td>{item.email}</td>
+                  <td>{item.roleType}</td>
                   <td>{item.managerInfo?.name}</td>
                   <td>{item.isActive ? "Active" : "Inactive"}</td>
                   <td>
