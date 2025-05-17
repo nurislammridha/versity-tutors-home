@@ -25,7 +25,7 @@ import UpdateAreaContainer from "./modules/area/views/UpdateAreaContainer";
 import CreateAreaContainer from "./modules/area/views/CreateAreaContainer";
 import ApproveTutorListContainer from "./modules/profiles/views/ApproveTutorListContainer";
 import UnApproveTutorListContainer from "./modules/profiles/views/UnApproveTutorListContainer";
-import AllTutorListContainer from "./modules/profiles/views/AllTutorListContainer";
+import AllTutorListContainer from "./modules/tutorManagement/views/AllTutorListContainer";
 import AllStudentListContainer from "./modules/profiles/views/AllStudentListContainer";
 import ApproveStudentListContainer from "./modules/profiles/views/ApproveStudentListContainer";
 import UnApproveStudentListContainer from "./modules/profiles/views/UnApproveStudentListContainer";
@@ -38,6 +38,12 @@ import UpdateRoleContainer from "./modules/role/views/UpdateRoleContainer";
 import CreateRoleContainer from "./modules/role/views/CreateRoleContainer";
 import RoleDetailsContainer from "./modules/role/views/RoleDetailsContainer";
 import UpdateProfileContainer from "./modules/profile/views/UpdateProfielContainer";
+import InitiatedTutorContainer from "./modules/tutorManagement/views/InitiatedTutorContainer";
+import UnderReviewTutorContainer from "./modules/tutorManagement/views/UnderReviewTutorContainer";
+import ApprovedTutorContainer from "./modules/tutorManagement/views/ApprovedTutorContainer";
+import RejectedTutorContainer from "./modules/tutorManagement/views/RejectedTutorContainer";
+import MissingDocTutorContainer from "./modules/tutorManagement/views/MissingDocTutorContainer";
+import ModeratorMonitoringContainer from "./modules/Monitoring/views/ModeratorMonitoringContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -109,8 +115,15 @@ const routes = [
     name: "Create Connection Package",
     component: CreateConnectionPackageContainer,
   },
-  //profiles
+  //Tutor Management
   { path: "/all-tutor", name: "All tutor", component: AllTutorListContainer },
+  { path: "/request-initiated-tutor", name: "request Initiated Tutor", component: InitiatedTutorContainer },
+  { path: "/under-review-tutor", name: "under review tutor", component: UnderReviewTutorContainer },
+  { path: "/approved-tutor", name: "approved tutor", component: ApprovedTutorContainer },
+  { path: "/rejected-tutor", name: "rejected tutor", component: RejectedTutorContainer },
+  { path: "/send-for-review", name: "send user to review", component: MissingDocTutorContainer },
+  //Profile
+
   { path: "/approve-tutor", name: "Approve tutor", component: ApproveTutorListContainer },
   { path: "/un-approve-tutor", name: "Approve tutor", component: UnApproveTutorListContainer },
   { path: "/all-student", name: "All student", component: AllStudentListContainer },
@@ -132,6 +145,8 @@ const routes = [
   },
   //role
   { path: "/profile", name: "Role", component: UpdateProfileContainer },
+  //role
+  { path: "/moderator-monitoring", name: "Moderator Monitoring", component: ModeratorMonitoringContainer },
 ];
 
 export default routes;

@@ -64,3 +64,10 @@ export const getUserPermissions = () => {
     return {};
   }
 };
+export const filterByModerator = (arr, userId) => {
+  console.log('arr', arr)
+  console.log('userId', userId)
+  return arr.filter(item =>
+    item.assignedModerator === userId || item.assignedModerator === null || item.assignedModerator === undefined
+  );
+};

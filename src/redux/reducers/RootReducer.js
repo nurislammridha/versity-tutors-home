@@ -6,11 +6,13 @@ import ConnectionPackageReducer from "src/modules/connectionPackage/_redux/Conne
 import DistrictReducer from "src/modules/district/_redux/DistrictReducer";
 import DivisionReducer from "src/modules/division/_redux/DivisionReducer";
 import LanguageReducer from "src/modules/language/_redux/LanguageReducer";
+import MonitoringReducer from "src/modules/Monitoring/_redux/MonitoringReducer";
 import ProfileReducer from "src/modules/profiles/_redux/ProfileReducer";
 import ReportConnectionReducer from "src/modules/reportConnection/_redux/ReportConnectionReducer";
 import RoleReducer from "src/modules/role/_redux/RoleReducer";
 import SubCategoryReducer from "src/modules/subCategory/_redux/SubCategoryReducer";
 import SubDistrictReducer from "src/modules/subDistrict/_redux/SubDistrictReducer";
+import TutorManagementReducer from "src/modules/tutorManagement/_redux/TutorManagementReducer";
 
 // combine all of the reducers here
 const rootReducer = combineReducers({
@@ -23,9 +25,11 @@ const rootReducer = combineReducers({
   areaInfo: AreaReducer,
   languageInfo: LanguageReducer,
   connectionPackageInfo: ConnectionPackageReducer,
+  tutorManagementInfo: TutorManagementReducer,
   profileInfo: ProfileReducer,
   reportConnectionInfo: ReportConnectionReducer,
   roleInfo: RoleReducer,
+  monitoringInfo: MonitoringReducer,
 });
 
 export default rootReducer;

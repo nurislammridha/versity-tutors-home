@@ -81,24 +81,44 @@ const _nav = [
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Approve",
-        to: "/approve-tutor",
+        name: "Request Initiated",
+        to: "/request-initiated-tutor",
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Un Approve",
-        to: "/un-approve-tutor",
+        name: "Under Review",
+        to: "/under-review-tutor",
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Featured",
-        to: "/featured",
+        name: "Approved",
+        to: "/approved-tutor",
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Un Featured",
-        to: "/un-featured",
+        name: "Rejected",
+        to: "/rejected-tutor",
       },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Send For Review",
+        to: "/send-for-review",
+      },
+      // {
+      //   _tag: "CSidebarNavItem",
+      //   name: "Un Approve",
+      //   to: "/un-approve-tutor",
+      // },
+      // {
+      //   _tag: "CSidebarNavItem",
+      //   name: "Featured",
+      //   to: "/featured",
+      // },
+      // {
+      //   _tag: "CSidebarNavItem",
+      //   name: "Un Featured",
+      //   to: "/un-featured",
+      // },
     ]
   },
   canView("studentManagement") && {
@@ -134,6 +154,12 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "Role",
     to: "/role",
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Moderator Monitoring",
+    to: "/moderator-monitoring",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
   // {
