@@ -5,7 +5,7 @@ import Select from "react-select";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { GetProfileList, GetProfileListFilter, ProfileDelete, ProfileUpdate } from "../_redux/TutorManagementAction";
 import { useHistory } from "react-router-dom";
-import { GlobalOptions } from "src/services/GlobalFunction";
+import { filterByModerator, GlobalOptions } from "src/services/GlobalFunction";
 import { GetDivisionList } from "src/modules/division/_redux/DivisionAction";
 import { DistrictByDivisionId } from "src/modules/district/_redux/DistrictAction";
 import { SubDistrictByDistrictId } from "src/modules/subDistrict/_redux/SubDistrictAction";
@@ -18,6 +18,7 @@ const UnderReviewTutorList = () => {
   const dispatch = useDispatch();
   const [filterObj, setFilterObj] = useState({});
   const [itemId, setItemId] = useState(null);
+  const [item, setItem] = useState(null);
   const [modalShow, setModalShow] = useState(false);
   const [userInfo, setUserInfo] = useState(null)
   const [division, setDivision] = useState("");
@@ -73,9 +74,10 @@ const UnderReviewTutorList = () => {
   }
 
 
-  const handleUnderReview = (id) => {
+  const handleUnderReview = (item) => {
     setModalShow(true)
-    setItemId(id)
+    setItemId(item?._id)
+    setItem(item)
   };
   const handleDelete = (id) => {
     confirmAlert({
@@ -93,11 +95,11 @@ const UnderReviewTutorList = () => {
     });
   };
   useEffect(() => {
-    const obj = { search, page, limit: 20, filters: { reviewStatus: "underReview", isTutorAccount: true, categoryId, subCategoryId, divisionId, districtId, subDistrictId, areaId } }
+    const obj = { search, page, limit: 20, filters: { moderatorId: userInfo?._id, reviewStatus: "underReview", isTutorAccount: true, categoryId, subCategoryId, divisionId, districtId, subDistrictId, areaId } }
     setFilterObj(obj)
-    dispatch(GetProfileListFilter(obj))
+    userInfo !== null && dispatch(GetProfileListFilter(obj))
 
-  }, [search, page, divisionId, districtId, subDistrictId, areaId, categoryId, subCategoryId]);
+  }, [userInfo, search, page, divisionId, districtId, subDistrictId, areaId, categoryId, subCategoryId]);
   useEffect(() => {
     setUserInfo(JSON.parse(localStorage.getItem("userData")))
     dispatch(GetDivisionList());
@@ -122,10 +124,10 @@ const UnderReviewTutorList = () => {
   return (
     <>
       <div className="row align-items-center mb-4 p-3 bg-white rounded shadow-sm">
-        <div className="col-md-2 mb-3 mb-md-3">
-          <h4 className="mb-0 fw-semibold text-primary">All Tutor</h4>
+        <div className="col-md-4 mb-3 mb-md-3">
+          <h4 className="mb-0 fw-semibold text-primary">Under Review Tutor</h4>
         </div>
-        <div className="col-md-10 d-flex align-items-center gap-2 mb-3 mb-md-3">
+        <div className="col-md-8 d-flex align-items-center gap-2 mb-3 mb-md-3">
           <label className="mb-0 fw-semibold">Search:</label>
           <input
             className="form-control"
@@ -243,6 +245,7 @@ const UnderReviewTutorList = () => {
               </tr>
             </thead>
             <tbody>
+              {/* {filterByModerator(profileList, userInfo?._id).map((item, index) => ( */}
               {profileList.map((item, index) => (
                 <tr>
                   <td>{index + 1}</td>
@@ -251,7 +254,7 @@ const UnderReviewTutorList = () => {
                   <td>
                     <a
                       className="btn  btn-outline-danger btn-sm mr-2"
-                      onClick={() => handleUnderReview(item._id)}
+                      onClick={() => handleUnderReview(item)}
                     >
                       {isUpdateLoading && itemId === item._id ? "Reviewing.." : "Review Decision"}
                     </a>
@@ -304,6 +307,7 @@ const UnderReviewTutorList = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         itemId={itemId}
+        item={item}
         filterObj={filterObj}
         userInfo={userInfo}
       />

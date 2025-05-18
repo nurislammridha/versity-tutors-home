@@ -104,6 +104,11 @@ const _nav = [
         name: "Send For Review",
         to: "/send-for-review",
       },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Receive For Review",
+        to: "/receive-for-review",
+      },
       // {
       //   _tag: "CSidebarNavItem",
       //   name: "Un Approve",

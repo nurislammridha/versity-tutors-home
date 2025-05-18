@@ -5,18 +5,22 @@ import Select from "react-select";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { GetProfileList, GetProfileListFilter, ProfileDelete, ProfileUpdate } from "../_redux/TutorManagementAction";
 import { useHistory } from "react-router-dom";
-import { GlobalOptions } from "src/services/GlobalFunction";
+import { filterByModerator, GlobalOptions } from "src/services/GlobalFunction";
 import { GetDivisionList } from "src/modules/division/_redux/DivisionAction";
 import { DistrictByDivisionId } from "src/modules/district/_redux/DistrictAction";
 import { SubDistrictByDistrictId } from "src/modules/subDistrict/_redux/SubDistrictAction";
 import { AreaBySubDistirctId } from "src/modules/area/_redux/AreaAction";
 import { GetCategoryList } from "src/modules/category/_redux/CategoryAction";
 import { SubCategoryByCategoryId } from "src/modules/subCategory/_redux/SubCategoryAction";
-const MissingDocTutorList = () => {
+import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
+const ReceiveForReviewTutorList = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [filterObj, setFilterObj] = useState({});
+  const [itemId, setItemId] = useState(null);
+  const [item, setItem] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
   const [userInfo, setUserInfo] = useState(null)
-  const [updateId, setUpdateId] = useState("")
   const [division, setDivision] = useState("");
   const [district, setDistrict] = useState("");
   const [subDistrict, setSubDistrict] = useState("");
@@ -59,31 +63,21 @@ const MissingDocTutorList = () => {
   const { result: profileList, totalPages } = tutorManagementInformation || { totalPages: 1 }
 
   const handleApprove = (id) => {
-    setUpdateId(id)
+
     dispatch(ProfileUpdate({ isApproved: true }, filter, id))
   }
   const submitUnderReview = (id) => {
-    const obj = { search, page, limit: 20, filters: { reviewStatus: "missingDOc", isTutorAccount: true, categoryId, subCategoryId, divisionId, districtId, subDistrictId, areaId } }
+    const obj = { search, page, limit: 20, filters: { reviewStatus: "requestInitiated", isTutorAccount: true, categoryId, subCategoryId, divisionId, districtId, subDistrictId, areaId } }
     let postData = { reviewStatus: "underReview", assignedModerator: userInfo?._id, }
-    setUpdateId(id)
+
     dispatch(ProfileUpdate(postData, id, userInfo, obj))
   }
 
 
-  const handleUnderReview = (id) => {
-    confirmAlert({
-      title: "Confirm To Take Under Review",
-      message: `Are you sure to take this tutor under review, It will be recorded?`,
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => submitUnderReview(id),
-        },
-        {
-          label: "No",
-        },
-      ],
-    });
+  const handleUnderReview = (item) => {
+    setModalShow(true)
+    setItemId(item?._id)
+    setItem(item)
   };
   const handleDelete = (id) => {
     confirmAlert({
@@ -101,10 +95,11 @@ const MissingDocTutorList = () => {
     });
   };
   useEffect(() => {
-    const obj = { search, page, limit: 20, filters: { reviewStatus: "rejected", isTutorAccount: true, categoryId, subCategoryId, divisionId, districtId, subDistrictId, areaId } }
-    dispatch(GetProfileListFilter(obj))
+    const obj = { search, page, limit: 20, filters: { moderatorId: userInfo?._id, reviewStatus: "receiveForReview", isTutorAccount: true, categoryId, subCategoryId, divisionId, districtId, subDistrictId, areaId } }
+    setFilterObj(obj)
+    userInfo !== null && dispatch(GetProfileListFilter(obj))
 
-  }, [search, page, divisionId, districtId, subDistrictId, areaId, categoryId, subCategoryId]);
+  }, [userInfo, search, page, divisionId, districtId, subDistrictId, areaId, categoryId, subCategoryId]);
   useEffect(() => {
     setUserInfo(JSON.parse(localStorage.getItem("userData")))
     dispatch(GetDivisionList());
@@ -129,10 +124,10 @@ const MissingDocTutorList = () => {
   return (
     <>
       <div className="row align-items-center mb-4 p-3 bg-white rounded shadow-sm">
-        <div className="col-md-2 mb-3 mb-md-3">
-          <h4 className="mb-0 fw-semibold text-primary">All Tutor</h4>
+        <div className="col-md-4 mb-3 mb-md-3">
+          <h4 className="mb-0 fw-semibold text-primary">Receive For Review Tutor</h4>
         </div>
-        <div className="col-md-10 d-flex align-items-center gap-2 mb-3 mb-md-3">
+        <div className="col-md-8 d-flex align-items-center gap-2 mb-3 mb-md-3">
           <label className="mb-0 fw-semibold">Search:</label>
           <input
             className="form-control"
@@ -250,18 +245,19 @@ const MissingDocTutorList = () => {
               </tr>
             </thead>
             <tbody>
+              {/* {filterByModerator(profileList, userInfo?._id).map((item, index) => ( */}
               {profileList.map((item, index) => (
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.firstName + " " + item.lastName}</td>
                   <td>{item.phone}</td>
                   <td>
-                    {/* <a
+                    <a
                       className="btn  btn-outline-danger btn-sm mr-2"
-                      onClick={() => !isUpdateLoading && handleUnderReview(item._id)}
+                      onClick={() => handleUnderReview(item)}
                     >
-                      {isUpdateLoading && updateId === item._id ? "Reviewing" : "Under Review"}
-                    </a> */}
+                      {isUpdateLoading && itemId === item._id ? "Reviewing.." : "Review Decision"}
+                    </a>
                     <a
                       className="btn btn-success btn-sm mr-2"
                       onClick={() => history.push(`/profile/${item._id}`)}
@@ -306,8 +302,17 @@ const MissingDocTutorList = () => {
           </li>
         </ul>
       </nav>
+
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        itemId={itemId}
+        item={item}
+        filterObj={filterObj}
+        userInfo={userInfo}
+      />
     </>
   );
 };
 
-export default MissingDocTutorList;
+export default ReceiveForReviewTutorList;

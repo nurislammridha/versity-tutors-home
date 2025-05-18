@@ -2,27 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { ProfileUpdate } from '../_redux/TutorManagementAction';
+import { ModerationHistoryUpdate, ProfileUpdate } from '../_redux/TutorManagementAction';
 import { useDispatch } from 'react-redux';
 
 const MyVerticallyCenteredModal = (props) => {
-    const { itemId, filterObj, userInfo } = props || {}
+    const { itemId, item, filterObj, userInfo } = props || {}
     const [comment, setComment] = useState('');
-    const [historyData, setHistory] = useState('');
     const dispatch = useDispatch()
     const handleAction = (status) => {
         let postData = { reviewStatus: status, assignedModerator: userInfo?._id, comment }
-
-
-        dispatch(ProfileUpdate(postData, itemId, userInfo, filterObj, historyData))
+        dispatch(ModerationHistoryUpdate(postData, item, userInfo, filterObj))
+        // dispatch(ProfileUpdate(postData, item, userInfo, filterObj, historyData, isHistoryUpdate))
         props.onHide(); // Close modal after action
     }
-    useEffect(() => {
-        const info = localStorage.getItem("history")
-        console.log('info', info)
-        setHistory(info ? null : JSON.parse(info))
-    }, [])
-    console.log('historyData', historyData)
+
     return (
         <Modal
             {...props}
@@ -57,7 +50,7 @@ const MyVerticallyCenteredModal = (props) => {
                     <Button variant="danger" onClick={() => handleAction('rejected')}>
                         Rejected
                     </Button>
-                    <Button variant="warning" onClick={() => handleAction('missingDoc')}>
+                    <Button variant="warning" onClick={() => handleAction('sendForReview')}>
                         Send User For Review
                     </Button>
                 </div>

@@ -65,8 +65,8 @@ const ModeratorMonitoring = () => {
               {moderatorMonitoringArrList.map((item, index) => (
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{item.roleInfo?.firstName}</td>
-                  <td>{moment(item.startingTime).format('DD-MM-YYYY')}</td>
+                  <td>{item.roleInfo?.name}</td>
+                  <td>{moment(item.startingTime).format('DD MMMM YYYY')}</td>
                   <td>{item?.endingTine}</td>
                   <td>{item?.lastStatus}</td>
                   <td>{item?.isCheckedByManager}</td>

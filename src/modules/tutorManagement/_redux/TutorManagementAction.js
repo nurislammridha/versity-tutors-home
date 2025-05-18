@@ -34,26 +34,57 @@ export const GetProfileListFilter = (data) => (dispatch) => {
     showToast("error", "Something went wrong");
   }
 };
-export const ModerationHistoryCreate = (id = null, userInfo = {}, profileObj = {}) => (dispatch) => {
+export const ProfileUpdate = (profileUpdateData, item, getProfileObj, historyData) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}client/${item}`;
+  dispatch({ type: Types.IS_UPDATE_LOADING, payload: true });
+  let postData = historyData === null ? profileUpdateData : { ...profileUpdateData, moderationHistory: historyData?._id }
+  try {
+    Axios.put(url, postData)
+      .then((res) => {
+        if (res.data.status) {
+          dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
+          dispatch(GetProfileList(getProfileObj));
+          showToast("success", res.data.message);
+          // !isHistoryUpdate ? dispatch(ModerationHistoryCreate(id, userInfo, profileObj)) : dispatch(ModerationHistoryUpdate(postData, userInfo, profileObj, historyData))
+        } else {
+          showToast("error", res.data.message);
+          dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
+        }
+      })
+      .catch((err) => {
+        dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
+        const message = JSON.parse(err.request.response).message;
+        showToast("error", message);
+      });
+  } catch (error) {
+    dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
+    showToast("error", "Something went wrong");
+  }
+};
+export const ModerationHistoryCreate = (profileUpdateData, itemId, userInfo, getProfileObj) => (dispatch) => {
+
   const url = `${process.env.REACT_APP_API_URL}moderationHistory`;
 
   const { _id, managerInfo } = userInfo || {}
   const postData = {
     roleId: _id,
     roleInfo: _id,
-    clientId: id,
-    clientInfo: id,
+    clientId: itemId,
+    clientInfo: itemId,
     managerId: managerInfo?._id,
     managerInfo: managerInfo?._id,
+    statusHistory: [{ status: "underReview" }]
   }
+  dispatch({ type: Types.IS_UPDATE_LOADING, payload: true });
   try {
     Axios.post(url, postData)
       .then((res) => {
         if (res.data.status) {
-          dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
+          // dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
           showToast("success", res.data.message);
-          dispatch(GetProfileList(profileObj));
-          localStorage.setItem("history", JSON.stringify(res.data.result))
+          const historyData = res.data.result
+          dispatch(ProfileUpdate(profileUpdateData, itemId, getProfileObj, historyData));
+          // localStorage.setItem("history", JSON.stringify(res.data.result))
         } else {
           showToast("error", res.data.message);
           dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
@@ -69,49 +100,28 @@ export const ModerationHistoryCreate = (id = null, userInfo = {}, profileObj = {
     showToast("error", "Something went wrong");
   }
 };
-export const ModerationHistoryUpdate = (data, userInfo = {}, profileObj = {}, historyData = null) => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}moderationHistory/${historyData?._id}`;
-  const { reviewStatus, assignedModerator, comment } = data || {}
+export const ModerationHistoryUpdate = (postData, item, userInfo, getProfileObj) => (dispatch) => {
+  let historyData = null
+  const url = `${process.env.REACT_APP_API_URL}moderationHistory/${item?.moderationHistory?._id}`;
+  const { reviewStatus, assignedModerator, comment } = postData || {}
   // const { _id, managerInfo } = userInfo || {}
   const d = new Date()
-  const postData = {
+  const updateData = {
     endingTime: d,
-    isTaskComplete: true,
+    isTaskComplete: ['approved', 'rejected'].includes(reviewStatus) ? true : false,
     lastStatus: reviewStatus,
-    comment
+    comment,
+    statusHistory: [{ status: reviewStatus }]
   }
-  try {
-    Axios.put(url, postData)
-      .then((res) => {
-        if (res.data.status) {
-          dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
-          showToast("success", res.data.message);
-          dispatch(GetProfileList(profileObj));
-          localStorage.setItem("history", JSON.stringify(res.data.result))
-        } else {
-          showToast("error", res.data.message);
-          dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
-        }
-      })
-      .catch((err) => {
-        dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
-        const message = JSON.parse(err.request.response).message;
-        showToast("error", message);
-      });
-  } catch (error) {
-    dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
-    showToast("error", "Something went wrong");
-  }
-};
-export const ProfileUpdate = (postData, id, userInfo, profileObj, historyData = null) => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}client/${id}`;
   dispatch({ type: Types.IS_UPDATE_LOADING, payload: true });
   try {
-    Axios.put(url, postData)
+    Axios.put(url, updateData)
       .then((res) => {
         if (res.data.status) {
+          // dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
           showToast("success", res.data.message);
-          historyData === null ? dispatch(ModerationHistoryCreate(id, userInfo, profileObj)) : dispatch(ModerationHistoryUpdate(postData, userInfo, profileObj, historyData))
+          dispatch(ProfileUpdate(postData, item?._id, getProfileObj, historyData));
+
         } else {
           showToast("error", res.data.message);
           dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
@@ -127,6 +137,7 @@ export const ProfileUpdate = (postData, id, userInfo, profileObj, historyData = 
     showToast("error", "Something went wrong");
   }
 };
+
 
 export const ProfileDelete = (listData, id) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}language/${id}`;

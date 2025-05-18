@@ -42,8 +42,9 @@ import InitiatedTutorContainer from "./modules/tutorManagement/views/InitiatedTu
 import UnderReviewTutorContainer from "./modules/tutorManagement/views/UnderReviewTutorContainer";
 import ApprovedTutorContainer from "./modules/tutorManagement/views/ApprovedTutorContainer";
 import RejectedTutorContainer from "./modules/tutorManagement/views/RejectedTutorContainer";
-import MissingDocTutorContainer from "./modules/tutorManagement/views/MissingDocTutorContainer";
 import ModeratorMonitoringContainer from "./modules/Monitoring/views/ModeratorMonitoringContainer";
+import SendForReviewTutorContainer from "./modules/tutorManagement/views/SendForReviewTutorContainer";
+import ReceiveForReviewTutorContainer from "./modules/tutorManagement/views/ReceiveForReviewTutorContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -121,7 +122,8 @@ const routes = [
   { path: "/under-review-tutor", name: "under review tutor", component: UnderReviewTutorContainer },
   { path: "/approved-tutor", name: "approved tutor", component: ApprovedTutorContainer },
   { path: "/rejected-tutor", name: "rejected tutor", component: RejectedTutorContainer },
-  { path: "/send-for-review", name: "send user to review", component: MissingDocTutorContainer },
+  { path: "/send-for-review", name: "send user to review", component: SendForReviewTutorContainer },
+  { path: "/receive-for-review", name: "send user to review", component: ReceiveForReviewTutorContainer },
   //Profile
 
   { path: "/approve-tutor", name: "Approve tutor", component: ApproveTutorListContainer },

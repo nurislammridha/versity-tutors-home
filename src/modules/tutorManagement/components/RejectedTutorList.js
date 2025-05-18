@@ -101,10 +101,10 @@ const RejectedTutorList = () => {
     });
   };
   useEffect(() => {
-    const obj = { search, page, limit: 20, filters: { reviewStatus: "rejected", isTutorAccount: true, categoryId, subCategoryId, divisionId, districtId, subDistrictId, areaId } }
-    dispatch(GetProfileListFilter(obj))
+    const obj = { search, page, limit: 20, filters: { moderatorId: userInfo?._id, reviewStatus: "rejected", isTutorAccount: true, categoryId, subCategoryId, divisionId, districtId, subDistrictId, areaId } }
+    userInfo !== null && dispatch(GetProfileListFilter(obj))
 
-  }, [search, page, divisionId, districtId, subDistrictId, areaId, categoryId, subCategoryId]);
+  }, [userInfo, search, page, divisionId, districtId, subDistrictId, areaId, categoryId, subCategoryId]);
   useEffect(() => {
     setUserInfo(JSON.parse(localStorage.getItem("userData")))
     dispatch(GetDivisionList());
@@ -129,10 +129,10 @@ const RejectedTutorList = () => {
   return (
     <>
       <div className="row align-items-center mb-4 p-3 bg-white rounded shadow-sm">
-        <div className="col-md-2 mb-3 mb-md-3">
-          <h4 className="mb-0 fw-semibold text-primary">All Tutor</h4>
+        <div className="col-md-4 mb-3 mb-md-3">
+          <h4 className="mb-0 fw-semibold text-primary">Rejected Tutor</h4>
         </div>
-        <div className="col-md-10 d-flex align-items-center gap-2 mb-3 mb-md-3">
+        <div className="col-md-8 d-flex align-items-center gap-2 mb-3 mb-md-3">
           <label className="mb-0 fw-semibold">Search:</label>
           <input
             className="form-control"
