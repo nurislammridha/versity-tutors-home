@@ -17,3 +17,18 @@ export const GetModeratorMonitoringList = (managerId, search = "", page = 1, lim
     showToast("error", "Something went wrong");
   }
 };
+
+export const GetModerationTutorDetails = (id) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}moderationHistory/${id}`;
+  dispatch({ type: Types.IS_MODERATOR_TUTOR_DETAILS, payload: true });
+  try {
+    Axios.get(url).then((res) => {
+      if (res.data.status) {
+        dispatch({ type: Types.MODERATOR_TUTOR_DETAILS, payload: res.data.result });
+        dispatch({ type: Types.IS_MODERATOR_TUTOR_DETAILS, payload: false });
+      }
+    });
+  } catch (error) {
+    showToast("error", "Something went wrong");
+  }
+};

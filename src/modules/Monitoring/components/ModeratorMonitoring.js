@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import moment from 'moment';
 import { GetModeratorMonitoringList } from "../_redux/MonitoringAction";
 const ModeratorMonitoring = () => {
+  const history = useHistory();
   const [userInfo, setUserInfo] = useState(null);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -57,8 +58,10 @@ const ModeratorMonitoring = () => {
                 <th>Starting Time</th>
                 <th>Ending Time</th>
                 <th>Last Status</th>
-                <th>Checked</th>
-                <th>Complete</th>
+                <th>Checked By Manager</th>
+                <th>Task Complete</th>
+                <th>Task Reject</th>
+                <th>View</th>
               </tr>
             </thead>
             <tbody>
@@ -67,11 +70,20 @@ const ModeratorMonitoring = () => {
                   <td>{index + 1}</td>
                   <td>{item.roleInfo?.name}</td>
                   <td>{moment(item.startingTime).format('DD MMMM YYYY')}</td>
-                  <td>{item?.endingTine}</td>
+                  <td>{moment(item.endingTime).format('DD MMMM YYYY')}</td>
                   <td>{item?.lastStatus}</td>
-                  <td>{item?.isCheckedByManager}</td>
-                  <td>{item?.isComplete}</td>
+                  <td>{item?.isCheckedByManager ? <span className="badge badge-success">Checked</span> : <span className="badge badge-danger">Unchecked</span>}</td>
+                  <td>{item?.isTaskComplete ? <span className="badge badge-success">Complete</span> : <span className="badge badge-danger">Incomplete</span>}</td>
+                  <td>{item?.isTaskRejected ? <span className="badge badge-success">Rejected</span> : <span className="badge badge-danger">No</span>}</td>
 
+                  <td>
+                    <a
+                      className="btn btn-outline-success btn-sm mr-2"
+                      onClick={() => history.push({ pathname: `/moderator-monitoring-details/${item._id}` })}
+                    >
+                      <i className="fa fa-eye"></i>
+                    </a>
+                  </td>
                 </tr>
               ))}
             </tbody>

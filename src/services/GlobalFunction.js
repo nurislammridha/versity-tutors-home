@@ -71,3 +71,27 @@ export const filterByModerator = (arr, userId) => {
     item.assignedModerator === userId || item.assignedModerator === null || item.assignedModerator === undefined
   );
 };
+export function getTimeDifference(start, end) {
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+
+  let diffMs = endDate - startDate;
+
+  if (diffMs < 0) return "Invalid time range";
+
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  diffMs -= diffDays * (1000 * 60 * 60 * 24);
+
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  diffMs -= diffHours * (1000 * 60 * 60);
+
+  const diffMinutes = Math.floor(diffMs / (1000 * 60));
+  diffMs -= diffMinutes * (1000 * 60);
+
+  let result = "";
+  if (diffDays > 0) result += `${diffDays} day${diffDays > 1 ? "s" : ""} `;
+  if (diffHours > 0) result += `${diffHours} hour${diffHours > 1 ? "s" : ""} `;
+  if (diffMinutes > 0) result += `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""}`;
+
+  return result.trim() || "Less than a minute";
+}

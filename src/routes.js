@@ -45,6 +45,7 @@ import RejectedTutorContainer from "./modules/tutorManagement/views/RejectedTuto
 import ModeratorMonitoringContainer from "./modules/Monitoring/views/ModeratorMonitoringContainer";
 import SendForReviewTutorContainer from "./modules/tutorManagement/views/SendForReviewTutorContainer";
 import ReceiveForReviewTutorContainer from "./modules/tutorManagement/views/ReceiveForReviewTutorContainer";
+import ViewModeratorMonitoringContainer from "./modules/Monitoring/views/ViewModeratorMonitoringContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -149,6 +150,7 @@ const routes = [
   { path: "/profile", name: "Role", component: UpdateProfileContainer },
   //role
   { path: "/moderator-monitoring", name: "Moderator Monitoring", component: ModeratorMonitoringContainer },
+  { path: "/moderator-monitoring-details/:id", name: "Moderator Monitoring", component: ViewModeratorMonitoringContainer },
 ];
 
 export default routes;

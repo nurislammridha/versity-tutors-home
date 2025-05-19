@@ -13,13 +13,17 @@ import { AreaBySubDistirctId } from "src/modules/area/_redux/AreaAction";
 import { GetCategoryList } from "src/modules/category/_redux/CategoryAction";
 import { SubCategoryByCategoryId } from "src/modules/subCategory/_redux/SubCategoryAction";
 import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
+import TaskRejectionModal from "./TaskRejectionModal";
 const ReceiveForReviewTutorList = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [filterObj, setFilterObj] = useState({});
   const [itemId, setItemId] = useState(null);
+  const [taskItemId, setTaskItemId] = useState(null);
+  const [taskItem, setTaskItem] = useState(null);
   const [item, setItem] = useState(null);
   const [modalShow, setModalShow] = useState(false);
+  const [rejectModalShow, setRejectModalShow] = useState(false);
   const [userInfo, setUserInfo] = useState(null)
   const [division, setDivision] = useState("");
   const [district, setDistrict] = useState("");
@@ -78,6 +82,11 @@ const ReceiveForReviewTutorList = () => {
     setModalShow(true)
     setItemId(item?._id)
     setItem(item)
+  };
+  const handleTaskRejection = (item) => {
+    setRejectModalShow(true)
+    setTaskItemId(item?._id)
+    setTaskItem(item)
   };
   const handleDelete = (id) => {
     confirmAlert({
@@ -259,6 +268,12 @@ const ReceiveForReviewTutorList = () => {
                       {isUpdateLoading && itemId === item._id ? "Reviewing.." : "Review Decision"}
                     </a>
                     <a
+                      className="btn  btn-outline-danger btn-sm mr-2"
+                      onClick={() => handleTaskRejection(item)}
+                    >
+                      {isUpdateLoading && taskItemId === item._id ? "Rejecting.." : "Task Rejection"}
+                    </a>
+                    <a
                       className="btn btn-success btn-sm mr-2"
                       onClick={() => history.push(`/profile/${item._id}`)}
                     >
@@ -302,7 +317,14 @@ const ReceiveForReviewTutorList = () => {
           </li>
         </ul>
       </nav>
-
+      <TaskRejectionModal
+        show={rejectModalShow}
+        onHide={() => setRejectModalShow(false)}
+        itemId={taskItemId}
+        item={taskItem}
+        filterObj={filterObj}
+        userInfo={userInfo}
+      />
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}

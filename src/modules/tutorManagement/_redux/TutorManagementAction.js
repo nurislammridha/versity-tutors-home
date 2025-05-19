@@ -43,7 +43,7 @@ export const ProfileUpdate = (profileUpdateData, item, getProfileObj, historyDat
       .then((res) => {
         if (res.data.status) {
           dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
-          dispatch(GetProfileList(getProfileObj));
+          !profileUpdateData?.rejectionByManager && dispatch(GetProfileList(getProfileObj));
           showToast("success", res.data.message);
           // !isHistoryUpdate ? dispatch(ModerationHistoryCreate(id, userInfo, profileObj)) : dispatch(ModerationHistoryUpdate(postData, userInfo, profileObj, historyData))
         } else {
@@ -73,7 +73,7 @@ export const ModerationHistoryCreate = (profileUpdateData, itemId, userInfo, get
     clientInfo: itemId,
     managerId: managerInfo?._id,
     managerInfo: managerInfo?._id,
-    statusHistory: [{ status: "underReview" }]
+    statusHistory: [{ status: "underReview", comment: "I'm taking the task" }]
   }
   dispatch({ type: Types.IS_UPDATE_LOADING, payload: true });
   try {
@@ -102,8 +102,9 @@ export const ModerationHistoryCreate = (profileUpdateData, itemId, userInfo, get
 };
 export const ModerationHistoryUpdate = (postData, item, userInfo, getProfileObj) => (dispatch) => {
   let historyData = null
-  const url = `${process.env.REACT_APP_API_URL}moderationHistory/${item?.moderationHistory?._id}`;
-  const { reviewStatus, assignedModerator, comment } = postData || {}
+  const { reviewStatus, assignedModerator, comment, taskRejection, reviewByManager, rejectionByManager } = postData || {}
+  const url = `${process.env.REACT_APP_API_URL}moderationHistory/${reviewByManager ? item?.moderationHistory : item?.moderationHistory?._id}`;
+
   // const { _id, managerInfo } = userInfo || {}
   const d = new Date()
   const updateData = {
@@ -111,7 +112,38 @@ export const ModerationHistoryUpdate = (postData, item, userInfo, getProfileObj)
     isTaskComplete: ['approved', 'rejected'].includes(reviewStatus) ? true : false,
     lastStatus: reviewStatus,
     comment,
-    statusHistory: [{ status: reviewStatus }]
+    statusHistory: [{ status: reviewStatus, comment }]
+  }
+  if (taskRejection) {
+    updateData.isTaskComplete = true
+    updateData.isTaskRejected = true
+    updateData.taskRejectedBy = "moderator"
+    updateData.assignedModerator = null
+    updateData.lastStatus = "underReview"
+    updateData.statusHistory = [{ status: "taskRejected", comment }]
+    updateData.taskRejectedNote = comment
+  }
+  if (rejectionByManager) {
+    updateData.isTaskComplete = true
+    updateData.isTaskRejected = true
+    updateData.isCheckedByManager = true
+    updateData.taskRejectedBy = "manager"
+    updateData.assignedModerator = null
+    updateData.statusHistory = [{ status: "taskRejected", comment }]
+    updateData.taskRejectedNote = comment
+    delete updateData.comment
+    delete updateData.endingTime
+    delete updateData.lastStatus
+  }
+  if (reviewByManager) {
+    updateData.isTaskComplete = true
+    updateData.isTaskRejected = false
+    updateData.isCheckedByManager = true
+    updateData.statusHistory = [{ status: "managerChecked", comment }]
+    updateData.managerCheckingComment = comment
+    delete updateData.comment
+    delete updateData.endingTime
+    delete updateData.lastStatus
   }
   dispatch({ type: Types.IS_UPDATE_LOADING, payload: true });
   try {
@@ -120,7 +152,7 @@ export const ModerationHistoryUpdate = (postData, item, userInfo, getProfileObj)
         if (res.data.status) {
           // dispatch({ type: Types.IS_UPDATE_LOADING, payload: false });
           showToast("success", res.data.message);
-          dispatch(ProfileUpdate(postData, item?._id, getProfileObj, historyData));
+          !reviewByManager && dispatch(ProfileUpdate(postData, item?._id, getProfileObj, historyData));
 
         } else {
           showToast("error", res.data.message);
