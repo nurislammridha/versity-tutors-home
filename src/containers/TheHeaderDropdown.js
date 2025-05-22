@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CBadge,
   CDropdown,
@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GlobalUserData, NotificationAsClicked, NotificationByAdmin, SeenNotification } from "src/modules/auth/_redux/AuthAction";
 
 const TheHeaderDropdown = () => {
+  const [userInfo, setUserInfo] = useState(null)
   const history = useHistory();
   const dispatch = useDispatch()
   const notificationList = useSelector((state) => state.authInfo.notificationList);
@@ -25,20 +26,23 @@ const TheHeaderDropdown = () => {
   };
   const handleSeen = (item) => {
     history.push(item.redirectUrl)
-    dispatch(SeenNotification(item?._id))
+    userInfo !== null && dispatch(SeenNotification(item?._id, userInfo?._id))
   }
   const handleOpenNotification = () => {
-    unreadCount > 0 && dispatch(NotificationAsClicked())
+    userInfo !== null && unreadCount > 0 && dispatch(NotificationAsClicked(userInfo?._id))
   }
   useEffect(() => {
     // const userData = JSON.parse(localStorage.getItem("userData"))
-    dispatch(NotificationByAdmin())
+    userInfo !== null && dispatch(NotificationByAdmin(userInfo?._id))
     // dispatch(GlobalUserData(userData))
+  }, [userInfo])
+  useEffect(() => {
+    setUserInfo(JSON.parse(localStorage.getItem("userData")))
   }, [])
 
   return (
     <CDropdown inNav className="c-header-nav-items mx-2 d-flex align-items-center" direction="down">
-      {/* <CDropdown className="mr-3">
+      <CDropdown className="mr-3">
         <CDropdownToggle
           className="c-header-nav-link" caret={false}
           onClick={() => handleOpenNotification()}
@@ -50,13 +54,13 @@ const TheHeaderDropdown = () => {
             </CBadge>
           )}
         </CDropdownToggle>
-        <CDropdownMenu className="pt-0" placement="bottom-end" style={{ minWidth: "300px" }}>
+        <CDropdownMenu className="pt-0" placement="bottom-end" style={{ minWidth: "300px", height: "500px", overflowY: "auto" }}>
           {notifications?.length === 0 ? (
             <CDropdownItem>No notifications</CDropdownItem>
           ) : (
             notifications && notifications.map((item, index) => (
               <CDropdownItem
-                className={`notification-item ${item?.isSeen ? "read" : "unread"}`} key={index}
+                className={`notification-item ${item?.seenIds.includes(userInfo?._id) ? "read" : "unread"}`} key={index}
                 onClick={() => handleSeen(item)}
               >
                 {item.title}
@@ -64,7 +68,7 @@ const TheHeaderDropdown = () => {
             ))
           )}
         </CDropdownMenu>
-      </CDropdown> */}
+      </CDropdown>
 
 
 

@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { ModerationHistoryUpdate, ProfileUpdate } from '../_redux/TutorManagementAction';
 import { useDispatch } from 'react-redux';
+import { CreateNotification } from 'src/modules/auth/_redux/AuthAction';
 
 const MyVerticallyCenteredModal = (props) => {
     const { itemId, item, filterObj, userInfo } = props || {}
@@ -14,6 +15,9 @@ const MyVerticallyCenteredModal = (props) => {
         dispatch(ModerationHistoryUpdate(postData, item, userInfo, filterObj))
         // dispatch(ProfileUpdate(postData, item, userInfo, filterObj, historyData, isHistoryUpdate))
         props.onHide(); // Close modal after action
+        //create notification 
+        const post = { clientInfo: itemId, title: `Your profile is ${status === "approved" ? "Approved" : status === "rejected" ? "Rejected" : "Sent to you for review"} by admin`, redirectUrl: "/dashboard?name=settings" }
+        dispatch(CreateNotification(post))
     }
 
     return (

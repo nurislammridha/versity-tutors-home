@@ -95,7 +95,7 @@ export const SubmitLogin = (data) => (dispatch) => {
     },
     isRegistered: true,
     isActive: true,
-    _id: null,
+    _id: "123fa3f49cc0001d84a000ef",//null
     name: "Rakibul",
     email: "rakibul@gmail.com",
     phone: "01753109207",
@@ -141,10 +141,10 @@ export const SubmitLogin = (data) => (dispatch) => {
 export const SetFalseLogin = () => (dispatch) => {
   dispatch({ type: Types.LOGIN_SUCCESS, payload: false });
 };
-export const NotificationByAdmin = () => (dispatch) => {
+export const NotificationByAdmin = (id) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}notification/admin`;
   try {
-    Axios.get(url).then((res) => {
+    Axios.post(url, { roleId: id }).then((res) => {
       if (res.data.status) {
         dispatch({ type: Types.NOTIFICATION_LIST, payload: res.data });
       }
@@ -153,24 +153,24 @@ export const NotificationByAdmin = () => (dispatch) => {
     showToast("error", "Something went wrong");
   }
 };
-export const SeenNotification = (id) => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}notification/${id}`;
+export const SeenNotification = (notificationId, roleId) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}notification/seen-role`;
   try {
-    Axios.put(url).then((res) => {
+    Axios.post(url, { notificationId, roleId }).then((res) => {
       if (res.data.status) {
-        dispatch(NotificationByAdmin())
+        // dispatch(NotificationByAdmin(id))
       }
     });
   } catch (error) {
     showToast("error", "Something went wrong");
   }
 };
-export const NotificationAsClicked = () => (dispatch) => {
-  const url = `${process.env.REACT_APP_API_URL}notification/admin`;
+export const NotificationAsClicked = (id) => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}notification/role/${id}`;
   try {
     Axios.put(url).then((res) => {
       if (res.data.status) {
-        dispatch(NotificationByAdmin())
+        dispatch(NotificationByAdmin(id))
       }
     });
   } catch (error) {

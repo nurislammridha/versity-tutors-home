@@ -12,6 +12,7 @@ import { SubDistrictByDistrictId } from "src/modules/subDistrict/_redux/SubDistr
 import { AreaBySubDistirctId } from "src/modules/area/_redux/AreaAction";
 import { GetCategoryList } from "src/modules/category/_redux/CategoryAction";
 import { SubCategoryByCategoryId } from "src/modules/subCategory/_redux/SubCategoryAction";
+import { CreateNotification } from "src/modules/auth/_redux/AuthAction";
 const InitiatedTutorList = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -66,8 +67,10 @@ const InitiatedTutorList = () => {
     const obj = { search, page, limit: 20, filters: { reviewStatus: "requestInitiated", isTutorAccount: true, categoryId, subCategoryId, divisionId, districtId, subDistrictId, areaId } }
     let postData = { reviewStatus: "underReview", assignedModerator: userInfo?._id, }
     setUpdateId(itemId)
-    // dispatch(ProfileUpdate(postData, id, userInfo, obj))
     dispatch(ModerationHistoryCreate(postData, itemId, userInfo, obj))
+    //create notification 
+    const post = { clientInfo: itemId, title: `Your profile is Under Review by admin`, redirectUrl: "/dashboard?name=settings" }
+    dispatch(CreateNotification(post))
   }
 
 

@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { ModerationHistoryUpdate, ProfileUpdate } from '../_redux/TutorManagementAction';
 import { useDispatch } from 'react-redux';
+import { CreateNotification } from 'src/modules/auth/_redux/AuthAction';
 
 const TaskRejectionModal = (props) => {
     const { itemId, item, filterObj, userInfo } = props || {}
@@ -13,6 +14,8 @@ const TaskRejectionModal = (props) => {
         let postData = { reviewStatus: "requestInitiated", assignedModerator: userInfo?._id, comment, taskRejection: true }
         dispatch(ModerationHistoryUpdate(postData, item, userInfo, filterObj))
         props.onHide(); // Close modal after action
+        const post = { clientInfo: itemId, title: `${userInfo?.name} reject his/her task`, redirectUrl: "/request-initiated-tutor", isAdmin: true }
+        dispatch(CreateNotification(post))
     }
 
     return (

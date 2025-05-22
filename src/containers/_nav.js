@@ -114,16 +114,7 @@ const _nav = [
       //   name: "Un Approve",
       //   to: "/un-approve-tutor",
       // },
-      // {
-      //   _tag: "CSidebarNavItem",
-      //   name: "Featured",
-      //   to: "/featured",
-      // },
-      // {
-      //   _tag: "CSidebarNavItem",
-      //   name: "Un Featured",
-      //   to: "/un-featured",
-      // },
+
     ]
   },
   canView("studentManagement") && {
@@ -147,6 +138,24 @@ const _nav = [
         name: "Un Approve",
         to: "/un-approve-student",
       },
+    ]
+  },
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Featured Management",
+    route: "",
+    icon: "cil-puzzle",
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: "Featured",
+        to: "/featured",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Un Featured",
+        to: "/un-featured",
+      }
     ]
   },
   // {
