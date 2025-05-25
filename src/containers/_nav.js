@@ -140,7 +140,7 @@ const _nav = [
       },
     ]
   },
-  {
+  canView("featuredManagement") && {
     _tag: "CSidebarNavDropdown",
     name: "Featured Management",
     route: "",
@@ -170,6 +170,7 @@ const _nav = [
     to: "/role",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
+  canView("moderatorMonitoring") &&
   {
     _tag: "CSidebarNavItem",
     name: "Moderator Monitoring",

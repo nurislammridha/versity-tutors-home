@@ -91,6 +91,20 @@ export const SubmitLogin = (data) => (dispatch) => {
         "Edit": true,
         "Delete": true,
         "_id": "681e3565cdb7a427a81eb425"
+      },
+      featuredManagement: {
+        "View": true,
+        "Create": true,
+        "Edit": true,
+        "Delete": true,
+        "_id": "681e3565cdb7a427a81eb425"
+      },
+      moderatorMonitoring: {
+        "View": true,
+        "Create": true,
+        "Edit": true,
+        "Delete": true,
+        "_id": "681e3565cdb7a427a81eb425"
       }
     },
     isRegistered: true,

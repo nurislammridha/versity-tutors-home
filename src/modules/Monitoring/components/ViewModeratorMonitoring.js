@@ -5,6 +5,7 @@ import { GetModerationTutorDetails } from '../_redux/MonitoringAction';
 import { getTimeDifference } from 'src/services/GlobalFunction';
 import moment from 'moment';
 import { ModerationHistoryUpdate } from 'src/modules/tutorManagement/_redux/TutorManagementAction';
+import { CreateNotification } from 'src/modules/auth/_redux/AuthAction';
 const ViewModeratorMonitoring = () => {
     const history = useHistory()
     const { id } = useParams()
@@ -23,10 +24,19 @@ const ViewModeratorMonitoring = () => {
     const handleReview = () => {
         let postData = { reviewStatus: lastStatus, comment: taskRejectedNotes, reviewByManager: true }
         dispatch(ModerationHistoryUpdate(postData, clientInfo, roleInfo))
+        //create notification 
+        const post = { roleId: roleInfo?._id, roleInfo: roleInfo?._id, clientInfo: clientId, title: `Your task (${firstName}) is review by your manager`, isAdmin: true, redirectUrl: `/profile/${clientId}` }
+        dispatch(CreateNotification(post))
+
     }
     const handleRejection = () => {
-        let postData = { reviewStatus: "requestInitiated", assignedModerator: roleInfo?._id, comment, taskRejection: true, rejectionByManager: true }
+        let postData = { reviewStatus: "requestInitiated", assignedModerator: roleInfo?._id, comment: taskRejectedNotes, taskRejection: true, rejectionByManager: true }
         dispatch(ModerationHistoryUpdate(postData, clientInfo, roleInfo))
+        //create notification 
+        const post = { roleId: roleInfo?._id, roleInfo: roleInfo?._id, clientInfo: clientId, title: `Your task (${firstName}) is rejected by your manager`, isAdmin: true, redirectUrl: `/profile/${clientId}` }
+        dispatch(CreateNotification(post))
+        const postRej = { clientInfo: clientId, title: `${name}'s task (${firstName}) is rejected by his/her manager`, redirectUrl: "/request-initiated-tutor", isAdmin: true }
+        dispatch(CreateNotification(postRej))
     }
 
     useEffect(() => {
@@ -117,7 +127,8 @@ const ViewModeratorMonitoring = () => {
                     </div>
                 </div>
 
-                {!(isCheckedByManager || isTaskRejected) &&
+                {/* {!(isCheckedByManager || isTaskRejected) && */}
+                {!(isCheckedByManager) &&
                     <div className="section-card">
                         <h5>Manager Moderation Action</h5>
                         <div className="form-check form-switch">
@@ -137,7 +148,7 @@ const ViewModeratorMonitoring = () => {
 
                         <div className="d-flex gap-2">
                             {!isCheckedByManager && <button className="btn btn-success" onClick={() => handleReview()}>Save Review</button>}
-                            {!isTaskRejected && <button className="btn btn-danger" onClick={() => handleRejection()}>Reject Task</button>}
+                            {lastStatus !== "approved" && lastStatus !== "rejected" && !isTaskRejected && <button className="btn btn-danger" onClick={() => handleRejection()}>Reject Task</button>}
                         </div>
                     </div>
                 }

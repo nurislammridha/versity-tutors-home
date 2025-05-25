@@ -38,6 +38,9 @@ export const ProfileUpdate = (profileUpdateData, item, getProfileObj, historyDat
   const url = `${process.env.REACT_APP_API_URL}client/${item}`;
   dispatch({ type: Types.IS_UPDATE_LOADING, payload: true });
   let postData = historyData === null ? profileUpdateData : { ...profileUpdateData, moderationHistory: historyData?._id }
+  if (profileUpdateData?.reviewStatus === "approved") {
+    postData.isApproved = true
+  }
   try {
     Axios.put(url, postData)
       .then((res) => {
@@ -102,10 +105,15 @@ export const ModerationHistoryCreate = (profileUpdateData, itemId, userInfo, get
 };
 export const ModerationHistoryUpdate = (postData, item, userInfo, getProfileObj) => (dispatch) => {
   let historyData = null
+  console.log('item', item)
   const { reviewStatus, assignedModerator, comment, taskRejection, reviewByManager, rejectionByManager } = postData || {}
-  const url = `${process.env.REACT_APP_API_URL}moderationHistory/${reviewByManager ? item?.moderationHistory : item?.moderationHistory?._id}`;
-
+  const url = `${process.env.REACT_APP_API_URL}moderationHistory/${item?.moderationHistory?._id}`;
+  // console.log('first', reviewByManager, url)
+  // return 0
   // const { _id, managerInfo } = userInfo || {}
+  // console.log('comment', comment)
+  // console.log('url', url)
+  // return 0
   const d = new Date()
   const updateData = {
     endingTime: d,
@@ -145,6 +153,8 @@ export const ModerationHistoryUpdate = (postData, item, userInfo, getProfileObj)
     delete updateData.endingTime
     delete updateData.lastStatus
   }
+  // console.log('updateData', updateData)
+  // return 0
   dispatch({ type: Types.IS_UPDATE_LOADING, payload: true });
   try {
     Axios.put(url, updateData)

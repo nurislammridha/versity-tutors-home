@@ -54,6 +54,8 @@ export const servicesListArr = () => [
   { id: "studentManagement", name: 'Student Management' },
   { id: "manualTutorRequest", name: 'Manual Tutor Request' },
   { id: "createRole", name: 'Create Role' },
+  { id: "featuredManagement", name: 'Featured Management' },
+  { id: "moderatorMonitoring", name: 'Moderator Monitoring' },
 ];
 export const getUserPermissions = () => {
   try {
