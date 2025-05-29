@@ -10,6 +10,7 @@ import MonitoringReducer from "src/modules/Monitoring/_redux/MonitoringReducer";
 import ProfileReducer from "src/modules/profiles/_redux/ProfileReducer";
 import ReportConnectionReducer from "src/modules/reportConnection/_redux/ReportConnectionReducer";
 import RoleReducer from "src/modules/role/_redux/RoleReducer";
+import StudentManagementReducer from "src/modules/studentManagement/_redux/StudentManagementReducer";
 import SubCategoryReducer from "src/modules/subCategory/_redux/SubCategoryReducer";
 import SubDistrictReducer from "src/modules/subDistrict/_redux/SubDistrictReducer";
 import TutorManagementReducer from "src/modules/tutorManagement/_redux/TutorManagementReducer";
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   languageInfo: LanguageReducer,
   connectionPackageInfo: ConnectionPackageReducer,
   tutorManagementInfo: TutorManagementReducer,
+  studentManagementInfo: StudentManagementReducer,
   profileInfo: ProfileReducer,
   reportConnectionInfo: ReportConnectionReducer,
   roleInfo: RoleReducer,

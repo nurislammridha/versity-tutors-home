@@ -23,16 +23,16 @@ import CreateConnectionPackageContainer from "./modules/connectionPackage/views/
 import AreaListContainer from "./modules/area/views/AreaContainer";
 import UpdateAreaContainer from "./modules/area/views/UpdateAreaContainer";
 import CreateAreaContainer from "./modules/area/views/CreateAreaContainer";
-import ApproveTutorListContainer from "./modules/profiles/views/ApproveTutorListContainer";
-import UnApproveTutorListContainer from "./modules/profiles/views/UnApproveTutorListContainer";
+// import ApproveTutorListContainer from "./modules/profiles/views/ApproveTutorListContainer";
+// import UnApproveTutorListContainer from "./modules/profiles/views/UnApproveTutorListContainer";
 import AllTutorListContainer from "./modules/tutorManagement/views/AllTutorListContainer";
-import AllStudentListContainer from "./modules/profiles/views/AllStudentListContainer";
-import ApproveStudentListContainer from "./modules/profiles/views/ApproveStudentListContainer";
-import UnApproveStudentListContainer from "./modules/profiles/views/UnApproveStudentListContainer";
+// import AllStudentListContainer from "./modules/profiles/views/AllStudentListContainer";
+// import ApproveStudentListContainer from "./modules/profiles/views/ApproveStudentListContainer";
+// import UnApproveStudentListContainer from "./modules/profiles/views/UnApproveStudentListContainer";
 import ReportConnectionListContainer from "./modules/reportConnection/views/ReportConnectionListContainer";
-import FeaturedList from "./modules/profiles/components/FeaturedList";
-import UnFeaturedList from "./modules/profiles/components/UnFeaturedList";
-import ProfileDetailsContainer from "./modules/profiles/views/ProfileDetailsContainer";
+// import FeaturedList from "./modules/profiles/components/FeaturedList";
+// import UnFeaturedList from "./modules/profiles/components/UnFeaturedList";
+// import ProfileDetailsContainer from "./modules/profiles/views/ProfileDetailsContainer";
 import RoleListContainer from "./modules/role/views/RoleListContainer";
 import UpdateRoleContainer from "./modules/role/views/UpdateRoleContainer";
 import CreateRoleContainer from "./modules/role/views/CreateRoleContainer";
@@ -42,10 +42,18 @@ import InitiatedTutorContainer from "./modules/tutorManagement/views/InitiatedTu
 import UnderReviewTutorContainer from "./modules/tutorManagement/views/UnderReviewTutorContainer";
 import ApprovedTutorContainer from "./modules/tutorManagement/views/ApprovedTutorContainer";
 import RejectedTutorContainer from "./modules/tutorManagement/views/RejectedTutorContainer";
-import ModeratorMonitoringContainer from "./modules/Monitoring/views/ModeratorMonitoringContainer";
+import TutorMonitoringContainer from "./modules/Monitoring/views/TutorMonitoringContainer";
+import StudentMonitoringContainer from "./modules/Monitoring/views/StudentMonitoringContainer";
 import SendForReviewTutorContainer from "./modules/tutorManagement/views/SendForReviewTutorContainer";
 import ReceiveForReviewTutorContainer from "./modules/tutorManagement/views/ReceiveForReviewTutorContainer";
 import ViewModeratorMonitoringContainer from "./modules/Monitoring/views/ViewModeratorMonitoringContainer";
+import AllStudentListContainer from "./modules/studentManagement/views/AllStudentListContainer";
+import InitiatedStudentContainer from "./modules/studentManagement/views/InitiatedStudentContainer";
+import UnderReviewStudentContainer from "./modules/studentManagement/views/UnderReviewStudentContainer";
+import ApprovedStudentContainer from "./modules/studentManagement/views/ApprovedStudentContainer";
+import RejectedStudentContainer from "./modules/studentManagement/views/RejectedStudentContainer";
+import SendForReviewStudentContainer from "./modules/studentManagement/views/SendForReviewStudentContainer";
+import ReceiveForReviewStudentContainer from "./modules/studentManagement/views/ReceiveForReviewStudentContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -125,16 +133,24 @@ const routes = [
   { path: "/rejected-tutor", name: "rejected tutor", component: RejectedTutorContainer },
   { path: "/send-for-review", name: "send user to review", component: SendForReviewTutorContainer },
   { path: "/receive-for-review", name: "send user to review", component: ReceiveForReviewTutorContainer },
+  //Student Management
+  { path: "/all-student", name: "All Student", component: AllStudentListContainer },
+  { path: "/request-initiated-student", name: "request Initiated Student", component: InitiatedStudentContainer },
+  { path: "/under-review-student", name: "under review student", component: UnderReviewStudentContainer },
+  { path: "/approved-student", name: "approved student", component: ApprovedStudentContainer },
+  { path: "/rejected-student", name: "rejected student", component: RejectedStudentContainer },
+  { path: "/student-send-for-review", name: "student send user to review", component: SendForReviewStudentContainer },
+  { path: "/student-receive-for-review", name: "student send user to review", component: ReceiveForReviewStudentContainer },
   //Profile
 
-  { path: "/approve-tutor", name: "Approve tutor", component: ApproveTutorListContainer },
-  { path: "/un-approve-tutor", name: "Approve tutor", component: UnApproveTutorListContainer },
-  { path: "/all-student", name: "All student", component: AllStudentListContainer },
-  { path: "/approve-student", name: "Approve student", component: ApproveStudentListContainer },
-  { path: "/un-approve-student", name: "Approve student", component: UnApproveStudentListContainer },
-  { path: "/featured", name: "Featured", component: FeaturedList },
-  { path: "/un-featured", name: "Un Featured", component: UnFeaturedList },
-  { path: "/profile/:id", name: "Profile Details", component: ProfileDetailsContainer },
+  // { path: "/approve-tutor", name: "Approve tutor", component: ApproveTutorListContainer },
+  // { path: "/un-approve-tutor", name: "Approve tutor", component: UnApproveTutorListContainer },
+  // { path: "/all-student", name: "All student", component: AllStudentListContainer },
+  // { path: "/approve-student", name: "Approve student", component: ApproveStudentListContainer },
+  // { path: "/un-approve-student", name: "Approve student", component: UnApproveStudentListContainer },
+  // { path: "/featured", name: "Featured", component: FeaturedList },
+  // { path: "/un-featured", name: "Un Featured", component: UnFeaturedList },
+  // { path: "/profile/:id", name: "Profile Details", component: ProfileDetailsContainer },
   //report connection
   { path: "/report-connection", name: "Report Connection", component: ReportConnectionListContainer },
   //role
@@ -149,7 +165,8 @@ const routes = [
   //role
   { path: "/profile", name: "Role", component: UpdateProfileContainer },
   //role
-  { path: "/moderator-monitoring", name: "Moderator Monitoring", component: ModeratorMonitoringContainer },
+  { path: "/tutor-monitoring", name: "Tutor Monitoring", component: TutorMonitoringContainer },
+  { path: "/student-monitoring", name: "Student Monitoring", component: StudentMonitoringContainer },
   { path: "/moderator-monitoring-details/:id", name: "Moderator Monitoring", component: ViewModeratorMonitoringContainer },
 ];
 

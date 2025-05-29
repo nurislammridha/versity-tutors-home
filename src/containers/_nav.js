@@ -130,16 +130,65 @@ const _nav = [
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Approve",
-        to: "/approve-student",
+        name: "Request Initiated",
+        to: "/request-initiated-student",
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Un Approve",
-        to: "/un-approve-student",
+        name: "Under Review",
+        to: "/under-review-student",
       },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Approved",
+        to: "/approved-student",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Rejected",
+        to: "/rejected-student",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Send For Review",
+        to: "/student-send-for-review",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Receive For Review",
+        to: "/student-receive-for-review",
+      },
+      // {
+      //   _tag: "CSidebarNavItem",
+      //   name: "Un Approve",
+      //   to: "/un-approve-tutor",
+      // },
+
     ]
   },
+  // canView("studentManagement") && {
+  //   _tag: "CSidebarNavDropdown",
+  //   name: "Student Management",
+  //   route: "",
+  //   icon: "cil-puzzle",
+  //   _children: [
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "All Student",
+  //       to: "/all-student",
+  //     },
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Approve",
+  //       to: "/approve-student",
+  //     },
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Un Approve",
+  //       to: "/un-approve-student",
+  //     },
+  //   ]
+  // },
   canView("featuredManagement") && {
     _tag: "CSidebarNavDropdown",
     name: "Featured Management",
@@ -170,12 +219,24 @@ const _nav = [
     to: "/role",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
-  canView("moderatorMonitoring") &&
+  // canView("moderatorMonitoring") &&
   {
-    _tag: "CSidebarNavItem",
+    _tag: "CSidebarNavDropdown",
     name: "Moderator Monitoring",
-    to: "/moderator-monitoring",
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+    route: "",
+    icon: "cil-puzzle",
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: "Tutor Profile",
+        to: "/tutor-monitoring",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Student Profile",
+        to: "/student-monitoring",
+      }
+    ]
   },
   // {
   //   _tag: "CSidebarNavDropdown",

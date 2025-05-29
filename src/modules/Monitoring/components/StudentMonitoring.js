@@ -5,7 +5,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { useHistory } from "react-router-dom";
 import moment from 'moment';
 import { GetModeratorMonitoringList } from "../_redux/MonitoringAction";
-const ModeratorMonitoring = () => {
+const StudentMonitoring = () => {
   const history = useHistory();
   const [userInfo, setUserInfo] = useState(null);
   const [search, setSearch] = useState("");
@@ -22,7 +22,8 @@ const ModeratorMonitoring = () => {
     setPage(1); // Reset to first page on new search
   };
   useEffect(() => {
-    userInfo !== null && dispatch(GetModeratorMonitoringList(userInfo?._id, search, page, 20));
+    let isTutorAccount = false;
+    userInfo !== null && dispatch(GetModeratorMonitoringList(userInfo?._id, isTutorAccount, search, page, 20));
   }, [userInfo, search, page]);
   useEffect(() => {
     setUserInfo(JSON.parse(localStorage.getItem("userData")))
@@ -120,4 +121,4 @@ const ModeratorMonitoring = () => {
   );
 };
 
-export default ModeratorMonitoring;
+export default StudentMonitoring;
