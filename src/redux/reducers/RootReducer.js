@@ -13,6 +13,7 @@ import ProfileReducer from "src/modules/profiles/_redux/ProfileReducer";
 import ReportConnectionReducer from "src/modules/reportConnection/_redux/ReportConnectionReducer";
 import RoleReducer from "src/modules/role/_redux/RoleReducer";
 import StudentManagementReducer from "src/modules/studentManagement/_redux/StudentManagementReducer";
+import StudyTypeReducer from "src/modules/StudyType/_redux/StudyTypeReducer";
 import SubCategoryReducer from "src/modules/subCategory/_redux/SubCategoryReducer";
 import SubDistrictReducer from "src/modules/subDistrict/_redux/SubDistrictReducer";
 import TutorManagementReducer from "src/modules/tutorManagement/_redux/TutorManagementReducer";
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   monitoringInfo: MonitoringReducer,
   instituteTypeInfo: InstituteTypeReducer,
   instituteNameInfo: InstituteNameReducer,
+  studyTypeInfo: StudyTypeReducer,
 });
 
 export default rootReducer;
