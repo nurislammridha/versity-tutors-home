@@ -38,6 +38,13 @@ const _nav = [
     to: "/institute-type",
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
+  //  canView("class") && 
+  {
+    _tag: "CSidebarNavItem",
+    name: "Institute Name",
+    to: "/institute-name",
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+  },
   canView("division") && {
     _tag: "CSidebarNavItem",
     name: "Division",

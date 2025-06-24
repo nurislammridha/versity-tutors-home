@@ -57,6 +57,9 @@ import ReceiveForReviewStudentContainer from "./modules/studentManagement/views/
 import InstituteTypeListContainer from "./modules/instituteType/views/InstituteTypeListContainer";
 import UpdateInstituteTypeContainer from "./modules/instituteType/views/UpdateInstituteTypeContainer";
 import CreateInstituteTypeContainer from "./modules/instituteType/views/CreateInstituteTypeContainer";
+import InstituteNameListContainer from "./modules/instituteName/views/InstituteNameListContainer";
+import UpdateInstituteNameContainer from "./modules/instituteName/views/UpdateInstituteNameContainer";
+import CreateInstituteNameContainer from "./modules/instituteName/views/CreateInstituteNameContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -179,6 +182,15 @@ const routes = [
     path: "/institute-type-add",
     name: "Create Institute Type",
     component: CreateInstituteTypeContainer,
+  },
+
+  //institute name
+  { path: "/institute-name", name: "Institute name", component: InstituteNameListContainer },
+  { path: "/institute-name-edit/:id", name: "Institute name", component: UpdateInstituteNameContainer },
+  {
+    path: "/institute-name-add",
+    name: "Create Institute Name",
+    component: CreateInstituteNameContainer,
   },
 ];
 
