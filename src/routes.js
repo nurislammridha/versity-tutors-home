@@ -54,6 +54,9 @@ import ApprovedStudentContainer from "./modules/studentManagement/views/Approved
 import RejectedStudentContainer from "./modules/studentManagement/views/RejectedStudentContainer";
 import SendForReviewStudentContainer from "./modules/studentManagement/views/SendForReviewStudentContainer";
 import ReceiveForReviewStudentContainer from "./modules/studentManagement/views/ReceiveForReviewStudentContainer";
+import InstituteTypeListContainer from "./modules/instituteType/views/InstituteTypeListContainer";
+import UpdateInstituteTypeContainer from "./modules/instituteType/views/UpdateInstituteTypeContainer";
+import CreateInstituteTypeContainer from "./modules/instituteType/views/CreateInstituteTypeContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -69,6 +72,7 @@ const routes = [
     name: "Create Category",
     component: CreateCategoryContainer,
   },
+
   //sub category
   { path: "/sub-category", name: "Sub Category", component: SubCategoryListContainer },
   { path: "/sub-category-edit/:id", name: "Sub Category", component: UpdateSubCategoryContainer },
@@ -168,6 +172,14 @@ const routes = [
   { path: "/tutor-monitoring", name: "Tutor Monitoring", component: TutorMonitoringContainer },
   { path: "/student-monitoring", name: "Student Monitoring", component: StudentMonitoringContainer },
   { path: "/moderator-monitoring-details/:id", name: "Moderator Monitoring", component: ViewModeratorMonitoringContainer },
+  //institute type
+  { path: "/institute-type", name: "Institute Type", component: InstituteTypeListContainer },
+  { path: "/institute-type-edit/:id", name: "Institute Type", component: UpdateInstituteTypeContainer },
+  {
+    path: "/institute-type-add",
+    name: "Create Institute Type",
+    component: CreateInstituteTypeContainer,
+  },
 ];
 
 export default routes;

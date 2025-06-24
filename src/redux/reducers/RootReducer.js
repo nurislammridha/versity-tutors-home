@@ -5,6 +5,7 @@ import CategoryReducer from "src/modules/category/_redux/CategoryReducer";
 import ConnectionPackageReducer from "src/modules/connectionPackage/_redux/ConnectionPackageReducer";
 import DistrictReducer from "src/modules/district/_redux/DistrictReducer";
 import DivisionReducer from "src/modules/division/_redux/DivisionReducer";
+import InstituteTypeReducer from "src/modules/instituteType/_redux/InstituteTypeReducer";
 import LanguageReducer from "src/modules/language/_redux/LanguageReducer";
 import MonitoringReducer from "src/modules/Monitoring/_redux/MonitoringReducer";
 import ProfileReducer from "src/modules/profiles/_redux/ProfileReducer";
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   reportConnectionInfo: ReportConnectionReducer,
   roleInfo: RoleReducer,
   monitoringInfo: MonitoringReducer,
+  instituteTypeInfo: InstituteTypeReducer,
 });
 
 export default rootReducer;
