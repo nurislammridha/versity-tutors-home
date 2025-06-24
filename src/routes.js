@@ -63,6 +63,9 @@ import CreateInstituteNameContainer from "./modules/instituteName/views/CreateIn
 import CreateStudyTypeContainer from "./modules/StudyType/views/CreateStudyTypeContainer";
 import UpdateStudyTypeContainer from "./modules/StudyType/views/UpdateStudyTypeContainer";
 import StudyTypeListContainer from "./modules/StudyType/views/StudyTypeListContainer";
+import CreateDepartmentNameContainer from "./modules/departmentName/views/CreateDepartmentNameContainer";
+import UpdateDepartmentNameContainer from "./modules/departmentName/views/UpdateDepartmentNameContainer";
+import DepartmentNameListContainer from "./modules/departmentName/views/DepartmentNameListContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -202,6 +205,14 @@ const routes = [
     path: "/study-type-add",
     name: "Create Study Type",
     component: CreateStudyTypeContainer,
+  },
+  //department name
+  { path: "/department-name", name: "Department name", component: DepartmentNameListContainer },
+  { path: "/department-name-edit/:id", name: "Department name", component: UpdateDepartmentNameContainer },
+  {
+    path: "/department-name-add",
+    name: "Create Department Name",
+    component: CreateDepartmentNameContainer,
   },
 ];
 
