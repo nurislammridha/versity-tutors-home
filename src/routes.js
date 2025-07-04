@@ -66,6 +66,7 @@ import StudyTypeListContainer from "./modules/StudyType/views/StudyTypeListConta
 import CreateDepartmentNameContainer from "./modules/departmentName/views/CreateDepartmentNameContainer";
 import UpdateDepartmentNameContainer from "./modules/departmentName/views/UpdateDepartmentNameContainer";
 import DepartmentNameListContainer from "./modules/departmentName/views/DepartmentNameListContainer";
+import RequestToUpdateTutorContainer from "./modules/tutorManagement/views/RequestToUpdateTutorContainer";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -141,6 +142,7 @@ const routes = [
   //Tutor Management
   { path: "/all-tutor", name: "All tutor", component: AllTutorListContainer },
   { path: "/request-initiated-tutor", name: "request Initiated Tutor", component: InitiatedTutorContainer },
+  { path: "/request-update-tutor", name: "request Updated Tutor", component: RequestToUpdateTutorContainer },
   { path: "/under-review-tutor", name: "under review tutor", component: UnderReviewTutorContainer },
   { path: "/approved-tutor", name: "approved tutor", component: ApprovedTutorContainer },
   { path: "/rejected-tutor", name: "rejected tutor", component: RejectedTutorContainer },

@@ -114,6 +114,11 @@ const _nav = [
       },
       {
         _tag: "CSidebarNavItem",
+        name: "Request For Update",
+        to: "/request-update-tutor",
+      },
+      {
+        _tag: "CSidebarNavItem",
         name: "Under Review",
         to: "/under-review-tutor",
       },
